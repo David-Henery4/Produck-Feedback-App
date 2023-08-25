@@ -1,8 +1,12 @@
 "use client"
 import { CheckIcon } from "public/assets/shared";
+import { handleSort } from "@/redux/features/sortSlice";
+import { useDispatch } from "react-redux";
 
 const SortDropdown = ({ dropdownInfo }) => {
-  const {isSortOpen, sortInfo, setIsSortOpen, handleSort} = dropdownInfo
+  const dispatch = useDispatch()
+  const {isSortOpen, sortInfo, setIsSortOpen} = dropdownInfo
+  // handleSort;
   return (
     <div
       className={`absolute top-14 left-0 bg-white shadow-sortDropdown w-64 z-20 rounded-[10px] ${
@@ -26,7 +30,7 @@ const SortDropdown = ({ dropdownInfo }) => {
                   className="absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer"
                   checked={s?.isActive}
                   onChange={() => {
-                    handleSort(s);
+                    dispatch(handleSort(s))
                   }}
                 />
                 <span>

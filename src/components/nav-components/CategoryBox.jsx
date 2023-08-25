@@ -1,10 +1,13 @@
 "use client";
-import placeholderData from "@/data/data.json";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const CategoryBox = () => {
+  const { placeholderRequests } = useSelector(
+    (store) => store.productRequestsReducer
+  );
   const [currRequestCategories, setCurrRequestCategories] = useState(
-    placeholderData?.productRequests
+    placeholderRequests
   );
   //
   const handleRemoveDuplicates = (prev) => {
@@ -25,7 +28,7 @@ const CategoryBox = () => {
     setCurrRequestCategories((prev) => {
       return handleRemoveDuplicates(prev);
     });
-  }, []);
+  }, [placeholderRequests]);
   //
   return (
     <div className="w-full bg-white p-6 flex flex-wrap justify-start items-center gap-2 rounded-[10px] max-w-[350px] lgTab:max-w-none lgTab:h-full">

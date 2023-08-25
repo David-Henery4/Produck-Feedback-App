@@ -1,10 +1,11 @@
 "use client"
 import { useEffect, useState } from "react";
-import placeholderData from "../../data/data.json";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 
 const RoadmapBox = () => {
-  const [currRequestCategories, setCurrRequestCategories] = useState(
-    placeholderData?.productRequests
+  const { placeholderRequests } = useSelector(
+    (store) => store.productRequestsReducer
   );
   const [roadmap, setRoadmap] = useState([]);
   //
@@ -13,7 +14,7 @@ const RoadmapBox = () => {
       {
         id: 1,
         label: "Planned",
-        quantity: currRequestCategories?.filter(
+        quantity: placeholderRequests?.filter(
           (req) => req.status === "planned"
         ).length,
         colour: "bg-orange",
@@ -21,7 +22,7 @@ const RoadmapBox = () => {
       {
         id: 2,
         label: "In-Progress",
-        quantity: currRequestCategories?.filter(
+        quantity: placeholderRequests?.filter(
           (req) => req.status === "in-progress"
         ).length,
         colour: "bg-purple",
@@ -29,7 +30,7 @@ const RoadmapBox = () => {
       {
         id: 3,
         label: "Live",
-        quantity: currRequestCategories?.filter((req) => req.status === "live")
+        quantity: placeholderRequests?.filter((req) => req.status === "live")
           .length,
         colour: "bg-lightBlue",
       },
@@ -38,7 +39,7 @@ const RoadmapBox = () => {
   //
   useEffect(() => {
     handleSettingStatusQuantities();
-  }, [placeholderData?.productRequests]);
+  }, [placeholderRequests]);
   //
   return (
     <div className="bg-white p-6 rounded-[10px] w-full grid gap-6 max-w-[350px] lgTab:max-w-none lgTab:h-full">
