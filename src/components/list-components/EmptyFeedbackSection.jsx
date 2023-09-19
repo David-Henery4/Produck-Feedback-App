@@ -1,5 +1,5 @@
 import { IllustrationIcon } from "public/assets/suggestions";
-import { PlusIcon } from "public/assets/shared";
+import { AddFeedbackLink } from "../shared-components";
 
 const EmptyFeedbackSection = () => {
   return (
@@ -16,10 +16,7 @@ const EmptyFeedbackSection = () => {
           </p>
         </div>
         <div className="flex justify-center">
-          <button className="text-sm bg-purple flex items-center gap-1 font-bold text-iceWhite px-2 py-3 rounded-[10px] tab:py-3 tab:px-6 hover:bg-pink active:bg-purple ">
-            <PlusIcon />
-            Add Feedback
-          </button>
+          <AddFeedbackLink/>
         </div>
       </div>
     </div>

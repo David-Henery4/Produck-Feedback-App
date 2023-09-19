@@ -23,11 +23,12 @@ module.exports = {
       offWhite: "#F7F8FD",
       lightNavy: "#3A4374",
       gray: "#647196",
+      lightGray: "#8C92B3",
       orange: "#F49F85",
       lightBlue: "#62BCFA",
     },
     fontFamily: {
-      jost: "'Jost', sans-serif",
+      jost: ['var(--font-jost)', 'sans-serif'],
     },
     gridTemplateColumns: {
       mob: "24px repeat(10,1fr) 24px",
