@@ -1,12 +1,15 @@
-"use client"
+"use client";
 import { CheckIcon } from "public/assets/shared";
 import { handleSort } from "@/redux/features/sortSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SortDropdown = ({ dropdownInfo }) => {
-  const dispatch = useDispatch()
-  const {isSortOpen, sortInfo, setIsSortOpen} = dropdownInfo
-  // handleSort;
+  const { sortData } = useSelector(
+    (store) => store.sortReducer
+  );
+  const dispatch = useDispatch();
+  const { isSortOpen, setIsSortOpen } = dropdownInfo;
+  //
   return (
     <div
       className={`absolute top-14 left-0 bg-white shadow-sortDropdown w-64 z-20 rounded-[10px] ${
@@ -14,7 +17,7 @@ const SortDropdown = ({ dropdownInfo }) => {
       }`}
     >
       <ul>
-        {sortInfo?.map((s) => {
+        {sortData?.map((s) => {
           return (
             <li
               className="relative py-3 px-6 text-sm group flex justify-between items-center border-b border-lightNavy/20 last:border-none"
@@ -30,11 +33,13 @@ const SortDropdown = ({ dropdownInfo }) => {
                   className="absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer"
                   checked={s?.isActive}
                   onChange={() => {
-                    dispatch(handleSort(s))
+                    dispatch(handleSort(s));
                   }}
                 />
                 <span>
-                  <p className="text-gray group-hover:text-purple">{s?.label}</p>
+                  <p className="text-gray group-hover:text-purple">
+                    {s?.label}
+                  </p>
                 </span>
               </label>
               {s?.isActive && <CheckIcon />}
@@ -46,4 +51,4 @@ const SortDropdown = ({ dropdownInfo }) => {
   );
 };
 
-export default SortDropdown
+export default SortDropdown;

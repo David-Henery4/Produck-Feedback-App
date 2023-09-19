@@ -2,27 +2,14 @@
 import { SortDropdown, SuggestionsCount } from "../bar-components";
 import { useState } from "react";
 import { ArrowDownIcon, PlusIcon } from "public/assets/shared";
-import sortData from "@/data/sortData";
+import { useSelector } from "react-redux";
 
 const FeedbackBarSection = () => {
+  const { currentSortLabel } = useSelector(
+    (store) => store.sortReducer
+  );
   // trying tablet layout change at 640px
-  const [currentSort, setCurrentSort] = useState("Most Upvotes");
-  const [sortInfo, setSortInfo] = useState(sortData);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  //
-  const handleSort = (s) => {
-    setSortInfo((prev) => {
-      return prev.map((i) => {
-        if (i.id === s.id) {
-          i.isActive = true;
-          setCurrentSort(i.label);
-        } else {
-          i.isActive = false;
-        }
-        return i;
-      });
-    });
-  };
   //
   return (
     <div
@@ -40,12 +27,12 @@ const FeedbackBarSection = () => {
           >
             Sort by :{" "}
             <span className="inline-flex justify-center items-center gap-2 font-bold text-sm">
-              {currentSort}
+              {currentSortLabel}
               <ArrowDownIcon className="stroke-white" />
             </span>
           </p>
           <SortDropdown
-            dropdownInfo={{ isSortOpen, setIsSortOpen, sortInfo, handleSort }}
+            dropdownInfo={{ isSortOpen, setIsSortOpen }}
           />
         </div>
       </div>
