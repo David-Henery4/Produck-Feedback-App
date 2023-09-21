@@ -1,17 +1,17 @@
 import { ArrowUpIcon, CommentsIcon } from "public/assets/shared";
 
 const FeedbackBox = ({
-  id,
-  title,
-  description,
-  category,
-  comments,
-  upvotes,
+  id = 0,
+  title = "title",
+  description = "description",
+  category = "category",
+  comments = "comments",
+  upvotes = 12,
 }) => {
   return (
     <div
       key={id}
-      className="grid justify-items-start grid-cols-feebackBox bg-white rounded-[10px] p-6 tab:py-7 tab:px-8 lgTab:items-start lgTab:grid-flow-col lgTab:gap-10 lgTab:grid-cols-feebackBoxTablet"
+      className="w-full grid justify-items-start grid-cols-feebackBox bg-white rounded-[10px] p-6 tab:py-7 tab:px-8 lgTab:items-start lgTab:grid-flow-col lgTab:gap-10 lgTab:grid-cols-feebackBoxTablet"
     >
       <div className="mb-4 col-start-1 col-end-3 lgTab:col-start-2 lgTab:col-end-3">
         <h2 className="text-[13px] font-bold text-lightNavy -tracking-[0.18px] tab:text-lg">

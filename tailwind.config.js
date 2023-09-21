@@ -17,6 +17,7 @@ module.exports = {
       purple: "#AD1FEA",
       pink: "#C75AF6",
       blue: "#4661E6",
+      blueShade: "#7C91F9",
       navy: "#373F68",
       white: "#FFFFFF",
       iceWhite: "#F2F4FF",
@@ -28,7 +29,7 @@ module.exports = {
       lightBlue: "#62BCFA",
     },
     fontFamily: {
-      jost: ['var(--font-jost)', 'sans-serif'],
+      jost: ["var(--font-jost)", "sans-serif"],
     },
     gridTemplateColumns: {
       mob: "24px repeat(10,1fr) 24px",
