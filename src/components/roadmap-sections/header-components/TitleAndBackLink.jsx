@@ -5,7 +5,7 @@ const TitleAndBackLink = () => {
   return (
     <div className="text-white font-bold">
       <Link
-        className="inline-flex justify-center items-center gap-4 text-xs"
+        className="inline-flex justify-center items-center gap-4 text-xs lgTab:text-[14px]"
         href="/"
       >
         {" "}
@@ -14,7 +14,7 @@ const TitleAndBackLink = () => {
         </span>{" "}
         Go Back
       </Link>
-      <h1 className="text-lg">Roadmap</h1>
+      <h1 className="text-lg lgTab:text-2xl">Roadmap</h1>
     </div>
   );
 };

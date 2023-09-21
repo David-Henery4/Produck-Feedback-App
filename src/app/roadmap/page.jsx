@@ -3,10 +3,10 @@ import { RoadmapHeader,  RoadmapContentContainer, StatusToggles} from "@/compone
 
 const RoadMap = () => {
   return (
-    <div className="grid grid-cols-mob pb-24 lgTab:pt-14">
+    <div className="grid grid-cols-mob pb-24 lgTab:pt-14 smTab:grid-cols-smTab">
       <RoadmapHeader />
-      <StatusToggles/>
-      <RoadmapContentContainer/>
+      <StatusToggles />
+      <RoadmapContentContainer />
     </div>
   );
 }

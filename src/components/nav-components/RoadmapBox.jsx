@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import Link from "next/link"
 
 
 const RoadmapBox = () => {
@@ -16,7 +17,7 @@ const RoadmapBox = () => {
         label: "Planned",
         quantity: placeholderRequests?.filter(
           (req) => req.status === "planned"
-        ).length,
+        ).length || 0,
         colour: "bg-orange",
       },
       {
@@ -24,14 +25,14 @@ const RoadmapBox = () => {
         label: "In-Progress",
         quantity: placeholderRequests?.filter(
           (req) => req.status === "in-progress"
-        ).length,
+        ).length || 0,
         colour: "bg-purple",
       },
       {
         id: 3,
         label: "Live",
         quantity: placeholderRequests?.filter((req) => req.status === "live")
-          .length,
+          .length || 0,
         colour: "bg-lightBlue",
       },
     ]);
@@ -47,9 +48,9 @@ const RoadmapBox = () => {
         <h2 className="text-lightNavy font-bold -tracking-[0.25px] text-lg">
           Roadmap
         </h2>
-        <a className="text-blue font-semibold underline" href="/">
+        <Link className="text-blue font-semibold underline" href="/roadmap">
           View
-        </a>
+        </Link>
       </div>
       <ul className="grid gap-2">
         {roadmap?.map((road) => {
