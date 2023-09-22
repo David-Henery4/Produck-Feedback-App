@@ -38,6 +38,8 @@ module.exports = {
       feebackBox: "1fr auto",
       feebackBoxTablet: "auto 1fr auto",
       lap: "40px auto 30px 1fr 40px",
+      commentMob: "auto 1fr",
+      commentTab: "auto 30px 1fr",
     },
     boxShadow: {
       sortDropdown: "0px 10px 40px -7px rgba(55, 63, 104, 0.35)",
