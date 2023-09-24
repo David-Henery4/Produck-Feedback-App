@@ -1,19 +1,11 @@
 import { ArrowLeftIcon } from "public/assets/shared";
 import Link from "next/link";
+import {GoBackBtn} from "@/components/shared-components"
 
 const TitleAndBackLink = () => {
   return (
-    <div className="text-white font-bold">
-      <Link
-        className="inline-flex justify-center items-center gap-4 text-xs lgTab:text-[14px]"
-        href="/"
-      >
-        {" "}
-        <span>
-          <ArrowLeftIcon />
-        </span>{" "}
-        Go Back
-      </Link>
+    <div className="text-white font-bold flex flex-col justify-start items-center">
+      <GoBackBtn isRoadmap={true}/>
       <h1 className="text-lg lgTab:text-2xl">Roadmap</h1>
     </div>
   );

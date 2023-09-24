@@ -14,7 +14,7 @@ const Comment = () => {
           <h3 className="font-bold text-lightNavy">Elijah Moss</h3>
           <h4>@hexagon.bestagon</h4>
         </div>
-        <button className="font-semibold text-blue">Reply</button>
+        <button className="font-semibold text-blue hover:underline">Reply</button>
       </div>
 
       {/* Bottom */}

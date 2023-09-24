@@ -8,6 +8,7 @@ module.exports = {
   ],
   theme: {
     screens: {
+      smMob: "22.5em", // 360px
       smTab: "32.5em", // 520px
       tab: "40em", // 640px
       lgTab: "45em", // 720px
@@ -20,6 +21,7 @@ module.exports = {
       blueShade: "#7C91F9",
       navy: "#373F68",
       white: "#FFFFFF",
+      slightWhite: "#CDD2EE",
       iceWhite: "#F2F4FF",
       offWhite: "#F7F8FD",
       lightNavy: "#3A4374",
