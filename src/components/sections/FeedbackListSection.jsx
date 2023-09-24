@@ -1,19 +1,23 @@
-"use client"
-import {EmptyFeedbackSection, FeedbackBox} from "@/components/list-components";
+"use client";
+import Link from "next/link";
+import {
+  EmptyFeedbackSection,
+  FeedbackBox,
+} from "@/components/list-components";
 import { useDispatch, useSelector } from "react-redux";
 import { sortProductRequests } from "@/redux/features/prodReqsSlice";
-import { useEffect } from "react";      
+import { useEffect } from "react";
 
 const FeedbackListSection = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { placeholderRequests } = useSelector(
     (store) => store.productRequestsReducer
-  )
+  );
   //
   const { currentSortData } = useSelector((store) => store.sortReducer);
   //
   useEffect(() => {
-    dispatch(sortProductRequests(currentSortData))
+    dispatch(sortProductRequests(currentSortData));
   }, [currentSortData]);
   //
   return (
@@ -23,7 +27,11 @@ const FeedbackListSection = () => {
       ) : (
         <>
           {placeholderRequests?.map((tData) => {
-            return <FeedbackBox key={tData?.id} {...tData} />;
+            return (
+              <Link key={tData?.id} href={`/feedback-detail/${tData?.id}`}>
+                <FeedbackBox {...tData} />
+              </Link>
+            );
           })}
         </>
       )}
