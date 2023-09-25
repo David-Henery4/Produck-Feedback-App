@@ -3,6 +3,7 @@ import placeholderData from "@/data/data.json"
 
 const initialState = {
   placeholderRequests: placeholderData.productRequests,
+  currentFeedback: {}
 };
 
 const productRequests = createSlice({
@@ -42,11 +43,15 @@ const productRequests = createSlice({
           }
         );
       }
+    },
+    getCurrentFeedbackDetail: (state, 
+      {payload}) => {
+      state.currentFeedback = state.placeholderRequests.find(feed => feed.id === +payload)
     }
   }
 })
 
-export const {sortProductRequests} = productRequests.actions
+export const {sortProductRequests, getCurrentFeedbackDetail} = productRequests.actions
 
 export default productRequests.reducer
 

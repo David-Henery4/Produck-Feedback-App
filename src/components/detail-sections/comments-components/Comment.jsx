@@ -1,6 +1,6 @@
 import { avatarJackson } from "public/assets/user-images";
 
-const Comment = () => {
+const Comment = ({}) => {
   return (
     <div className="py-6 text-[13px] text-gray font-medium grid grid-cols-commentMob gap-4 border-t-lightGray/25 border-t first:border-none lgTab:grid-cols-commentTab lgTab:gap-x-0 lgTab:py-8">
       <img

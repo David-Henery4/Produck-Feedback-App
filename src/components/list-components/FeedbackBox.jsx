@@ -5,7 +5,7 @@ const FeedbackBox = ({
   title = "title",
   description = "description",
   category = "category",
-  comments = "comments",
+  comments,
   upvotes = 12,
 }) => {
   return (
