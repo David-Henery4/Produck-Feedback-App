@@ -2,15 +2,22 @@
 
 const Comment = ({ id, content, user, replies, isReply, replyingTo = null }) => {
   const { name, username, image } = user;
+  // console.log(replies)
   //
   return (
     <div
-      className={`text-[13px] text-gray font-medium grid grid-cols-commentMob lgTab:grid-cols-commentTab lgTab:gap-x-0 ${
+      className={`relative group text-[13px] text-gray font-medium grid grid-cols-commentMob lgTab:grid-cols-commentTab lgTab:gap-x-0 ${
         isReply
           ? "pl-6 py-0 gap-4 lgTab:gap-[10px] lgTab:pl-11 lgTab:py-0"
           : "py-6 gap-4 lgTab:py-8"
       }`}
     >
+      {replies && (
+        <div className="w-[1px] h-[130%] bg-gray/10 absolute top-[94px] left-5 hidden lgTab:block"></div>
+      )}
+      {isReply && (
+        <div className="w-[1px] h-[130%] bg-gray/10 absolute top-0 left-0 hidden group-first:block group-first:lgTab:hidden"></div>
+      )}
       <img
         className="w-10 h-10 rounded-full object-cover object-center"
         src={`/assets/user-images/${image}`}

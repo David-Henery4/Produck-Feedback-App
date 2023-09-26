@@ -13,10 +13,10 @@ const FeedbackComments = ({ comments }) => {
         {comments?.map((comment) => {
           return (
             <div
-              className="w-full relative border-t-lightGray/25 border-t first:border-none"
+              className="w-full border-t-lightGray/25 border-t first:border-none"
               key={comment?.id}
             >
-              {comment?.replies && <div className="w-[1px] h-1/2 bg-gray absolute top-1/3 left-0"></div>}
+              {/* {comment?.replies && <div className="w-[1px] h-[38%] bg-gray absolute top-[35%] left-0"></div>} */}
               <Comment {...comment} />
               <div className="w-full grid gap-6 lgTab:gap-4">
                 {comment?.replies &&
