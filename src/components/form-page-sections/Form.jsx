@@ -1,16 +1,39 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import { FeedbackTitleInput, FeedbackDropdownInput, FeedbackContentInput, SubmitFeedbackBtns } from "./form-components";
 import { useSelector } from "react-redux";
+import useValidation from "@/hooks/useValidation";
 
 const Form = () => {
-
+  const {validation} = useValidation()
   const { currentCategoryData, currentStatusData, statusData, categoryData } =
     useSelector((store) => store.dropdownReducer);
   //
+  const [formInputs, setFormInputs] = useState({
+    id: 1,
+    title: "",
+    category: currentCategoryData?.dataType,
+    status: currentStatusData?.dataType,
+    comment: "",
+  });
+  //
+  const checkValues = () => {
+    validation(formInputs)
+  }
+  //
+  useEffect(() => {
+    setFormInputs((oldValues) => {
+      return {
+        ...oldValues,
+        category: currentCategoryData?.dataType,
+        status: currentStatusData?.dataType,
+      };
+    });
+  }, [currentCategoryData, currentStatusData]);
+  //
   return (
     <form className="w-full grid gap-6 mt-6">
-      <FeedbackTitleInput />
+      <FeedbackTitleInput formInfo={{ setFormInputs, formInputs }} />
       <FeedbackDropdownInput
         value={currentCategoryData?.dataType}
         inputTitle="Category"
@@ -26,8 +49,8 @@ const Form = () => {
         inputName="status-input"
         inputOptions={statusData}
       />
-      <FeedbackContentInput/>
-      <SubmitFeedbackBtns/>
+      <FeedbackContentInput formInfo={{ setFormInputs, formInputs }} />
+      <SubmitFeedbackBtns checkValues={checkValues} />
     </form>
   );
 };

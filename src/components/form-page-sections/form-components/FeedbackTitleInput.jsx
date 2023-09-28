@@ -1,6 +1,7 @@
 
 
-const FeedbackTitleInput = () => {
+const FeedbackTitleInput = ({ formInfo }) => {
+  const {setFormInputs, formInputs} = formInfo
   return (
     <div>
       <div>
@@ -14,9 +15,13 @@ const FeedbackTitleInput = () => {
         id="feedback-title"
         name="feedback-title"
         className="w-full p-4 mt-4 rounded-md bg-offWhite outline-blue tab:text-[15px]"
+        value={formInputs?.title}
+        onChange={(e) => setFormInputs((oldValues) => {
+          return {...oldValues, title: e.target.value}
+        })}
       />
     </div>
   );
-}
+};
 
 export default FeedbackTitleInput

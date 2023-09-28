@@ -1,10 +1,11 @@
-
-
-const SubmitFeedbackBtns = () => {
+const SubmitFeedbackBtns = ({ checkValues }) => {
   return (
     <div className="w-full flex flex-col justify-center items-center mt-4 lgTab:flex-row-reverse lgTab:justify-start lgTab:gap-4">
       <button
-        onClick={(e) => e.preventDefault()}
+        onClick={(e) => {
+          e.preventDefault();
+          checkValues()
+        }}
         className="w-full py-3 px-7 rounded-xl bg-purple hover:bg-pink active:bg-purple text-white lgTab:w-36 lgTab:px-6"
       >
         Add Feedback
@@ -17,6 +18,6 @@ const SubmitFeedbackBtns = () => {
       </button>
     </div>
   );
-}
+};
 
-export default SubmitFeedbackBtns
+export default SubmitFeedbackBtns;
