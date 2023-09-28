@@ -25,6 +25,7 @@ module.exports = {
       iceWhite: "#F2F4FF",
       offWhite: "#F7F8FD",
       lightNavy: "#3A4374",
+      lighterNavy: "#656EA3",
       gray: "#647196",
       lightGray: "#8C92B3",
       orange: "#F49F85",

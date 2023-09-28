@@ -1,6 +1,9 @@
+import { useDispatch } from "react-redux";
 import { CheckIcon } from "public/assets/shared";
+import {updateDropdownData} from "@/redux/features/dropdownInputSlice"
 
 const FormDropdown = ({ isDropdownOpen, inputName, inputOptions }) => {
+  const dispatch = useDispatch()
   return (
     <div
       className={`absolute top-14 left-0 bg-white shadow-sortDropdown w-full z-20 rounded-[10px] ${
@@ -22,7 +25,9 @@ const FormDropdown = ({ isDropdownOpen, inputName, inputOptions }) => {
                   value={category.dataType}
                   checked={category.isActive}
                   className="absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer"
-                  onChange={() => console.log(category.dataType)}
+                  onChange={() => {
+                    dispatch(updateDropdownData({id: category?.id, inputName}))
+                  }}
                 />
                 <span className="group-hover:text-purple">
                   <p>{category.label}</p>

@@ -1,8 +1,10 @@
 "use client";
-import { FeedbackTitleInput, FeedbackDropdownInput } from "./form-components";
+
+import { FeedbackTitleInput, FeedbackDropdownInput, FeedbackContentInput, SubmitFeedbackBtns } from "./form-components";
 import { useSelector } from "react-redux";
 
 const Form = () => {
+
   const { currentCategoryData, currentStatusData, statusData, categoryData } =
     useSelector((store) => store.dropdownReducer);
   //
@@ -24,6 +26,8 @@ const Form = () => {
         inputName="status-input"
         inputOptions={statusData}
       />
+      <FeedbackContentInput/>
+      <SubmitFeedbackBtns/>
     </form>
   );
 };
