@@ -1,6 +1,6 @@
 
 
-const feedbackContentInput = ({formInfo}) => {
+const feedbackContentInput = ({ formInfo, errorsList }) => {
   const { setFormInputs, formInputs } = formInfo;
   return (
     <div>
@@ -12,16 +12,25 @@ const feedbackContentInput = ({formInfo}) => {
       </div>
 
       <textarea
-        className="resize-none w-full p-4 mt-4 rounded-md bg-offWhite outline-blue min-h-[120px] tab:text-[15px]"
+        className={`resize-none w-full p-4 mt-4 rounded-md outline-none bg-offWhite border min-h-[120px] tab:text-[15px] ${
+          errorsList?.comment?.isError
+            ? "border-red"
+            : "border-offWhite hover:border-blue"
+        }`}
         name="feedback-content"
         id="feedback-content"
         value={formInputs?.comment}
-        onChange={(e) => setFormInputs((oldValues) => {
-          return {...oldValues, comment: e.target.value}
-        })}
+        onChange={(e) =>
+          setFormInputs((oldValues) => {
+            return { ...oldValues, comment: e.target.value };
+          })
+        }
       ></textarea>
+      {errorsList?.comment?.isError && (
+        <p className="text-red font-medium mt-1">{errorsList?.comment?.msg}</p>
+      )}
     </div>
   );
-}
+};
 
 export default feedbackContentInput

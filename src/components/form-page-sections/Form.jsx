@@ -5,7 +5,10 @@ import { useSelector } from "react-redux";
 import useValidation from "@/hooks/useValidation";
 
 const Form = () => {
-  const {validation} = useValidation()
+  const submitValues = (readyValues) => {
+    console.log(readyValues)
+  }
+  const { validation, errorsList } = useValidation(submitValues);
   const { currentCategoryData, currentStatusData, statusData, categoryData } =
     useSelector((store) => store.dropdownReducer);
   //
@@ -33,7 +36,10 @@ const Form = () => {
   //
   return (
     <form className="w-full grid gap-6 mt-6">
-      <FeedbackTitleInput formInfo={{ setFormInputs, formInputs }} />
+      <FeedbackTitleInput
+        formInfo={{ setFormInputs, formInputs }}
+        errorsList={errorsList}
+      />
       <FeedbackDropdownInput
         value={currentCategoryData?.dataType}
         inputTitle="Category"
@@ -49,7 +55,10 @@ const Form = () => {
         inputName="status-input"
         inputOptions={statusData}
       />
-      <FeedbackContentInput formInfo={{ setFormInputs, formInputs }} />
+      <FeedbackContentInput
+        formInfo={{ setFormInputs, formInputs }}
+        errorsList={errorsList}
+      />
       <SubmitFeedbackBtns checkValues={checkValues} />
     </form>
   );
