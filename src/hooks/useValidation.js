@@ -29,7 +29,7 @@ const useValidation = (callbackSubmit) => {
   const validation = (rawValues) => {
     setNumberOfValues(Object.entries(rawValues).length);
     Object.entries(rawValues).forEach((v) => {
-      if (v[0] === "title" || v[0] === "comment") {
+      if (v[0] === "title" || v[0] === "description") {
         checkIfValueEmpty(v[0], v[1]);
       } else {
         setCheckedValuesList((oldValues) => {

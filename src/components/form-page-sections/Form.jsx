@@ -1,28 +1,38 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FeedbackTitleInput, FeedbackDropdownInput, FeedbackContentInput, SubmitFeedbackBtns } from "./form-components";
-import { useSelector } from "react-redux";
+import {
+  FeedbackTitleInput,
+  FeedbackDropdownInput,
+  FeedbackContentInput,
+  SubmitFeedbackBtns,
+} from "./form-components";
+import { useSelector, useDispatch } from "react-redux";
 import useValidation from "@/hooks/useValidation";
+import { getCurrentFeedbackDetail } from "@/redux/features/prodReqsSlice";
 
-const Form = () => {
+const Form = ({ type }) => {
+  const dispatch = useDispatch()
   const submitValues = (readyValues) => {
-    console.log(readyValues)
-  }
+    console.log(readyValues);
+  };
   const { validation, errorsList } = useValidation(submitValues);
   const { currentCategoryData, currentStatusData, statusData, categoryData } =
     useSelector((store) => store.dropdownReducer);
+  const { currentFeedback } = useSelector(
+    (store) => store.productRequestsReducer
+  );
   //
   const [formInputs, setFormInputs] = useState({
     id: 1,
     title: "",
     category: currentCategoryData?.dataType,
     status: currentStatusData?.dataType,
-    comment: "",
+    description: "",
   });
   //
   const checkValues = () => {
-    validation(formInputs)
-  }
+    validation(formInputs);
+  };
   //
   useEffect(() => {
     setFormInputs((oldValues) => {
@@ -33,6 +43,13 @@ const Form = () => {
       };
     });
   }, [currentCategoryData, currentStatusData]);
+  //
+  useEffect(() => {
+    if (type[0] === "edit"){
+      dispatch(getCurrentFeedbackDetail(type[1]))
+      setFormInputs(currentFeedback) // data needs to be gotten with the id (type[0])
+    }
+  }, [type, currentFeedback])
   //
   return (
     <form className="w-full grid gap-6 mt-6">
@@ -48,13 +65,15 @@ const Form = () => {
         inputOptions={categoryData}
       />
       {/* For edit only */}
-      <FeedbackDropdownInput
-        value={currentStatusData?.dataType}
-        inputTitle="Update Status"
-        inputDescription="Change feature state"
-        inputName="status-input"
-        inputOptions={statusData}
-      />
+      {type[0] === "edit" && (
+        <FeedbackDropdownInput
+          value={currentStatusData?.dataType}
+          inputTitle="Update Status"
+          inputDescription="Change feature state"
+          inputName="status-input"
+          inputOptions={statusData}
+        />
+      )}
       <FeedbackContentInput
         formInfo={{ setFormInputs, formInputs }}
         errorsList={errorsList}

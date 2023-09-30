@@ -16,8 +16,6 @@ const FeedbackTitleInput = ({ formInfo, errorsList }) => {
         type="text"
         id="feedback-title"
         name="feedback-title"
-        // onFocus={() => setIsFocused(true)}
-        // onBlur={() => setIsFocused(false)}
         className={`w-full p-4 mt-4 rounded-md bg-offWhite outline-none border tab:text-[15px] ${
           errorsList?.title?.isError
             ? "border-red"
