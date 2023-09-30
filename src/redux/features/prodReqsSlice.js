@@ -47,11 +47,14 @@ const productRequests = createSlice({
     getCurrentFeedbackDetail: (state, 
       {payload}) => {
       state.currentFeedback = state.placeholderRequests.find(feed => feed.id === +payload)
-    }
+    },
+    createFeedback: (state, {payload}) => {
+      state.placeholderRequests = [...state.placeholderRequests, payload]
+    },
   }
 })
 
-export const {sortProductRequests, getCurrentFeedbackDetail} = productRequests.actions
+export const {sortProductRequests, getCurrentFeedbackDetail, createFeedback} = productRequests.actions
 
 export default productRequests.reducer
 

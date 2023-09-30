@@ -31,6 +31,7 @@ module.exports = {
       orange: "#F49F85",
       lightBlue: "#62BCFA",
       red: "#D73737",
+      lightRed: "#E98888",
     },
     fontFamily: {
       jost: ["var(--font-jost)", "sans-serif"],

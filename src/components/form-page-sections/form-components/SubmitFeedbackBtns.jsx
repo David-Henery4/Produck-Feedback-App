@@ -1,10 +1,10 @@
-const SubmitFeedbackBtns = ({ checkValues }) => {
+const SubmitFeedbackBtns = ({ checkValues, type }) => {
   return (
     <div className="w-full flex flex-col justify-center items-center mt-4 lgTab:flex-row-reverse lgTab:justify-start lgTab:gap-4">
       <button
         onClick={(e) => {
           e.preventDefault();
-          checkValues()
+          checkValues();
         }}
         className="w-full py-3 px-7 rounded-xl bg-purple hover:bg-pink active:bg-purple text-white lgTab:w-36 lgTab:px-6"
       >
@@ -16,6 +16,14 @@ const SubmitFeedbackBtns = ({ checkValues }) => {
       >
         Cancel
       </button>
+      {type[0] === "edit" && (
+        <button
+          onClick={(e) => e.preventDefault()}
+          className="w-full py-3 px-7 mt-4 rounded-xl bg-red hover:bg-lightRed active:bg-red text-white lgTab:w-24 lgTab:px-6 lgTab:mt-0 lgTab:mr-auto"
+        >
+          Delete
+        </button>
+      )}
     </div>
   );
 };

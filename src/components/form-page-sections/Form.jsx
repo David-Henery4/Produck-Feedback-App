@@ -8,12 +8,13 @@ import {
 } from "./form-components";
 import { useSelector, useDispatch } from "react-redux";
 import useValidation from "@/hooks/useValidation";
-import { getCurrentFeedbackDetail } from "@/redux/features/prodReqsSlice";
+import { getCurrentFeedbackDetail, createFeedback } from "@/redux/features/prodReqsSlice";
 
 const Form = ({ type }) => {
   const dispatch = useDispatch()
   const submitValues = (readyValues) => {
-    console.log(readyValues);
+    // console.log(readyValues);
+    dispatch(createFeedback(readyValues))
   };
   const { validation, errorsList } = useValidation(submitValues);
   const { currentCategoryData, currentStatusData, statusData, categoryData } =
@@ -23,11 +24,13 @@ const Form = ({ type }) => {
   );
   //
   const [formInputs, setFormInputs] = useState({
-    id: 1,
+    id: +new Date(),
     title: "",
     category: currentCategoryData?.dataType,
+    upvotes: 0,
     status: currentStatusData?.dataType,
     description: "",
+    comments: []
   });
   //
   const checkValues = () => {
@@ -78,7 +81,7 @@ const Form = ({ type }) => {
         formInfo={{ setFormInputs, formInputs }}
         errorsList={errorsList}
       />
-      <SubmitFeedbackBtns checkValues={checkValues} />
+      <SubmitFeedbackBtns checkValues={checkValues} type={type}/>
     </form>
   );
 };
