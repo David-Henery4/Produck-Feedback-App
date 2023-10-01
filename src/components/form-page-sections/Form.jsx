@@ -5,33 +5,35 @@ import {
   FeedbackDropdownInput,
   FeedbackContentInput,
   SubmitFeedbackBtns,
+  FormModal
 } from "./form-components";
 import { useSelector, useDispatch } from "react-redux";
 import useValidation from "@/hooks/useValidation";
 import { getCurrentFeedbackDetail, createFeedback } from "@/redux/features/prodReqsSlice";
+import defaultFormInputs from "@/data/defaultFormInputs";
 
 const Form = ({ type }) => {
   const dispatch = useDispatch()
+  const [formInputs, setFormInputs] = useState(defaultFormInputs);
+  const [isFeedbackSubmitted,setIsFeedbackSubmited] = useState(false)
+  const [isModalActive,setIsModalActive] = useState(false)
+  //
   const submitValues = (readyValues) => {
-    // console.log(readyValues);
+    // Create conditional for the edit
     dispatch(createFeedback(readyValues))
+    setFormInputs({
+      ...defaultFormInputs,
+      id: +new Date()
+    });
+    setIsFeedbackSubmited(true)
   };
   const { validation, errorsList } = useValidation(submitValues);
+  //
   const { currentCategoryData, currentStatusData, statusData, categoryData } =
     useSelector((store) => store.dropdownReducer);
   const { currentFeedback } = useSelector(
     (store) => store.productRequestsReducer
   );
-  //
-  const [formInputs, setFormInputs] = useState({
-    id: +new Date(),
-    title: "",
-    category: currentCategoryData?.dataType,
-    upvotes: 0,
-    status: currentStatusData?.dataType,
-    description: "",
-    comments: []
-  });
   //
   const checkValues = () => {
     validation(formInputs);
@@ -48,14 +50,17 @@ const Form = ({ type }) => {
   }, [currentCategoryData, currentStatusData]);
   //
   useEffect(() => {
-    if (type[0] === "edit"){
+    if (type[0] === "edit" || Object.entries(currentFeedback).length > 0){
       dispatch(getCurrentFeedbackDetail(type[1]))
-      setFormInputs(currentFeedback) // data needs to be gotten with the id (type[0])
+      setFormInputs(currentFeedback)
     }
-  }, [type, currentFeedback])
+  }, [type])
   //
   return (
     <form className="w-full grid gap-6 mt-6">
+      {isModalActive && (
+        <FormModal type={type} modal={{ isModalActive, setIsModalActive }} />
+      )}
       <FeedbackTitleInput
         formInfo={{ setFormInputs, formInputs }}
         errorsList={errorsList}
@@ -81,7 +86,13 @@ const Form = ({ type }) => {
         formInfo={{ setFormInputs, formInputs }}
         errorsList={errorsList}
       />
-      <SubmitFeedbackBtns checkValues={checkValues} type={type}/>
+      <SubmitFeedbackBtns
+        checkValues={checkValues}
+        type={type}
+        isFeedbackSubmitted={isFeedbackSubmitted}
+        setIsFeedbackSubmited={setIsFeedbackSubmited}
+        modal={{ isModalActive, setIsModalActive }}
+      />
     </form>
   );
 };

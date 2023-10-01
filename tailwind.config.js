@@ -16,11 +16,13 @@ module.exports = {
     },
     colors: {
       purple: "#AD1FEA",
+      green: "#12C10E",
       pink: "#C75AF6",
       blue: "#4661E6",
       blueShade: "#7C91F9",
       navy: "#373F68",
       white: "#FFFFFF",
+      black: "#000000",
       slightWhite: "#CDD2EE",
       iceWhite: "#F2F4FF",
       offWhite: "#F7F8FD",
