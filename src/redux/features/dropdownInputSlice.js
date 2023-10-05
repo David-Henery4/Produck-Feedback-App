@@ -53,6 +53,12 @@ const dropdownInput = createSlice({
           state.currentStatusData = currentData;
       }
     },
+    updateCategoryFromEdit: (state, {payload}) => {
+      
+    },
+    updateStatusFromEdit: (state, {payload}) => {
+      
+    }
   },
 });
 

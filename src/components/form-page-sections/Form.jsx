@@ -5,27 +5,35 @@ import {
   FeedbackDropdownInput,
   FeedbackContentInput,
   SubmitFeedbackBtns,
-  FormModal
+  FormModal,
 } from "./form-components";
 import { useSelector, useDispatch } from "react-redux";
 import useValidation from "@/hooks/useValidation";
-import { getCurrentFeedbackDetail, createFeedback } from "@/redux/features/prodReqsSlice";
+import {
+  getCurrentFeedbackDetail,
+  createFeedback,
+} from "@/redux/features/prodReqsSlice";
 import defaultFormInputs from "@/data/defaultFormInputs";
+import { updateDropdownData } from "@/redux/features/dropdownInputSlice";
 
 const Form = ({ type }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [formInputs, setFormInputs] = useState(defaultFormInputs);
-  const [isFeedbackSubmitted,setIsFeedbackSubmited] = useState(false)
-  const [isModalActive,setIsModalActive] = useState(false)
+  const [isFeedbackSubmitted, setIsFeedbackSubmited] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
+  //
+  const resetFormToDefault = () => {
+    setFormInputs({
+      ...defaultFormInputs,
+      id: +new Date(),
+    });
+  };
   //
   const submitValues = (readyValues) => {
     // Create conditional for the edit
-    dispatch(createFeedback(readyValues))
-    setFormInputs({
-      ...defaultFormInputs,
-      id: +new Date()
-    });
-    setIsFeedbackSubmited(true)
+    dispatch(createFeedback(readyValues));
+    resetFormToDefault();
+    setIsFeedbackSubmited(true);
   };
   const { validation, errorsList } = useValidation(submitValues);
   //
@@ -39,22 +47,38 @@ const Form = ({ type }) => {
     validation(formInputs);
   };
   //
+  // **~Updating the dropdown values~**
   useEffect(() => {
     setFormInputs((oldValues) => {
       return {
         ...oldValues,
         category: currentCategoryData?.dataType,
+      };
+    });
+  }, [currentCategoryData]);
+  //
+  useEffect(() => {
+    setFormInputs((oldValues) => {
+      return {
+        ...oldValues,
         status: currentStatusData?.dataType,
       };
     });
-  }, [currentCategoryData, currentStatusData]);
+  }, [currentStatusData]);
+  // **~End of updating the dropdown values~**
   //
   useEffect(() => {
-    if (type[0] === "edit" || Object.entries(currentFeedback).length > 0){
-      dispatch(getCurrentFeedbackDetail(type[1]))
-      setFormInputs(currentFeedback)
+    if (type[0] === "create") {
+      resetFormToDefault();
     }
-  }, [type])
+    if (type[0] === "edit") {
+      dispatch(getCurrentFeedbackDetail(type[1]));
+      // dispatch(updateDropdownData())
+    }
+    if (Object.entries(currentFeedback).length > 0 && type[0] !== "create") {
+      setFormInputs(currentFeedback);
+    }
+  }, [type, currentFeedback]);
   //
   return (
     <form className="w-full grid gap-6 mt-6">
@@ -66,7 +90,7 @@ const Form = ({ type }) => {
         errorsList={errorsList}
       />
       <FeedbackDropdownInput
-        value={currentCategoryData?.dataType}
+        value={formInputs.category}
         inputTitle="Category"
         inputDescription="Choose a category for your feedback"
         inputName="category-input"
@@ -75,7 +99,7 @@ const Form = ({ type }) => {
       {/* For edit only */}
       {type[0] === "edit" && (
         <FeedbackDropdownInput
-          value={currentStatusData?.dataType}
+          value={formInputs.status}
           inputTitle="Update Status"
           inputDescription="Change feature state"
           inputName="status-input"
