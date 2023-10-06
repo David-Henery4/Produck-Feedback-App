@@ -73,6 +73,7 @@ const Form = ({ type }) => {
     }
     if (type[0] === "edit") {
       dispatch(getCurrentFeedbackDetail(type[1]));
+      console.log(formInputs.category)
       // dispatch(updateDropdownData())
     }
     if (Object.entries(currentFeedback).length > 0 && type[0] !== "create") {
