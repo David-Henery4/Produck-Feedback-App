@@ -27,14 +27,15 @@ const dropdownInput = createSlice({
   initialState,
   reducers: {
     updateDropdownData: (state, { payload }) => {
-      const { inputName, id } = payload;
+      const { inputName, id = null, dataType = null } = payload;
       if (inputName === "category-input") {
         const { updatedOverall, currentValue, currentData } =
           updateDropdownInputs(
             id,
             state.categoryData,
             state.currentCategory,
-            state.currentCategoryData
+            state.currentCategoryData,
+            dataType
           );
           state.categoryData = updatedOverall
           state.currentCategory = currentValue
@@ -46,18 +47,13 @@ const dropdownInput = createSlice({
             id,
             state.statusData,
             state.currentStatus,
-            state.currentStatusData
+            state.currentStatusData,
+            dataType
           );
           state.statusData = updatedOverall;
           state.currentStatus = currentValue;
           state.currentStatusData = currentData;
       }
-    },
-    updateCategoryFromEdit: (state, {payload}) => {
-      
-    },
-    updateStatusFromEdit: (state, {payload}) => {
-      
     }
   },
 });

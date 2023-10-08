@@ -58,6 +58,10 @@ const productRequests = createSlice({
       );
       state.currentFeedback = {};
     },
+    updateFeedback: (state, {payload}) => {
+      const updatedItem = state.placeholderRequests.find(item => item.id === payload)
+      console.log(updatedItem)
+    }
   },
 });
 

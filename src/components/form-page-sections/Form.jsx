@@ -29,6 +29,22 @@ const Form = ({ type }) => {
     });
   };
   //
+  const resetFormToEditValues = () => {
+    setFormInputs(currentFeedback);
+    dispatch(
+      updateDropdownData({
+        inputName: "status-input",
+        dataType: currentFeedback.status,
+      })
+    );
+    dispatch(
+      updateDropdownData({
+        inputName: "category-input",
+        dataType: currentFeedback.category,
+      })
+    );
+  }
+  //
   const submitValues = (readyValues) => {
     // Create conditional for the edit
     dispatch(createFeedback(readyValues));
@@ -73,11 +89,9 @@ const Form = ({ type }) => {
     }
     if (type[0] === "edit") {
       dispatch(getCurrentFeedbackDetail(type[1]));
-      console.log(formInputs.category)
-      // dispatch(updateDropdownData())
     }
     if (Object.entries(currentFeedback).length > 0 && type[0] !== "create") {
-      setFormInputs(currentFeedback);
+      resetFormToEditValues()
     }
   }, [type, currentFeedback]);
   //
@@ -117,6 +131,7 @@ const Form = ({ type }) => {
         isFeedbackSubmitted={isFeedbackSubmitted}
         setIsFeedbackSubmited={setIsFeedbackSubmited}
         modal={{ isModalActive, setIsModalActive }}
+        resetFormToEditValues={resetFormToEditValues}
       />
     </form>
   );
