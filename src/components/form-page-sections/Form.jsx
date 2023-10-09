@@ -12,6 +12,7 @@ import useValidation from "@/hooks/useValidation";
 import {
   getCurrentFeedbackDetail,
   createFeedback,
+  updateFeedback
 } from "@/redux/features/prodReqsSlice";
 import defaultFormInputs from "@/data/defaultFormInputs";
 import { updateDropdownData } from "@/redux/features/dropdownInputSlice";
@@ -47,8 +48,14 @@ const Form = ({ type }) => {
   //
   const submitValues = (readyValues) => {
     // Create conditional for the edit
-    dispatch(createFeedback(readyValues));
-    resetFormToDefault();
+    if (type[0] === "edit"){
+      dispatch(updateFeedback({data: readyValues, id: type[1]} ));
+    }
+    if (type[0] === "create"){
+      dispatch(createFeedback(readyValues));
+      resetFormToDefault();
+    }
+    // dispatch(createFeedback(readyValues));
     setIsFeedbackSubmited(true);
   };
   const { validation, errorsList } = useValidation(submitValues);

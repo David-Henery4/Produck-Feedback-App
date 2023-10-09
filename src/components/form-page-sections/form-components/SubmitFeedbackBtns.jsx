@@ -22,13 +22,15 @@ const SubmitFeedbackBtns = ({
     <>
       {isFeedbackSubmitted && (
         <p className="text-center font-medium text-green">
-          Your feedback has been submitted
+          {type[0] === "edit"
+            ? "Changes saved successfully"
+            : "Your feedback has been submitted"}
         </p>
       )}
       <div className="w-full flex flex-col justify-center items-center mt-4 lgTab:flex-row-reverse lgTab:justify-start lgTab:gap-4">
         <button
           onClick={(e) => {
-            // Create conditional for the edit
+            // Create conditional for the edit (after validation)
             e.preventDefault();
             checkValues();
           }}
@@ -38,8 +40,8 @@ const SubmitFeedbackBtns = ({
         </button>
         <button
           onClick={(e) => {
-            e.preventDefault() 
-            resetFormToEditValues()
+            e.preventDefault();
+            resetFormToEditValues();
           }}
           className="w-full py-3 px-7 mt-4 rounded-xl bg-lightNavy text-white hover:bg-lighterNavy active:bg-lightNavy lgTab:w-24 lgTab:px-6 lgTab:mt-0"
         >

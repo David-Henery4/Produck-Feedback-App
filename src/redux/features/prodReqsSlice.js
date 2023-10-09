@@ -58,9 +58,12 @@ const productRequests = createSlice({
       );
       state.currentFeedback = {};
     },
-    updateFeedback: (state, {payload}) => {
-      const updatedItem = state.placeholderRequests.find(item => item.id === payload)
-      console.log(updatedItem)
+    updateFeedback: (state, {payload: {id, data}}) => {
+      state.placeholderRequests = state.placeholderRequests.map(item => {
+        if(item.id === +id) {item = data}
+        return item
+      })
+      state.currentFeedback = data
     }
   },
 });
@@ -70,6 +73,7 @@ export const {
   getCurrentFeedbackDetail,
   createFeedback,
   deleteFeedback,
+  updateFeedback,
 } = productRequests.actions;
 
 export default productRequests.reducer;
