@@ -12,43 +12,37 @@ const productRequests = createSlice({
   initialState: initialState,
   reducers: {
     sortProductRequests: (state, { payload }) => {
-      // let tempArray = state.placeholderRequests.forEach((item) => {
-
-      // })
-
       if (payload.sortBy === "most-upvotes") {
-        state.placeholderRequests = state.placeholderRequests.sort(
+        state.currentlyDisplayed = state.currentlyDisplayed.sort(
           (a, b) => b.upvotes - a.upvotes
         );
       }
       if (payload.sortBy === "least-upvotes") {
-        state.placeholderRequests = state.placeholderRequests.sort(
+        state.currentlyDisplayed = state.currentlyDisplayed.sort(
           (a, b) => a.upvotes - b.upvotes
         );
       }
       if (payload.sortBy === "most-comments") {
-        state.placeholderRequests = state.placeholderRequests.sort((a, b) => {
-          if (!a.comments) {
-            return 1 - 0;
-          }
-          return b?.comments?.length - a.comments?.length;
+        state.currentlyDisplayed = state.currentlyDisplayed.sort((a, b) => {
+          const commentsA = a.comments ? a.comments.length : 0;
+          const commentsB = b.comments ? b.comments.length : 0;
+          return commentsB - commentsA;
         });
       }
       if (payload.sortBy === "least-comments") {
-        state.placeholderRequests = state.placeholderRequests.sort((a, b) => {
-          if (!a.comments) {
-            return 0 - 1;
-          }
-          return a?.comments?.length - b.comments?.length;
+        state.currentlyDisplayed = state.currentlyDisplayed.sort((a, b) => {
+          const commentsA = a.comments ? a.comments.length : 0;
+          const commentsB = b.comments ? b.comments.length : 0;
+          return commentsA - commentsB;
         });
       }
     },
     getCurrentFeedbackDetail: (state, { payload }) => {
-      if (state.placeholderRequests.find((feed) => feed.id === +payload)){
+      if (state.placeholderRequests.find((feed) => feed.id === +payload)) {
         state.currentFeedback = state.placeholderRequests.find(
           (feed) => feed.id === +payload
-          );
-        }
+        );
+      }
     },
     createFeedback: (state, { payload }) => {
       state.placeholderRequests = [...state.placeholderRequests, payload];
@@ -59,18 +53,24 @@ const productRequests = createSlice({
       );
       state.currentFeedback = {};
     },
-    updateFeedback: (state, {payload: {id, data}}) => {
-      state.placeholderRequests = state.placeholderRequests.map(item => {
-        if(item.id === +id) {item = data}
-        return item
-      })
-      state.currentFeedback = data
+    updateFeedback: (state, { payload: { id, data } }) => {
+      state.placeholderRequests = state.placeholderRequests.map((item) => {
+        if (item.id === +id) {
+          item = data;
+        }
+        return item;
+      });
+      state.currentFeedback = data;
     },
-    filterFeedbackList: (state, {payload}) => {
-      
-    },
-    resetFilterFeedbackList: (state, {payload}) => {
-      
+    filterFeedbackList: (state, { payload }) => {
+      if (payload !== "all") {
+        state.currentlyDisplayed = state.placeholderRequests.filter(
+          (feed) => feed.category === payload
+        );
+      }
+      if (payload === "all") {
+        state.currentlyDisplayed = state.placeholderRequests;
+      }
     },
   },
 });
