@@ -20,6 +20,7 @@ const CategoryBox = () => {
       return {
         id: i + 1,
         category: cat,
+        isActive: false
       };
     });
   };
@@ -40,6 +41,9 @@ const CategoryBox = () => {
           <div
             key={prod?.id}
             className="text-blue font-semibold text-[13px] py-[6px] px-4 bg-iceWhite rounded-[10px] capitalize mb-[6px]"
+            onClick={() => {
+              
+            }}
           >
             <p>{prod?.category}</p>
           </div>

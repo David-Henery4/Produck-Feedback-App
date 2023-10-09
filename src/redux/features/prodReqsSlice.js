@@ -3,6 +3,7 @@ import placeholderData from "@/data/data.json";
 
 const initialState = {
   placeholderRequests: placeholderData.productRequests,
+  currentlyDisplayed: placeholderData.productRequests,
   currentFeedback: {},
 };
 
@@ -64,7 +65,13 @@ const productRequests = createSlice({
         return item
       })
       state.currentFeedback = data
-    }
+    },
+    filterFeedbackList: (state, {payload}) => {
+      
+    },
+    resetFilterFeedbackList: (state, {payload}) => {
+      
+    },
   },
 });
 
@@ -74,6 +81,7 @@ export const {
   createFeedback,
   deleteFeedback,
   updateFeedback,
+  filterFeedbackList,
 } = productRequests.actions;
 
 export default productRequests.reducer;
