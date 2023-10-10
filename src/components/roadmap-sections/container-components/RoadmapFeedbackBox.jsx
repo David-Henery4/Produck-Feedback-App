@@ -1,19 +1,25 @@
 import { ArrowDownIcon, ArrowUpIcon, CommentsIcon, ArrowLeftIcon } from "public/assets/shared";
+import Link from "next/link";
 
-const RoadmapFeedbackBox = () => {
+const RoadmapFeedbackBox = ({ title, status, category, upvotes, comments, color, id }) => {
   return (
-    <div className="w-full p-8 rounded-md border-t-[6px] text-[13px] border-t-purple bg-white text-gray">
+    <div
+      className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white text-gray ${color}`}
+    >
       {/* Status */}
       <div className="flex justify-start items-center gap-4">
         <div className="w-2 h-2 rounded-full bg-purple"></div>
-        <p className="lap:text-base">In Progress</p>
+        <p className="capitalize lap:text-base">{status}</p>
       </div>
 
       {/* Title & Feedback */}
       <div className="mt-2">
-        <h3 className="font-bold text-lightNavy -tracking-[0.25px] lap:text-lg">
-          One-click portfolio generation
-        </h3>
+        <Link
+          className="font-bold capitalize text-lightNavy -tracking-[0.25px] hover:text-blue lap:text-lg"
+          href={`/feedback-detail/${id}`}
+        >
+          {title}
+        </Link>
         <p className="mt-1 lap:text-base">
           Add ability to create professional looking portfolio from profile.
         </p>
@@ -21,17 +27,17 @@ const RoadmapFeedbackBox = () => {
 
       {/* Feedback type */}
       <div className="px-4 py-[6px] rounded-lg bg-iceWhite inline-flex mt-4">
-        <p className="text-blue font-semibold">Feature</p>
+        <p className="text-blue font-semibold capitalize">{category}</p>
       </div>
 
       {/* Upvotes & Comments Amounts */}
       <div className="flex justify-between items-center mt-4">
-        <div className="px-4 py-3 bg-iceWhite rounded-lg">
+        <div className="px-4 py-3 bg-iceWhite rounded-lg hover:bg-purpleShade hover:cursor-pointer">
           <p className="inline-flex justify-center items-baseline gap-2 font-bold">
             <span>
               <ArrowUpIcon className="stroke-purple fill-none" />
             </span>{" "}
-            62
+            {upvotes}
           </p>
         </div>
 
@@ -40,12 +46,12 @@ const RoadmapFeedbackBox = () => {
             <span>
               <CommentsIcon />
             </span>{" "}
-            1
+            {comments?.length ? comments.length : 0}
           </p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default RoadmapFeedbackBox

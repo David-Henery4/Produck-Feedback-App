@@ -5,6 +5,29 @@ const initialState = {
   placeholderRequests: placeholderData.productRequests,
   currentlyDisplayed: placeholderData.productRequests,
   currentFeedback: {},
+  roadmapColumns: [
+    {
+      id: 1,
+      label: "planned",
+      columnData: [],
+      color: "border-t-orange",
+      description: "Ideas prioritized for research",
+    },
+    {
+      id: 2,
+      label: "in-progress",
+      columnData: [],
+      color: "border-t-purple",
+      description: "Currently being developed",
+    },
+    {
+      id: 3,
+      label: "live",
+      columnData: [],
+      color: "border-t-lightBlue",
+      description: "Released features",
+    },
+  ],
 };
 
 const productRequests = createSlice({
@@ -72,6 +95,14 @@ const productRequests = createSlice({
         state.currentlyDisplayed = state.placeholderRequests;
       }
     },
+    setInitialRoadmapColumns: (state, { payload }) => {
+      state.roadmapColumns = state.roadmapColumns.map((col) => {
+        col.columnData = state.placeholderRequests.filter(
+          (feed) => feed.status === col.label
+        );
+        return col;
+      });
+    },
   },
 });
 
@@ -82,6 +113,7 @@ export const {
   deleteFeedback,
   updateFeedback,
   filterFeedbackList,
+  setInitialRoadmapColumns,
 } = productRequests.actions;
 
 export default productRequests.reducer;

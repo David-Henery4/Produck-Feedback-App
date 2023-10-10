@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 const FeedbackListSection = () => {
   const dispatch = useDispatch();
-  const { placeholderRequests, currentlyDisplayed } = useSelector(
+  const { currentlyDisplayed } = useSelector(
     (store) => store.productRequestsReducer
   );
   //
@@ -21,7 +21,7 @@ const FeedbackListSection = () => {
   }, [currentSortData]);
   //
   return (
-    <section className="mt-8 col-start-2 col-end-12 grid gap-4 tab:mt-6 lap:col-start-4 lap:col-end-5 lap:row-start-2 lap:row-end-5">
+    <section className="mt-8 col-start-2 col-end-12 grid gap-4 content-start tab:mt-6 lap:col-start-4 lap:col-end-5 lap:row-start-2 lap:row-end-5">
       {currentlyDisplayed?.length <= 0 ? (
         <EmptyFeedbackSection />
       ) : (
