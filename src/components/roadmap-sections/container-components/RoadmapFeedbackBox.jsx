@@ -4,11 +4,21 @@ import Link from "next/link";
 const RoadmapFeedbackBox = ({ title, status, category, upvotes, comments, color, id }) => {
   return (
     <div
-      className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white text-gray ${color}`}
+      className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white text-gray ${
+        (status === "in-progress" && "border-t-purple") ||
+        (status === "planned" && "border-t-orange") ||
+        (status === "live" && "border-t-lightBlue")
+      }`}
     >
       {/* Status */}
       <div className="flex justify-start items-center gap-4">
-        <div className="w-2 h-2 rounded-full bg-purple"></div>
+        <div
+          className={`w-2 h-2 rounded-full ${
+            (status === "in-progress" && "bg-purple") ||
+            (status === "planned" && "bg-orange") ||
+            (status === "live" && "bg-lightBlue")
+          }`}
+        ></div>
         <p className="capitalize lap:text-base">{status}</p>
       </div>
 
