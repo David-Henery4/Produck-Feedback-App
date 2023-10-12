@@ -1,5 +1,4 @@
 "use client"
-import { TaskAbortError } from "@reduxjs/toolkit";
 import { motion } from "framer-motion";
 
 const StatusToggles = ({
@@ -9,12 +8,12 @@ const StatusToggles = ({
   //
   return (
     <div className="w-full col-start-1 col-end-13 border-b border-b-lightGray/25 lgTab:hidden">
-      <div className="w-full flex justify-between items-center text-sm text-lightNavy/40 font-bold max-w-[500px] mx-auto">
+      <div className="px-3 w-full flex justify-between items-center text-[11px] smMob:text-sm text-lightNavy/40 font-bold max-w-[500px] mx-auto">
         {roadmapColumns.map((tabs, i) => {
           return (
             <button
               key={tabs.id}
-              className={`relative px-7 py-5 ${
+              className={`relative px-3 py-5 ${
                 currentTabInx === i ? "text-lightNavy" : ""
               }`}
               onClick={() => setCurrentTabInx(i)}
@@ -28,8 +27,10 @@ const StatusToggles = ({
               </p>
               {i === currentTabInx ? (
                 <motion.div
-                  className={`absolute -bottom-[1px] left-0 right-0 h-1 ${
-                    tabs.label === "in-progress" && "bg-purple" || tabs.label === "planned" && "bg-orange" || tabs.label === "live" && "bg-lightBlue"
+                  className={`absolute  -bottom-[1px] left-0 right-0 h-1 ${
+                    (tabs.label === "in-progress" && "bg-purple") ||
+                    (tabs.label === "planned" && "bg-orange") ||
+                    (tabs.label === "live" && "bg-lightBlue")
                   }`}
                   layoutId="underline"
                 />
