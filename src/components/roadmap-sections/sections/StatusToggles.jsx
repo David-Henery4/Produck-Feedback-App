@@ -43,20 +43,4 @@ const StatusToggles = ({
   );
 };
 
-// styles
-
-{
-  /* <div className="w-full flex justify-between items-center text-sm text-lightNavy/40 font-bold max-w-[500px] mx-auto">
-  <button className="px-7 py-5">
-    <p className="scale-100 transition-all">Planned (2)</p>
-  </button>
-  <button className=" text-lightNavy px-7 py-5 border-b-4 border-b-purple">
-    <p className="scale-110 transition-all">In-Progress (3)</p>
-  </button>
-  <button className="px-7 py-5">
-    <p className="scale-100 transition-all">Live (1)</p>
-  </button>
-</div>; */
-}
-
 export default StatusToggles;
