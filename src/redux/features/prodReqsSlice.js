@@ -69,12 +69,14 @@ const productRequests = createSlice({
     },
     createFeedback: (state, { payload }) => {
       state.placeholderRequests = [...state.placeholderRequests, payload];
+      state.currentlyDisplayed = state.placeholderRequests
     },
     deleteFeedback: (state, { payload }) => {
       state.placeholderRequests = state.placeholderRequests.filter(
         (item) => item.id !== +payload
       );
       state.currentFeedback = {};
+      state.currentlyDisplayed = state.placeholderRequests;
     },
     updateFeedback: (state, { payload: { id, data } }) => {
       state.placeholderRequests = state.placeholderRequests.map((item) => {
@@ -84,6 +86,7 @@ const productRequests = createSlice({
         return item;
       });
       state.currentFeedback = data;
+      state.currentlyDisplayed = state.placeholderRequests;
     },
     filterFeedbackList: (state, { payload }) => {
       if (payload !== "all") {

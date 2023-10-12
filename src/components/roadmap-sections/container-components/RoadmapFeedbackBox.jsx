@@ -1,7 +1,15 @@
 import { ArrowDownIcon, ArrowUpIcon, CommentsIcon, ArrowLeftIcon } from "public/assets/shared";
 import Link from "next/link";
 
-const RoadmapFeedbackBox = ({ title, status, category, upvotes, comments, color, id }) => {
+const RoadmapFeedbackBox = ({
+  title,
+  status,
+  category,
+  upvotes,
+  comments,
+  id,
+  description,
+}) => {
   return (
     <div
       className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white text-gray ${
@@ -30,9 +38,7 @@ const RoadmapFeedbackBox = ({ title, status, category, upvotes, comments, color,
         >
           {title}
         </Link>
-        <p className="mt-1 lap:text-base">
-          Add ability to create professional looking portfolio from profile.
-        </p>
+        <p className="mt-1 lap:text-base">{description}</p>
       </div>
 
       {/* Feedback type */}
