@@ -35,7 +35,7 @@ const Page = ({ params }) => {
         <DetailsNav {...currentFeedback} />
         <FeedbackBox {...currentFeedback} />
         <FeedbackComments {...currentFeedback} />
-        <AddComments />
+        <AddComments {...currentFeedback} />
       </div>
     </main>
   );

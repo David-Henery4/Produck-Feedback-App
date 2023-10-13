@@ -1,8 +1,17 @@
-// import { avatarJackson } from "public/assets/user-images";
+import { useState } from "react";
+import { ReplyToComment, ReplyInput } from ".";
 
-const Comment = ({ id, content, user, replies, isReply, replyingTo = null }) => {
-  const { name, username, image } = user;
-  // console.log(replies)
+
+const Comment = ({
+  id,
+  content,
+  user: { name, username, image },
+  replies,
+  isReply,
+  replyingTo = null,
+  ogCommentId,
+}) => {
+  const [isReplyActive, setIsReplyActive] = useState(false);
   //
   return (
     <div
@@ -29,7 +38,10 @@ const Comment = ({ id, content, user, replies, isReply, replyingTo = null }) => 
           <h3 className="font-bold text-lightNavy">{name}</h3>
           <h4>{username}</h4>
         </div>
-        <button className="font-semibold text-blue hover:underline">
+        <button
+          className="font-semibold text-blue hover:underline"
+          onClick={() => setIsReplyActive(!isReplyActive)}
+        >
           Reply
         </button>
       </div>
@@ -46,6 +58,8 @@ const Comment = ({ id, content, user, replies, isReply, replyingTo = null }) => 
           <p>{content}</p>
         )}
       </div>
+
+      {isReplyActive && <ReplyInput replyInfo={{ id, username, ogCommentId }} />}
     </div>
   );
 };

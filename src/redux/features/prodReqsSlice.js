@@ -106,10 +106,22 @@ const productRequests = createSlice({
         return col;
       });
     },
-    addComment: () => {
-      
+    addComment: (state, {payload: {id, commentData}}) => {
+      state.placeholderRequests = state.placeholderRequests.map((item) => {
+        if (item.id === id){
+          item?.comments
+            ? (item.comments = [...item.comments, commentData])
+            : (item.comments = [commentData]);
+        }
+        return item
+      })
+      //
+      state.currentFeedback = state.placeholderRequests.find(
+        (item) => item.id === id
+      );
+      state.currentlyDisplayed = state.placeholderRequests;
     },
-    addCommentReply: () => {
+    addCommentReply: (state, {payload}) => {
       
     },
   },
@@ -123,6 +135,9 @@ export const {
   updateFeedback,
   filterFeedbackList,
   setInitialRoadmapColumns,
+  //
+  addComment,
+  addCommentReply,
 } = productRequests.actions;
 
 export default productRequests.reducer;

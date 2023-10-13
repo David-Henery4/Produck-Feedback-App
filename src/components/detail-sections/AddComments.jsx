@@ -1,6 +1,16 @@
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addComment } from "@/redux/features/prodReqsSlice";
 
-
-const AddComments = () => {
+const AddComments = ({id}) => {
+  const dispatch = useDispatch()
+  const {currentUser} = useSelector(store => store.userReducer)
+  const [commentData, setCommentData] = useState({
+    id: +new Date(),
+    content: "",
+    user: {...currentUser},
+  });
+  //
   return (
     <div className="w-full p-6 text-[13px] font-medium bg-white rounded-xl tab:px-8 lgTab:text-[15px]">
       <label
@@ -14,10 +24,23 @@ const AddComments = () => {
         name="comment-input"
         id="comment-input"
         className="resize-none outline-blue w-full h-20 p-4 bg-offWhite mt-6"
+        onChange={(e) => setCommentData((oldValues) => {
+          return {...oldValues, content: e.target.value}
+        })}
+        value={commentData.content}
       ></textarea>
       <div className="w-full flex justify-center items-center flex-wrap gap-4 mt-4 smMob:justify-between">
         <p className="text-gray">250 Characters left</p>
-        <button className="rounded-xl bg-purple font-bold text-iceWhite px-4 py-3 hover:bg-pink active:bg-purple lgTab:text-[14px]">
+        <button className="rounded-xl bg-purple font-bold text-iceWhite px-4 py-3 hover:bg-pink active:bg-purple lgTab:text-[14px]" onClick={() => {
+          dispatch(addComment({id, commentData}))
+          setCommentData((oldValues) => {
+            return {
+              ...oldValues,
+              id: +new Date(),
+              content: "",
+            };
+          })
+        }}>
           Post Comment
         </button>
       </div>

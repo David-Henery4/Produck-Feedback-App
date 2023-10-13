@@ -21,7 +21,7 @@ const FeedbackComments = ({ comments }) => {
               <div className="w-full grid gap-6 lgTab:gap-4">
                 {comment?.replies &&
                   comment?.replies?.map((reply, i) => {
-                    return <Comment key={i} {...reply} isReply={true} />;
+                    return <Comment key={i} {...reply} isReply={true} ogCommentId={comment.id} />;
                   })}
               </div>
             </div>
