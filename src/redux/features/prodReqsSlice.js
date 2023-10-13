@@ -106,6 +106,12 @@ const productRequests = createSlice({
         return col;
       });
     },
+    addComment: () => {
+      
+    },
+    addCommentReply: () => {
+      
+    },
   },
 });
 
