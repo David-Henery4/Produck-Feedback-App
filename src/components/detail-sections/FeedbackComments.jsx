@@ -1,4 +1,3 @@
-import { avatarJackson } from "public/assets/user-images";
 import { Comment } from "./comments-components";
 
 const FeedbackComments = ({ comments }) => {
@@ -16,14 +15,21 @@ const FeedbackComments = ({ comments }) => {
               className="w-full border-t-lightGray/25 border-t first:border-none"
               key={comment?.id}
             >
-              {/* {comment?.replies && <div className="w-[1px] h-[38%] bg-gray absolute top-[35%] left-0"></div>} */}
               <Comment {...comment} />
-              <div className="w-full grid gap-6 lgTab:gap-4">
-                {comment?.replies &&
-                  comment?.replies?.map((reply, i) => {
-                    return <Comment key={i} {...reply} isReply={true} ogCommentId={comment.id} />;
+              {comment?.replies && (
+                <div className="w-full grid gap-6 pb-6 lgTab:pb-8 lgTab:gap-4">
+                  {comment?.replies?.map((reply, i) => {
+                    return (
+                      <Comment
+                        key={i}
+                        {...reply}
+                        isReply={true}
+                        ogCommentId={comment.id}
+                      />
+                    );
                   })}
-              </div>
+                </div>
+              )}
             </div>
           );
         })}

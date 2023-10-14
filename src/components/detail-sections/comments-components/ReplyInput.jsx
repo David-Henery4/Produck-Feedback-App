@@ -6,7 +6,6 @@ const ReplyInput = ({
   replyInfo: { id, username, ogCommentId },
   setIsReplyActive,
 }) => {
-  // console.log(id, username, ogCommentId);
   const { currentUser } = useSelector((store) => store.userReducer);
   const [isContentInvalid, setIsContentInvalid] = useState(false);
   const [replyData, setReplyData] = useState({
