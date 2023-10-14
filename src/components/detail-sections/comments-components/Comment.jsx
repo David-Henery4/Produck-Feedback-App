@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ReplyToComment, ReplyInput } from ".";
+import { useSelector } from "react-redux";
+
 
 
 const Comment = ({
@@ -9,15 +11,16 @@ const Comment = ({
   replies,
   isReply,
   replyingTo = null,
-  ogCommentId,
+  ogCommentId = null,
 }) => {
+  const { currentUser } = useSelector((store) => store.userReducer);
   const [isReplyActive, setIsReplyActive] = useState(false);
   //
   return (
     <div
       className={`relative group text-[13px] text-gray font-medium grid grid-cols-commentMob lgTab:grid-cols-commentTab lgTab:gap-x-0 ${
         isReply
-          ? "pl-6 py-0 gap-4 lgTab:gap-[10px] lgTab:pl-11 lgTab:py-0"
+          ? "pl-6 pb-6 gap-4 lgTab:gap-[10px] lgTab:pl-11 lgTab:py-0"
           : "py-6 gap-4 lgTab:py-8"
       }`}
     >
@@ -38,28 +41,35 @@ const Comment = ({
           <h3 className="font-bold text-lightNavy">{name}</h3>
           <h4>{username}</h4>
         </div>
-        <button
-          className="font-semibold text-blue hover:underline"
-          onClick={() => setIsReplyActive(!isReplyActive)}
-        >
-          Reply
-        </button>
+        {username !== currentUser?.username && (
+          <button
+            className="font-semibold text-blue hover:underline"
+            onClick={() => setIsReplyActive(!isReplyActive)}
+          >
+            Reply
+          </button>
+        )}
       </div>
 
       {/* Bottom */}
 
       <div className="col-start-1 col-end-3 lgTab:col-start-3 lgTab:col-end-4">
         {isReply ? (
-          <p>
+          <p className="break-words">
             <span className="text-purple font-bold">@{replyingTo}</span>{" "}
             {content}
           </p>
         ) : (
-          <p>{content}</p>
+          <p className="break-words">{content}</p>
         )}
       </div>
 
-      {isReplyActive && <ReplyInput replyInfo={{ id, username, ogCommentId }} />}
+      {isReplyActive && (
+        <ReplyInput
+          replyInfo={{ id, username, ogCommentId }}
+          setIsReplyActive={setIsReplyActive}
+        />
+      )}
     </div>
   );
 };

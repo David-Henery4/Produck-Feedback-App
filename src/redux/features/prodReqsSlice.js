@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import placeholderData from "@/data/data.json";
+import addReply from "./helpers/addReply";
 
 const initialState = {
   placeholderRequests: placeholderData.productRequests,
@@ -69,7 +70,7 @@ const productRequests = createSlice({
     },
     createFeedback: (state, { payload }) => {
       state.placeholderRequests = [...state.placeholderRequests, payload];
-      state.currentlyDisplayed = state.placeholderRequests
+      state.currentlyDisplayed = state.placeholderRequests;
     },
     deleteFeedback: (state, { payload }) => {
       state.placeholderRequests = state.placeholderRequests.filter(
@@ -106,23 +107,39 @@ const productRequests = createSlice({
         return col;
       });
     },
-    addComment: (state, {payload: {id, commentData}}) => {
+    addComment: (state, { payload: { id, commentData } }) => {
       state.placeholderRequests = state.placeholderRequests.map((item) => {
-        if (item.id === id){
+        if (item.id === id) {
           item?.comments
             ? (item.comments = [...item.comments, commentData])
             : (item.comments = [commentData]);
         }
-        return item
-      })
+        return item;
+      });
       //
       state.currentFeedback = state.placeholderRequests.find(
         (item) => item.id === id
       );
       state.currentlyDisplayed = state.placeholderRequests;
     },
-    addCommentReply: (state, {payload}) => {
-      
+    addCommentReply: (
+      state,
+      { payload: { replyData, commentId, ogCommentId } }
+    ) => {
+      if (!ogCommentId) {
+        state.currentFeedback.comments = addReply(
+          commentId,
+          state.currentFeedback,
+          replyData
+        );
+      }
+      if (ogCommentId) {
+        state.currentFeedback.comments = addReply(
+          ogCommentId,
+          state.currentFeedback,
+          replyData
+        );
+      }
     },
   },
 });
