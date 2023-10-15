@@ -15,6 +15,7 @@ const RoadmapFeedbackBox = ({
   comments,
   id,
   description,
+  upvotedBy = [],
 }) => {
   return (
     <div
@@ -54,7 +55,12 @@ const RoadmapFeedbackBox = ({
 
       {/* Upvotes & Comments Amounts */}
       <div className="flex justify-between items-center mt-4">
-        <Upvotes upvotes={upvotes} isRoadmapFeedbackBox={true}/>
+        <Upvotes
+          upvotes={upvotes}
+          isRoadmapFeedbackBox={true}
+          feedbackId={id}
+          upvotedBy={upvotedBy}
+        />
 
         <div className="grid">
           <p className="inline-flex justify-center items-center gap-2 font-bold">

@@ -10,6 +10,7 @@ const FeedbackBox = ({
   comments,
   upvotes = 12,
   isMainList = false,
+  upvotedBy = []
 }) => {
   return (
     <div
@@ -36,7 +37,7 @@ const FeedbackBox = ({
         </span>
       </div>
 
-      <Upvotes upvotes={upvotes} />
+      <Upvotes upvotes={upvotes} feedbackId={id} upvotedBy={upvotedBy} />
 
       <div className="flex justify-center items-center gap-1 lgTab:col-start-3 lgTab:col-end-4 lgTab:self-center">
         <CommentsIcon />
