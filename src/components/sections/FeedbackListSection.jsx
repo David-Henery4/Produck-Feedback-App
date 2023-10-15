@@ -27,11 +27,7 @@ const FeedbackListSection = () => {
       ) : (
         <>
           {currentlyDisplayed?.map((tData) => {
-            return (
-              <Link key={tData?.id} href={`/feedback-detail/${tData?.id}`}>
-                <FeedbackBox {...tData} />
-              </Link>
-            );
+            return <FeedbackBox key={tData?.id} {...tData} isMainList={true} />;
           })}
         </>
       )}

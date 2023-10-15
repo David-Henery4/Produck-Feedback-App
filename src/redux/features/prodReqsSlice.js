@@ -140,7 +140,17 @@ const productRequests = createSlice({
           replyData
         );
       }
+      state.placeholderRequests = state.placeholderRequests.map((item) => {
+        if (item.id === state.currentFeedback.id) {
+          item = state.currentFeedback;
+        }
+        return item;
+      });
+      state.currentlyDisplayed = state.placeholderRequests;
     },
+    addAndRemoveUpvote: (state, {payload}) => {
+      console.log(payload)
+    }
   },
 });
 
@@ -155,6 +165,8 @@ export const {
   //
   addComment,
   addCommentReply,
+  //
+  addAndRemoveUpvote,
 } = productRequests.actions;
 
 export default productRequests.reducer;

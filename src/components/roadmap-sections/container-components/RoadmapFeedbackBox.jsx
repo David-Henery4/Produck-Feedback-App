@@ -1,5 +1,11 @@
-import { ArrowDownIcon, ArrowUpIcon, CommentsIcon, ArrowLeftIcon } from "public/assets/shared";
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CommentsIcon,
+  ArrowLeftIcon,
+} from "public/assets/shared";
 import Link from "next/link";
+import { Upvotes } from "@/components/shared-components";
 
 const RoadmapFeedbackBox = ({
   title,
@@ -48,14 +54,7 @@ const RoadmapFeedbackBox = ({
 
       {/* Upvotes & Comments Amounts */}
       <div className="flex justify-between items-center mt-4">
-        <div className="px-4 py-3 bg-iceWhite rounded-lg hover:bg-purpleShade hover:cursor-pointer">
-          <p className="inline-flex justify-center items-baseline gap-2 font-bold">
-            <span>
-              <ArrowUpIcon className="stroke-purple fill-none" />
-            </span>{" "}
-            {upvotes}
-          </p>
-        </div>
+        <Upvotes upvotes={upvotes} isRoadmapFeedbackBox={true}/>
 
         <div className="grid">
           <p className="inline-flex justify-center items-center gap-2 font-bold">
@@ -70,4 +69,4 @@ const RoadmapFeedbackBox = ({
   );
 };
 
-export default RoadmapFeedbackBox
+export default RoadmapFeedbackBox;
