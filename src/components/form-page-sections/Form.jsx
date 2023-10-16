@@ -28,6 +28,18 @@ const Form = ({ type }) => {
       ...defaultFormInputs,
       id: +new Date(),
     });
+    dispatch(
+      updateDropdownData({
+        inputName: "status-input",
+        dataType: "planned",
+      })
+    );
+    dispatch(
+      updateDropdownData({
+        inputName: "category-input",
+        dataType: "feature",
+      })
+    );
   };
   //
   const resetFormToEditValues = () => {
@@ -139,6 +151,7 @@ const Form = ({ type }) => {
         setIsFeedbackSubmited={setIsFeedbackSubmited}
         modal={{ isModalActive, setIsModalActive }}
         resetFormToEditValues={resetFormToEditValues}
+        resetFormToDefault={resetFormToDefault}
       />
     </form>
   );

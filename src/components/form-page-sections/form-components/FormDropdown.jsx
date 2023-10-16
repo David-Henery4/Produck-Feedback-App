@@ -23,10 +23,16 @@ const FormDropdown = ({ isDropdownOpen, inputName, inputOptions }) => {
                   name={inputName}
                   id={category.dataType}
                   value={category.dataType}
-                  checked={category.isActive}
+                  defaultChecked={category.isActive}
+                  // checked={category.isActive}
                   className="absolute top-0 left-0 w-full h-full opacity-0 hover:cursor-pointer"
-                  onChange={() => {
-                    dispatch(updateDropdownData({id: category?.id, inputName}))
+                  // onChange={() => {
+                  //   dispatch(updateDropdownData({id: category?.id, inputName}))
+                  // }}
+                  onClick={() => {
+                    dispatch(
+                      updateDropdownData({ id: category?.id, inputName })
+                    );
                   }}
                 />
                 <span className="group-hover:text-purple">

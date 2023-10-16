@@ -1,8 +1,6 @@
-"use client"
 import { ArrowUpIcon } from "public/assets/shared";
 import { useDispatch, useSelector } from "react-redux";
 import { addAndRemoveUpvote } from "@/redux/features/prodReqsSlice";
-import { useEffect } from "react";
 
 const Upvotes = ({
   upvotes,
@@ -12,11 +10,6 @@ const Upvotes = ({
 }) => {
   const { currentUser } = useSelector((store) => store.userReducer);
   const dispatch = useDispatch();
-  //
-  useEffect(() => {
-    console.log(upvotedBy)
-    console.log(upvotedBy?.includes(currentUser?.username));
-  }, [upvotedBy])
   //
   return (
     <div

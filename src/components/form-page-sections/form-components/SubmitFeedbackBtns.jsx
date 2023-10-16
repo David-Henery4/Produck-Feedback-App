@@ -7,6 +7,7 @@ const SubmitFeedbackBtns = ({
   setIsFeedbackSubmited,
   modal: { isModalActive, setIsModalActive },
   resetFormToEditValues,
+  resetFormToDefault,
 }) => {
   //
   useEffect(() => {
@@ -40,8 +41,13 @@ const SubmitFeedbackBtns = ({
         </button>
         <button
           onClick={(e) => {
+            // ADD conditional for create/edit
             e.preventDefault();
-            resetFormToEditValues();
+            if (type[0] === "edit") {
+              resetFormToEditValues();
+              return
+            }
+            resetFormToDefault()
           }}
           className="w-full py-3 px-7 mt-4 rounded-xl bg-lightNavy text-white hover:bg-lighterNavy active:bg-lightNavy lgTab:w-24 lgTab:px-6 lgTab:mt-0"
         >

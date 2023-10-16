@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import placeholderData from "@/data/data.json";
 import addReply from "./helpers/addReply";
 
-
 const initialState = {
   placeholderRequests: placeholderData.productRequests,
   currentlyDisplayed: placeholderData.productRequests,
@@ -153,10 +152,10 @@ const productRequests = createSlice({
       const feedbackIndex = state.placeholderRequests.findIndex(
         (item) => item.id === feedbackId
       );
-
+      //
       if (feedbackIndex !== -1) {
         const activeFeedback = state.placeholderRequests[feedbackIndex];
-
+        //
         if (activeFeedback.upvotedBy?.includes(username)) {
           activeFeedback.upvotes -= 1;
           activeFeedback.upvotedBy = activeFeedback.upvotedBy.filter(
@@ -169,21 +168,18 @@ const productRequests = createSlice({
             username,
           ];
         }
-
+        //
         state.placeholderRequests = state.placeholderRequests.map((item) => {
           if (item.id === feedbackId) {
             item = activeFeedback;
           }
           return item;
         });
-
-        // NEED TO GET THE SORT FUNCTION TO FIRE, EVERYTIME THE UPVOTES VALUES CHANGE,
-        // IN ORDER TO UPDATE "currentlyDisplayed"
-
-        // AND ALSO NEED TO UP DATE CURRENTFEEDBACK, WHEN UPVOTE COMES FROM
-        // THE SINGLE FEEDBACK PAGE.
-        
+        //
         state.currentlyDisplayed = state.placeholderRequests;
+        if (state.currentFeedback.id && state.currentFeedback.id === activeFeedback.id){
+          state.currentFeedback = activeFeedback
+        }
         setInitialRoadmapColumns();
       }
     },

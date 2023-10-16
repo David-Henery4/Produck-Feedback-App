@@ -30,7 +30,7 @@ const FeedbackDropdownInput = ({
           readOnly
           value={value}
         />
-        <ArrowDownIcon className="stroke-blue absolute top-1/2 -translate-y-1/2 right-4" />
+        <ArrowDownIcon className="stroke-blue absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none" />
         <FormDropdown
           inputName={inputName}
           isDropdownOpen={isDropdownOpen}

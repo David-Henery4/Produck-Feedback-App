@@ -5,7 +5,6 @@ import { deleteFeedback } from "@/redux/features/prodReqsSlice";
 const FormModal = ({ type, modal: { isModalActive, setIsModalActive } }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  // console.log()
   //
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black/80 z-50 grid place-items-center">

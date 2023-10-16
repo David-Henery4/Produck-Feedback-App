@@ -17,7 +17,7 @@ const FeedbackListSection = () => {
   //
   useEffect(() => {
     dispatch(sortProductRequests(currentSortData));
-  }, [currentSortData]);
+  }, [currentSortData, currentlyDisplayed]);
   //
   return (
     <section className="mt-8 col-start-2 col-end-12 grid gap-4 content-start tab:mt-6 lap:col-start-4 lap:col-end-5 lap:row-start-2 lap:row-end-5">
