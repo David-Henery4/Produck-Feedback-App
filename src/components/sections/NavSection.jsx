@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { Titles, TitleBox, CategoryBox, RoadmapBox, Sidebar } from "../nav-components";
+import { Titles, TitleBox, CategoryBox, RoadmapBox, Sidebar, Overlay } from "../nav-components";
 import { backgroundHeaderMobile } from "public/assets/suggestions";
 import { HamburgerIcon, CloseIcon } from "public/assets/shared";
 
@@ -62,6 +62,7 @@ const NavSection = () => {
         )}
       </div>
       <Sidebar isSidebarOpen={isSidebarOpen} />
+      <Overlay isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
     </nav>
   );
 };
