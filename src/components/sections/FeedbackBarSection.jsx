@@ -2,7 +2,7 @@
 import { SortDropdown, SuggestionsCount } from "../bar-components";
 import { AddFeedbackLink } from "../shared-components";
 import { useState } from "react";
-import { ArrowDownIcon, PlusIcon } from "public/assets/shared";
+import { ArrowDownIcon } from "../../../public/assets/shared";
 import { useSelector } from "react-redux";
 
 const FeedbackBarSection = () => {
