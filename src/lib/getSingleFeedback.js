@@ -1,5 +1,5 @@
 
-const getAllFeedback = async (id) => {
+const getSingleFeedback = async (id) => {
   try {
     const res = await fetch(`http://localhost:3000/api/feedback/${id}`);
     return res.json()
@@ -9,4 +9,4 @@ const getAllFeedback = async (id) => {
   }
 };
 
-export default getAllFeedback;
+export default getSingleFeedback;

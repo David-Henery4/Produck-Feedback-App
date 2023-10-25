@@ -3,7 +3,6 @@
 const getAllFeedback = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/feedback");
-    // console.log(res.json());
     return res.json()
   } catch (error) {
     console.error(error)

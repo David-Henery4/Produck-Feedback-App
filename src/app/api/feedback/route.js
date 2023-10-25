@@ -1,26 +1,21 @@
 import clientPromise from "@/lib/mongodb";
+import { NextResponse } from "next/server";
+
 
 export async function GET() {
   try {
-    const client = await clientPromise
-    const db = client.db("main-product-feedback")
-    const collection = db.collection("product-feedbacks");
-    const findMainList = await collection.find("productRequests")
-    // const allFeedbackList = await db
-    //   .collection("product-feedbacks")
-    //   .find("productRequests")
-    //   .toArray();
-    return Response.json({
-      // allFeedbackList,
-      findMainList,
-      headers:{
-        status: 200,
-        "message": "success"
-      }
-    })
+    const client = await clientPromise;
+    const db = client.db("main-product-feedback");
+    const productRequests = db.collection("product-feedbacks");
+    const allFeedbackList = await productRequests.distinct("productRequests");
+    return NextResponse.json(
+      allFeedbackList
+      // headers:{
+      //   status: 200,
+      //   "message": "success"
+      // }
+    );
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
-
-
