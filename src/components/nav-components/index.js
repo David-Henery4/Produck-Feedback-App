@@ -4,6 +4,8 @@ import CategoryBox from "./CategoryBox";
 import RoadmapBox from "./RoadmapBox";
 import Sidebar from "./Sidebar";
 import Overlay from "./Overlay";
+import BurgerAndSidebar from "./BurgerAndSidebar";
+import RoadmapList from "./RoadmapList";
 
 export {
   Titles,
@@ -11,5 +13,7 @@ export {
   CategoryBox,
   RoadmapBox,
   Sidebar,
-  Overlay
+  Overlay,
+  BurgerAndSidebar,
+  RoadmapList
 }
