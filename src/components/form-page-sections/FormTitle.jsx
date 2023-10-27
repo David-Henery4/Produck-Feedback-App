@@ -1,14 +1,9 @@
-"use client"
-import { useSelector } from "react-redux";
 
-const FormTitle = ({ type }) => {
-  const { currentFeedback } = useSelector(
-    (store) => store.productRequestsReducer
-  );
+const FormTitle = ({ type, feedbackValuesForEdit }) => {
   return (
     <h1 className="text-lg tab:text-2xl">
       {type[0] === "edit"
-        ? `Editing ‘${currentFeedback?.title || ""}’`
+        ? `Editing ‘${feedbackValuesForEdit?.title}’`
         : "Create New Feedback"}
     </h1>
   );

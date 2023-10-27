@@ -10,16 +10,17 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import useValidation from "@/hooks/useValidation";
 import {
-  getCurrentFeedbackDetail,
   createFeedback,
   updateFeedback
 } from "@/redux/features/prodReqsSlice";
 import defaultFormInputs from "@/data/defaultFormInputs";
 import { updateDropdownData } from "@/redux/features/dropdownInputSlice";
 
-const Form = ({ type }) => {
+const Form = ({ type, feedbackValuesForEdit }) => {
   const dispatch = useDispatch();
-  const [formInputs, setFormInputs] = useState(defaultFormInputs);
+  const [formInputs, setFormInputs] = useState(
+    type[0] === "create" ? defaultFormInputs : feedbackValuesForEdit
+  );
   const [isFeedbackSubmitted, setIsFeedbackSubmited] = useState(false);
   const [isModalActive, setIsModalActive] = useState(false);
   //
@@ -43,27 +44,27 @@ const Form = ({ type }) => {
   };
   //
   const resetFormToEditValues = () => {
-    setFormInputs(currentFeedback);
+    setFormInputs(feedbackValuesForEdit);
     dispatch(
       updateDropdownData({
         inputName: "status-input",
-        dataType: currentFeedback.status,
+        dataType: feedbackValuesForEdit.status,
       })
     );
     dispatch(
       updateDropdownData({
         inputName: "category-input",
-        dataType: currentFeedback.category,
+        dataType: feedbackValuesForEdit.category,
       })
     );
-  }
+  };
   //
   const submitValues = (readyValues) => {
     // Create conditional for the edit
-    if (type[0] === "edit"){
-      dispatch(updateFeedback({data: readyValues, id: type[1]} ));
+    if (type[0] === "edit") {
+      dispatch(updateFeedback({ data: readyValues, id: type[1] }));
     }
-    if (type[0] === "create"){
+    if (type[0] === "create") {
       dispatch(createFeedback(readyValues));
       resetFormToDefault();
     }
@@ -74,9 +75,6 @@ const Form = ({ type }) => {
   //
   const { currentCategoryData, currentStatusData, statusData, categoryData } =
     useSelector((store) => store.dropdownReducer);
-  const { currentFeedback } = useSelector(
-    (store) => store.productRequestsReducer
-  );
   //
   const checkValues = () => {
     validation(formInputs);
@@ -107,12 +105,9 @@ const Form = ({ type }) => {
       resetFormToDefault();
     }
     if (type[0] === "edit") {
-      dispatch(getCurrentFeedbackDetail(type[1]));
-    }
-    if (Object.entries(currentFeedback).length > 0 && type[0] !== "create") {
       resetFormToEditValues()
     }
-  }, [type, currentFeedback]);
+  }, [type]);
   //
   return (
     <form className="w-full grid gap-6 mt-6">
@@ -158,3 +153,104 @@ const Form = ({ type }) => {
 };
 
 export default Form;
+
+
+
+/////////***********OLD*COMPONENT*LOGIC***************////////////
+
+  // const dispatch = useDispatch();
+  // const [formInputs, setFormInputs] = useState(defaultFormInputs);
+  // const [isFeedbackSubmitted, setIsFeedbackSubmited] = useState(false);
+  // const [isModalActive, setIsModalActive] = useState(false);
+  // //
+  // const resetFormToDefault = () => {
+  //   setFormInputs({
+  //     ...defaultFormInputs,
+  //     id: +new Date(),
+  //   });
+  //   dispatch(
+  //     updateDropdownData({
+  //       inputName: "status-input",
+  //       dataType: "planned",
+  //     })
+  //   );
+  //   dispatch(
+  //     updateDropdownData({
+  //       inputName: "category-input",
+  //       dataType: "feature",
+  //     })
+  //   );
+  // };
+  // //
+  // const resetFormToEditValues = () => {
+  //   setFormInputs(currentFeedback);
+  //   dispatch(
+  //     updateDropdownData({
+  //       inputName: "status-input",
+  //       dataType: currentFeedback.status,
+  //     })
+  //   );
+  //   dispatch(
+  //     updateDropdownData({
+  //       inputName: "category-input",
+  //       dataType: currentFeedback.category,
+  //     })
+  //   );
+  // };
+  // //
+  // const submitValues = (readyValues) => {
+  //   // Create conditional for the edit
+  //   if (type[0] === "edit") {
+  //     dispatch(updateFeedback({ data: readyValues, id: type[1] }));
+  //   }
+  //   if (type[0] === "create") {
+  //     dispatch(createFeedback(readyValues));
+  //     resetFormToDefault();
+  //   }
+  //   // dispatch(createFeedback(readyValues));
+  //   setIsFeedbackSubmited(true);
+  // };
+  // const { validation, errorsList } = useValidation(submitValues);
+  // //
+  // const { currentCategoryData, currentStatusData, statusData, categoryData } =
+  //   useSelector((store) => store.dropdownReducer);
+  // const { currentFeedback } = useSelector(
+  //   (store) => store.productRequestsReducer
+  // );
+  // //
+  // const checkValues = () => {
+  //   validation(formInputs);
+  // };
+  // //
+  // // **~Updating the dropdown values~**
+  // useEffect(() => {
+  //   setFormInputs((oldValues) => {
+  //     return {
+  //       ...oldValues,
+  //       category: currentCategoryData?.dataType,
+  //     };
+  //   });
+  // }, [currentCategoryData]);
+  // //
+  // useEffect(() => {
+  //   setFormInputs((oldValues) => {
+  //     return {
+  //       ...oldValues,
+  //       status: currentStatusData?.dataType,
+  //     };
+  //   });
+  // }, [currentStatusData]);
+  // // **~End of updating the dropdown values~**
+  // //
+  // useEffect(() => {
+  //   if (type[0] === "create") {
+  //     resetFormToDefault();
+  //   }
+  //   if (type[0] === "edit") {
+  //     dispatch(getCurrentFeedbackDetail(type[1]));
+  //   }
+  //   if (Object.entries(currentFeedback).length > 0 && type[0] !== "create") {
+  //     resetFormToEditValues();
+  //   }
+  // }, [type, currentFeedback]);
+  // //

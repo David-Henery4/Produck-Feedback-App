@@ -1,3 +1,4 @@
+"use client"
 import { ArrowUpIcon } from "public/assets/shared";
 import { useDispatch, useSelector } from "react-redux";
 import { addAndRemoveUpvote } from "@/redux/features/prodReqsSlice";

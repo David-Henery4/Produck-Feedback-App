@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addComment } from "@/redux/features/prodReqsSlice";
