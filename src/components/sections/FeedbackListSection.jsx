@@ -7,7 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { sortProductRequests } from "@/redux/features/prodReqsSlice";
 import { useEffect } from "react";
 
-const FeedbackListSection = () => {
+
+const FeedbackListSection = ({feedBackList}) => {
+  console.log(feedBackList)
   const dispatch = useDispatch();
   const { currentlyDisplayed } = useSelector(
     (store) => store.productRequestsReducer

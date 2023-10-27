@@ -23,7 +23,7 @@ const feedbackSchema = new Schema({
   ],
 });
 
-const productRequests = mongoose.models.productRequests || mongoose.model("productRequests", feedbackSchema)
+const productRequests = mongoose.models.productrequests || mongoose.model("productrequests", feedbackSchema)
 
 export default productRequests
 
