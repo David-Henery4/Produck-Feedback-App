@@ -1,15 +1,16 @@
-
-export async function updateFeedback(id,dataToUpdate) {
+async function updateFeedback(id, dataToUpdate) {
   try {
     const res = await fetch(`http://localhost:3000/api/feedback/${id}`, {
       method: "PUT",
-      body:{
-        formData: dataToUpdate
-      }
+      body: JSON.stringify({
+        formData: { ...dataToUpdate },
+      }),
     });
-    return await res.json()
+    console.log(dataToUpdate)
+    return await res.json();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
+export default updateFeedback;

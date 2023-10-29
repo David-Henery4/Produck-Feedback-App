@@ -2,6 +2,9 @@
 import { ArrowUpIcon } from "public/assets/shared";
 import { useDispatch, useSelector } from "react-redux";
 import { addAndRemoveUpvote } from "@/redux/features/prodReqsSlice";
+import updateFeedback from "@/lib/updateFeedback";
+import { useRouter } from "next/navigation";
+
 
 const Upvotes = ({
   upvotes,
@@ -9,8 +12,30 @@ const Upvotes = ({
   feedbackId,
   upvotedBy,
 }) => {
+  const router = useRouter()
   const { currentUser } = useSelector((store) => store.userReducer);
   const dispatch = useDispatch();
+  //
+  const handleUpvote = async () => {
+    let newUpvotes
+    let newList
+    //
+    if (upvotedBy?.includes(currentUser?.username)) {
+      newUpvotes = upvotes -= 1;
+      newList = upvotedBy.filter(
+        (item) => item !== currentUser?.username
+      );
+    } else {
+      newUpvotes = upvotes += 1;
+      newList = [...(upvotedBy || []), currentUser?.username];
+    }
+    //
+    const res = await updateFeedback(feedbackId, { upvotes : newUpvotes, upvotedBy: newList});
+    router.refresh()
+    console.log(res)
+  }
+  console.log(upvotedBy)
+  console.log(upvotes)
   //
   return (
     <div
@@ -22,9 +47,10 @@ const Upvotes = ({
         upvotedBy?.includes(currentUser?.username) ? "bg-blue" : "bg-iceWhite"
       }`}
       onClick={() => {
-        dispatch(
-          addAndRemoveUpvote({ feedbackId, username: currentUser?.username })
-        );
+        // dispatch(
+        //   addAndRemoveUpvote({ feedbackId, username: currentUser?.username })
+        // );
+        handleUpvote()
       }}
     >
       <ArrowUpIcon
@@ -46,3 +72,15 @@ const Upvotes = ({
 };
 
 export default Upvotes;
+
+// QUICK LOGIC
+
+// if (activeFeedback.upvotedBy?.includes(username)) {
+//   activeFeedback.upvotes -= 1;
+//   activeFeedback.upvotedBy = activeFeedback.upvotedBy.filter(
+//     (item) => item !== username
+//   );
+// } else {
+//   activeFeedback.upvotes += 1;
+//   activeFeedback.upvotedBy = [...(activeFeedback.upvotedBy || []), username];
+// }

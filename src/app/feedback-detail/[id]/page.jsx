@@ -16,7 +16,7 @@ const Page = async ({ params:{id} }) => {
         <DetailsNav {...currentFeedback} />
         <FeedbackBox {...currentFeedback} />
         <FeedbackComments {...currentFeedback} />
-        <AddComments {...currentFeedback} />
+        <AddComments currentFeedback={currentFeedback} />
       </div>
     </main>
   );

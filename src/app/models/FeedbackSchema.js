@@ -10,6 +10,7 @@ const feedbackSchema = new Schema({
   upvotes: { type: Number, required: true },
   status: { type: String, required: true },
   description: { type: String, required: true },
+  upvotedBy: Array,
   comments: [
     {
       id: Number,

@@ -1,19 +1,30 @@
 "use client"
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addComment } from "@/redux/features/prodReqsSlice";
+import { useSelector } from "react-redux";
+import updateFeedback from "@/lib/updateFeedback";
+import { useRouter } from "next/navigation";
 
-const AddComments = ({ id }) => {
-  const [checkInputActive,setCheckInputActive] = useState(false)
+const AddComments = ({ currentFeedback }) => {
+  const router = useRouter()
+  const [checkInputActive, setCheckInputActive] = useState(false);
   const [isContentInvalid, setIsContentInvalid] = useState(false);
   const [characterLimit, setCharacterLimit] = useState(250);
-  const dispatch = useDispatch();
   const { currentUser } = useSelector((store) => store.userReducer);
+  //
   const [commentData, setCommentData] = useState({
     id: +new Date(),
     content: "",
     user: { ...currentUser },
   });
+  //
+  const handleCommentSubmit = async () => {
+    const updatedFeedbackWithComment = {
+      ...currentFeedback,
+      comments: [...currentFeedback?.comments, commentData]
+    }
+    await updateFeedback(currentFeedback.id, updatedFeedbackWithComment)
+    router.refresh()
+  };
   //
   useEffect(() => {
     setCharacterLimit(250 - commentData.content.length);
@@ -59,7 +70,7 @@ const AddComments = ({ id }) => {
           onClick={() => {
             if (commentData.content.trim() !== "") {
               setIsContentInvalid(false);
-              dispatch(addComment({ id, commentData }));
+              handleCommentSubmit()
               setCommentData((oldValues) => {
                 return {
                   ...oldValues,
@@ -80,3 +91,30 @@ const AddComments = ({ id }) => {
 };
 
 export default AddComments;
+
+// OLD Components logic & imports
+
+// "use client"
+// import { useState, useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { addComment } from "@/redux/features/prodReqsSlice";
+
+//   const [checkInputActive,setCheckInputActive] = useState(false)
+//   const [isContentInvalid, setIsContentInvalid] = useState(false);
+//   const [characterLimit, setCharacterLimit] = useState(250);
+//   const dispatch = useDispatch();
+//   const { currentUser } = useSelector((store) => store.userReducer);
+//   //
+//   const [commentData, setCommentData] = useState({
+//     id: +new Date(),
+//     content: "",
+//     user: { ...currentUser },
+//   });
+//   //
+//   const handleCommentSubmit =() => {
+    
+//   }
+//   //
+//   useEffect(() => {
+//     setCharacterLimit(250 - commentData.content.length);
+//   }, [commentData?.content]);

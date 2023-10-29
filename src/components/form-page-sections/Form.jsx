@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   FeedbackTitleInput,
@@ -7,17 +8,15 @@ import {
   SubmitFeedbackBtns,
   FormModal,
 } from "./form-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import useValidation from "@/hooks/useValidation";
-import {
-  createFeedback,
-  updateFeedback
-} from "@/redux/features/prodReqsSlice";
 import defaultFormInputs from "@/data/defaultFormInputs";
 import { updateDropdownData } from "@/redux/features/dropdownInputSlice";
+import createFeedback from "@/lib/createFeedback";
+import updateFeedback from "@/lib/updateFeedback";
 
 const Form = ({ type, feedbackValuesForEdit }) => {
-  const dispatch = useDispatch();
+  const router = useRouter()
   const [formInputs, setFormInputs] = useState(
     type[0] === "create" ? defaultFormInputs : feedbackValuesForEdit
   );
@@ -59,16 +58,25 @@ const Form = ({ type, feedbackValuesForEdit }) => {
     );
   };
   //
+  const handleCreateFeedback = async (newData) => {
+    await createFeedback(newData)
+  }
+  //
+  const handleUpdateFeedback = async (feedbackId, updatedData) => {
+    await updateFeedback(feedbackId, updatedData)
+    // MAYBE check for success before refresh?
+    router.refresh()
+  }
+  //
   const submitValues = (readyValues) => {
     // Create conditional for the edit
     if (type[0] === "edit") {
-      dispatch(updateFeedback({ data: readyValues, id: type[1] }));
+      handleUpdateFeedback(type[1], readyValues)
     }
     if (type[0] === "create") {
-      dispatch(createFeedback(readyValues));
+      handleCreateFeedback(readyValues)
       resetFormToDefault();
     }
-    // dispatch(createFeedback(readyValues));
     setIsFeedbackSubmited(true);
   };
   const { validation, errorsList } = useValidation(submitValues);
@@ -154,7 +162,25 @@ const Form = ({ type, feedbackValuesForEdit }) => {
 
 export default Form;
 
+/////////*****OLD COMPONENT IMPORTS*********//////////
 
+// "use client";
+// import { useEffect, useState } from "react";
+// import {
+//   FeedbackTitleInput,
+//   FeedbackDropdownInput,
+//   FeedbackContentInput,
+//   SubmitFeedbackBtns,
+//   FormModal,
+// } from "./form-components";
+// import { useSelector, useDispatch } from "react-redux";
+// import useValidation from "@/hooks/useValidation";
+// import {
+//   createFeedback,
+//   updateFeedback
+// } from "@/redux/features/prodReqsSlice";
+// import defaultFormInputs from "@/data/defaultFormInputs";
+// import { updateDropdownData } from "@/redux/features/dropdownInputSlice"; 
 
 /////////***********OLD*COMPONENT*LOGIC***************////////////
 

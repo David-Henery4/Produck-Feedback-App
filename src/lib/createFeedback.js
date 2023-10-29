@@ -4,9 +4,12 @@ async function createFeedback(newFeedbackData) {
   try {
     const res = await fetch("http://localhost:3000/api/feedback", {
       method: "POST",
-      body:{
-        formData: newFeedbackData
-      }
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formData: { ...newFeedbackData },
+      }),
     });
     return await res.json()
   } catch (error) {
