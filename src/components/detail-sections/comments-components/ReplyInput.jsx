@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const ReplyInput = ({
   replyInfo: { id, username, ogCommentId },
   setIsReplyActive,
+  comments
 }) => {
   const { currentUser } = useSelector((store) => store.userReducer);
   const [isContentInvalid, setIsContentInvalid] = useState(false);
@@ -40,11 +41,12 @@ const ReplyInput = ({
         )}
       </div>
       <ReplyToComment
+        comments={comments}
         replyData={replyData}
         commentIdAndOgCommentId={{ id, ogCommentId }}
         setIsReplyActive={setIsReplyActive}
         setReplyData={setReplyData}
-        replyValidation={{isContentInvalid, setIsContentInvalid}}
+        replyValidation={{ isContentInvalid, setIsContentInvalid }}
       />
     </div>
   );

@@ -6,7 +6,6 @@ async function updateFeedback(id, dataToUpdate) {
         formData: { ...dataToUpdate },
       }),
     });
-    console.log(dataToUpdate)
     return await res.json();
   } catch (error) {
     console.error(error);

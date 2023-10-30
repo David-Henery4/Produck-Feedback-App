@@ -15,13 +15,14 @@ const FeedbackComments = ({ comments }) => {
               className="w-full border-t-lightGray/25 border-t first:border-none"
               key={comment?.id}
             >
-              <Comment {...comment} />
+              <Comment comments={ comments } {...comment} />
               {comment?.replies && (
                 <div className="w-full grid gap-6 pb-6 lgTab:pb-8 lgTab:gap-4">
                   {comment?.replies?.map((reply, i) => {
                     return (
                       <Comment
                         key={i}
+                        comments={comments}
                         {...reply}
                         isReply={true}
                         ogCommentId={comment.id}

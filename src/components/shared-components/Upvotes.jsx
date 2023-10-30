@@ -1,7 +1,6 @@
 "use client"
 import { ArrowUpIcon } from "public/assets/shared";
-import { useDispatch, useSelector } from "react-redux";
-import { addAndRemoveUpvote } from "@/redux/features/prodReqsSlice";
+import { useSelector } from "react-redux";
 import updateFeedback from "@/lib/updateFeedback";
 import { useRouter } from "next/navigation";
 
@@ -14,7 +13,6 @@ const Upvotes = ({
 }) => {
   const router = useRouter()
   const { currentUser } = useSelector((store) => store.userReducer);
-  const dispatch = useDispatch();
   //
   const handleUpvote = async () => {
     let newUpvotes
@@ -30,12 +28,9 @@ const Upvotes = ({
       newList = [...(upvotedBy || []), currentUser?.username];
     }
     //
-    const res = await updateFeedback(feedbackId, { upvotes : newUpvotes, upvotedBy: newList});
+    await updateFeedback(feedbackId, { upvotes : newUpvotes, upvotedBy: newList});
     router.refresh()
-    console.log(res)
   }
-  console.log(upvotedBy)
-  console.log(upvotes)
   //
   return (
     <div
@@ -47,9 +42,6 @@ const Upvotes = ({
         upvotedBy?.includes(currentUser?.username) ? "bg-blue" : "bg-iceWhite"
       }`}
       onClick={() => {
-        // dispatch(
-        //   addAndRemoveUpvote({ feedbackId, username: currentUser?.username })
-        // );
         handleUpvote()
       }}
     >
@@ -84,3 +76,12 @@ export default Upvotes;
 //   activeFeedback.upvotes += 1;
 //   activeFeedback.upvotedBy = [...(activeFeedback.upvotedBy || []), username];
 // }
+
+// Was using:
+
+// import { useDispatch, useSelector } from "react-redux";
+// import { addAndRemoveUpvote } from "@/redux/features/prodReqsSlice";
+// const dispatch = useDispatch();
+// dispatch(
+//   addAndRemoveUpvote({ feedbackId, username: currentUser?.username })
+// );

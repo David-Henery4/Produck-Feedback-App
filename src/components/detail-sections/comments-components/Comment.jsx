@@ -4,11 +4,10 @@ import { useState } from "react";
 import {  ReplyInput } from ".";
 import { useSelector } from "react-redux";
 
-
-
 const Comment = ({
   id,
   content,
+  comments,
   user: { name, username, image },
   replies,
   isReply,
@@ -68,6 +67,7 @@ const Comment = ({
 
       {isReplyActive && (
         <ReplyInput
+          comments={comments}
           replyInfo={{ id, username, ogCommentId }}
           setIsReplyActive={setIsReplyActive}
         />

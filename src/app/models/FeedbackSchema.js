@@ -15,6 +15,18 @@ const feedbackSchema = new Schema({
     {
       id: Number,
       content: String,
+      replies: [
+        {
+          id: Number,
+          content: String,
+          replyingTo: String,
+          user: {
+            image: String,
+            name: String,
+            username: String,
+          },
+        },
+      ],
       user: {
         image: String,
         name: String,

@@ -8,7 +8,7 @@ import {
   SubmitFeedbackBtns,
   FormModal,
 } from "./form-components";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import useValidation from "@/hooks/useValidation";
 import defaultFormInputs from "@/data/defaultFormInputs";
 import { updateDropdownData } from "@/redux/features/dropdownInputSlice";
@@ -17,6 +17,7 @@ import updateFeedback from "@/lib/updateFeedback";
 
 const Form = ({ type, feedbackValuesForEdit }) => {
   const router = useRouter()
+  const dispatch = useDispatch()
   const [formInputs, setFormInputs] = useState(
     type[0] === "create" ? defaultFormInputs : feedbackValuesForEdit
   );
