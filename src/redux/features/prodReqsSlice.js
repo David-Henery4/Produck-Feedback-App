@@ -29,6 +29,7 @@ const initialState = {
       description: "Released features",
     },
   ],
+  currentRoadmapColumnIndex: 1
 };
 
 const productRequests = createSlice({
@@ -183,6 +184,9 @@ const productRequests = createSlice({
         setInitialRoadmapColumns();
       }
     },
+    changeRoadmapColumn: (state, {payload}) => {
+      state.currentRoadmapColumnIndex = payload
+    }
   },
 });
 
@@ -199,6 +203,8 @@ export const {
   addCommentReply,
   //
   addAndRemoveUpvote,
+  //
+  changeRoadmapColumn
 } = productRequests.actions;
 
 export default productRequests.reducer;

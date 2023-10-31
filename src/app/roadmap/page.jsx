@@ -36,12 +36,9 @@ const RoadMap = async () => {
     });
   }
   //
-  console.log(handleSetRoadmapColumns())
-  //
   return (
     <div className="grid grid-cols-mob pb-24 lgTab:pt-14 smTab:grid-cols-smTab">
       <RoadmapHeader roadmapColumnData={handleSetRoadmapColumns()} />
-      {/* <StatusToggles /> */}
       <RoadmapContentContainer roadmapColumnData={handleSetRoadmapColumns()} />
     </div>
   );

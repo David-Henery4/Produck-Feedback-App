@@ -1,10 +1,15 @@
 "use client"
 import { motion } from "framer-motion";
+import { useSelector, useDispatch } from "react-redux";
+import { changeRoadmapColumn } from "@/redux/features/prodReqsSlice";
 
 const StatusToggles = ({
   roadmapColumns,
-  tabInxInfo: { currentTabInx, setCurrentTabInx },
 }) => {
+  const dispatch = useDispatch()
+  const { currentRoadmapColumnIndex } = useSelector(
+    (store) => store.productRequestsReducer
+  );
   //
   return (
     <div className="w-full col-start-1 col-end-13 border-b border-b-lightGray/25 lgTab:hidden">
@@ -14,18 +19,18 @@ const StatusToggles = ({
             <button
               key={tabs.id}
               className={`relative px-3 py-5 ${
-                currentTabInx === i ? "text-lightNavy" : ""
+                currentRoadmapColumnIndex === i ? "text-lightNavy" : ""
               }`}
-              onClick={() => setCurrentTabInx(i)}
+              onClick={() => dispatch(changeRoadmapColumn(i))}
             >
               <p
                 className={`capitalize transition-all ${
-                  currentTabInx === i ? "scale-110" : "scale-100"
+                  currentRoadmapColumnIndex === i ? "scale-110" : "scale-100"
                 }`}
               >
                 {tabs.label} ({tabs?.columnData.length})
               </p>
-              {i === currentTabInx ? (
+              {i === currentRoadmapColumnIndex ? (
                 <motion.div
                   className={`absolute  -bottom-[1px] left-0 right-0 h-1 ${
                     (tabs.label === "in-progress" && "bg-purple") ||
