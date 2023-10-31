@@ -20,6 +20,7 @@ const initialState = {
     },
     ...resetData(),
   ],
+  currentFilter: "all"
 };
 
 const filters = createSlice({
@@ -28,7 +29,12 @@ const filters = createSlice({
   reducers: {
     upDateFilterUi: (state, {payload}) => {
       state.filterOptions = state.filterOptions.map(filter => {
-        filter.id === payload ? filter.isActive = true : filter.isActive = false
+        if (filter.id === payload){
+          state.currentFilter = filter.dataType;
+          filter.isActive = true;
+        } else{
+          filter.isActive = false;
+        }
         return filter
       })
     }
