@@ -1,5 +1,3 @@
-import { ArrowLeftIcon } from "public/assets/shared";
-import Link from "next/link";
 import {GoBackBtn} from "@/components/shared-components"
 
 const TitleAndBackLink = () => {

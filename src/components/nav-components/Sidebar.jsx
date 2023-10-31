@@ -1,6 +1,6 @@
 import { CategoryBox, RoadmapBox } from "."
 
-const Sidebar = ({ isSidebarOpen }) => {
+const Sidebar = ({ isSidebarOpen, children }) => {
   //
   return (
     <aside
@@ -10,7 +10,7 @@ const Sidebar = ({ isSidebarOpen }) => {
     >
       <CategoryBox />
       {/**/}
-      <RoadmapBox />
+      {children} {/*{children} = <RoadmapBox /> */}
       {/**/}
     </aside>
   );

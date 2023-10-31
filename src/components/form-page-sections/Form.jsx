@@ -61,6 +61,7 @@ const Form = ({ type, feedbackValuesForEdit }) => {
   //
   const handleCreateFeedback = async (newData) => {
     await createFeedback(newData)
+    router.refresh();
   }
   //
   const handleUpdateFeedback = async (feedbackId, updatedData) => {
@@ -80,6 +81,7 @@ const Form = ({ type, feedbackValuesForEdit }) => {
     }
     setIsFeedbackSubmited(true);
   };
+  //
   const { validation, errorsList } = useValidation(submitValues);
   //
   const { currentCategoryData, currentStatusData, statusData, categoryData } =

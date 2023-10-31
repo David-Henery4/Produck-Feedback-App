@@ -3,6 +3,7 @@ import { RoadmapList } from ".";
 
 
 const RoadmapBox = () => {
+  console.log("RoadmapBox:server");
   //
   return (
     <div className="bg-white p-6 rounded-[10px] w-full grid gap-6 max-w-[350px] lgTab:max-w-none lgTab:h-full">

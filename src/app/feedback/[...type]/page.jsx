@@ -17,7 +17,7 @@ const page = async ({ params: {type} }) => {
   return (
     <main className="w-full pt-[34px] pb-[77px] grid grid-cols-mob smTab:grid-cols-smTab">
       <div className="w-full col-start-2 col-end-12 max-w-[540px] mx-auto">
-        <GoBackBtn type={type} />
+        <GoBackBtn />
       </div>
 
       {/**/}

@@ -32,6 +32,7 @@ const FormModal = ({ type, modal: { isModalActive, setIsModalActive } }) => {
               router.replace("/");
               handleDeleteFeedback(type[1]);
               setIsModalActive(false);
+              router.refresh()
             }}
             className="w-full py-3 px-7 rounded-xl bg-red hover:bg-lightRed active:bg-red text-white lgTab:w-24 lgTab:px-6"
           >
