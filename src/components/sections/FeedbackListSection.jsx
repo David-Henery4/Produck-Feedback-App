@@ -9,7 +9,7 @@ const FeedbackListSection = ({feedBackList}) => {
   const {currentSortData} = useSelector((store) => store.sortReducer);
   const {currentFilter} = useSelector((store) => store.filterReducer);
   //
-  const handleSortItems = (list) => {
+  const handleSortAndFilterItems = (list) => {
     let newList
     if (currentSortData.sortBy === "most-upvotes") {
       newList = list.sort(
@@ -40,7 +40,7 @@ const FeedbackListSection = ({feedBackList}) => {
       : newList.filter((feed) => feed.category === currentFilter);
   }
   //
-  const sortedList = handleSortItems(feedBackList) || feedBackList
+  const sortedList = handleSortAndFilterItems(feedBackList) || feedBackList
   //
   return (
     <section className="mt-8 col-start-2 col-end-12 grid gap-4 content-start tab:mt-6 lap:col-start-4 lap:col-end-5 lap:row-start-2 lap:row-end-5">
