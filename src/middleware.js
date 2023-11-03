@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
+import { withAuth } from "next-auth/middleware";
 
 // Allowed Origin List
 const allowedOrigins =
@@ -7,12 +8,12 @@ const allowedOrigins =
     : ["http://localhost:3000"];
 
 export function middleware(req) {
-  const origin = req.headers.get("origin")
-  console.log(origin)
+  const origin = req.headers.get("origin");
+  console.log(origin);
   //
   // Conditional to see if the origin is on the allowed origin list or not
   // if NOT, this conditional gets applied and returns this "400: Bad Request" response
-  if (origin && !allowedOrigins.includes(origin)){
+  if (origin && !allowedOrigins.includes(origin)) {
     // !origin / || !origin = This blocks api checkers like postman & thunderclient
     // from accessing the api. (Include this production/ maybe don't include in development)
     return new Response(null, {
@@ -24,13 +25,26 @@ export function middleware(req) {
     });
   }
   //
-  console.log("middleware")
-  console.log(req.method)
-  console.log(req.url)
+  console.log("middleware");
+  console.log(req.method);
+  console.log(req.url);
   //
-  return NextResponse.next()
+  // AUTH LOGIC
+  // console.log(req?.nextUrl?.pathname);
+  // console.log("request: ", req)
+  // console.log(req?.nextauth?.token?.role);
+  //
+
+  //
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: "/api/:path*",
-}
+};
+
+export default withAuth(middleware, {
+  callbacks: {
+    authorized: ({ token }) => !!token,
+  },
+});

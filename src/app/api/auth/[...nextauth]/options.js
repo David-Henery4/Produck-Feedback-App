@@ -1,5 +1,8 @@
-import GitHubProvider from "next-auth/providers/github"
-import GoogleProvider from "next-auth/providers/google"
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import User from "@/app/models/User";
+import bcrypt from "bcrypt";
 
 export const options = {
   providers: [
@@ -7,6 +10,7 @@ export const options = {
       profile(profile) {
         console.log("Profile Google: ", profile);
 
+        let userRole = "Google User";
         return {
           ...profile,
           id: profile.sub,
@@ -16,6 +20,7 @@ export const options = {
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
+    //
     GitHubProvider({
       profile(profile) {
         console.log("Profile GitHub: ", profile);
@@ -25,6 +30,10 @@ export const options = {
         if (profile?.email == "david4henery00@hotmail.com") {
           userRole = "admin";
         }
+        console.log("Returned Value: ", {
+          ...profile,
+          role: userRole,
+        });
         return {
           ...profile,
           role: userRole,
@@ -33,19 +42,63 @@ export const options = {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    //
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: {
+          label: "email:",
+          type: "text",
+          placeholder: "your-email"
+        },
+        password: {
+          label: "password:",
+          type: "password",
+          placeholder: "your-password"
+        },
+      },
+      async authorize(credentials){
+        try {
+
+          const foundUser = await User.findOne({email: credentials.email}).lean().exec()
+
+          // if user exists // if user isn't found, that is handled by the null 
+          if (foundUser){
+            console.log("user exists")
+            const match = await bcrypt.compare(credentials.password, foundUser.password)
+
+            if (match){
+              console.log("Good Pass")
+              delete foundUser.password
+              foundUser["role"] = "Unverified Email User"
+              return foundUser
+            }
+          }
+
+        } catch (error) {
+          console.log(error)
+        }
+        return null
+      }
+    })
+    //
   ],
+  //
   callbacks: {
-    // This adds our role, on to the token, 
+    // This adds our role, on to the token,
     // so we can utilize it on the server side
-    async jwt({token, user}){
-      if (user) token.role = user.role
-      return token
+    async jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
     },
     // This here will allow us to do the same on the
     // client side as well
-    async session({session, token}){
-      if (session?.user) session.user.role = token.role
-      return session
-    }
-  }
+    async session({ session, token }) {
+      if (session?.user) session.user.role = token.role;
+      return session;
+    },
+  },
+  // pages: {
+  //   signIn: "/login"
+  // }
 };
