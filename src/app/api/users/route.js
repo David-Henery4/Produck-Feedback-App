@@ -8,15 +8,15 @@ export async function POST (req){
     const userData = body.formData
     
     // If data missing
-    if (!userData.email || !userData.password){
+    if (!userData.username || !userData.password){
       return NextResponse.json({ message: "All fields are required" }, { status: 400 });
     }
     
-    // check for duplicate emails
-    const duplicate = await User.findOne({email: userData.email}).lean().exec()
+    // check for duplicate username
+    const duplicate = await User.findOne({username: userData.username}).lean().exec()
     if(duplicate){
       return NextResponse.json(
-        { message: "Duplicate Email" },
+        { message: "Duplicate Username" },
         { status: 409 }
       );
     }

@@ -28,6 +28,7 @@ export function middleware(req) {
   console.log("middleware");
   console.log(req.method);
   console.log(req.url);
+  // console.log(NextResponse.next());
   //
   // AUTH LOGIC
   // console.log(req?.nextUrl?.pathname);

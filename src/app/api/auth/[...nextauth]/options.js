@@ -46,41 +46,51 @@ export const options = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {
-          label: "email:",
+        username: {
+          label: "username:",
           type: "text",
-          placeholder: "your-email"
+          placeholder: "your-username",
         },
         password: {
           label: "password:",
           type: "password",
-          placeholder: "your-password"
+          placeholder: "your-password",
         },
       },
-      async authorize(credentials){
+      async authorize(credentials) {
         try {
+          const foundUser = await User.findOne({
+            username: credentials.username,
+          })
+            .lean()
+            .exec();
 
-          const foundUser = await User.findOne({email: credentials.email}).lean().exec()
+            console.log({...foundUser, msg:"test"}, "user details");
+            if (foundUser) {
+              // if user exists // if user isn't found, that is handled by the null
+              console.log("user exists");
+              const match = await bcrypt.compare(
+                credentials.password,
+                foundUser.password
+              );
+              console.log("match",match)
 
-          // if user exists // if user isn't found, that is handled by the null 
-          if (foundUser){
-            console.log("user exists")
-            const match = await bcrypt.compare(credentials.password, foundUser.password)
-
-            if (match){
-              console.log("Good Pass")
-              delete foundUser.password
-              foundUser["role"] = "Unverified Email User"
-              return foundUser
+              if (match) {
+                console.log("Good Pass");
+                delete foundUser.password;
+                foundUser["role"] = "Unverified Email User";
+                return foundUser;
+              }
             }
-          }
-
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
-        return null
-      }
-    })
+        return {
+          res: null,
+          msg: "no credentials",
+        };
+      },
+    }),
     //
   ],
   //
@@ -98,7 +108,7 @@ export const options = {
       return session;
     },
   },
-  // pages: {
-  //   signIn: "/login"
-  // }
+  pages: {
+    signIn: "/auth/signin",
+  },
 };
