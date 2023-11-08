@@ -1,16 +1,30 @@
 "use client";
-import { useState, useRef } from "react";
-import { signIn } from "next-auth/react";
+import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import signInWithCredentials from "@/lib/signInWithCredentials";
+import createUser from "@/lib/createUser";
+import {
+  SignInError,
+  SubmitBtn,
+  CredentialInput,
+} from "./credentials-signin-components";
 
+// const data = await signInWithCredentials({
+//   csrfToken,
+//   username,
+//   password
+// });
 
 const CredentialsSignIn = ({ csrfToken }) => {
-  const formRef = useRef(null);
+  const router = useRouter()
+  // const {status} = useSession({required: true})
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isUsernameInvalid, setIsUsernameInvalid] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [isSignInError, setIsSignInError] = useState(false);
   //
   const handleValidation = () => {
     username.trim() === ""
@@ -24,17 +38,25 @@ const CredentialsSignIn = ({ csrfToken }) => {
   //
   const handleSubmit = async () => {
     if (username.trim() === "" || password.trim() === "") return;
+    setIsPasswordInvalid(false);
+    setIsUsernameInvalid(false);
     if (!isSignUp) {
-      signIn("credentials", { username, password});
-      // const data = await signInWithCredentials({
-      //   csrfToken,
-      //   username,
-      //   password
-      // });
-      // console.log(data)
+      const data = await signIn("credentials", {
+        redirect: false,
+        username,
+        password,
+      });
+      console.log(data);
+      if (data.error) {
+        setIsSignInError(true);
+        return
+      }
+      setIsSignInError(false)
+      router.refresh()
     }
-    if (isSignUp){
-
+    if (isSignUp) {
+      const res = await createUser({ username, password });
+      console.log("response", res);
     }
   };
   //
@@ -42,7 +64,6 @@ const CredentialsSignIn = ({ csrfToken }) => {
   //
   return (
     <form
-      ref={formRef}
       onSubmit={(e) => {
         e.preventDefault();
         handleValidation();
@@ -53,70 +74,22 @@ const CredentialsSignIn = ({ csrfToken }) => {
       className="w-full"
     >
       <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-      <div className="">
-        <label
-          htmlFor="username"
-          className="text-lightNavy font-bold -tracking-[0.19px]"
-        >
-          Username
-        </label>
-        <input
-          id="username"
-          className={`bg-offWhite w-full outline-none px-3 py-4 mt-3 rounded-[10px] ${
-            isUsernameInvalid ? "border border-red" : "border border-offWhite"
-          }`}
-          name="username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {isUsernameInvalid && (
-          <p className="text-sm font-normal text-red mt-1">
-            Username is required!
-          </p>
-        )}
-      </div>
-      <div className="mt-4">
-        <label
-          htmlFor="password"
-          className="text-lightNavy font-bold -tracking-[0.19px]"
-        >
-          Password
-        </label>
-        <input
-          id="password"
-          className={`bg-offWhite w-full outline-none px-3 py-4 mt-3 rounded-[10px] ${
-            isPasswordInvalid ? "border border-red" : "border border-offWhite"
-          }`}
-          name="password"
-          type="text"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {isPasswordInvalid && (
-          <p className="text-sm font-normal text-red mt-1">
-            Password is required!
-          </p>
-        )}
-      </div>
-      <div className="w-full mt-9">
-        <button
-          type="submit"
-          className="w-full py-6 px-4 font-semibold rounded-[10px] bg-purple text-white"
-        >
-          {isSignUp ? "Sign-Up" : "Sign-In"}
-        </button>
-        <p className="mt-4 text-sm">
-          {isSignUp ? "Already have an account?" : "Don't have an account?"}
-          <span
-            className="text-blue cursor-pointer"
-            onClick={() => setIsSignUp(!isSignUp)}
-          >
-            {" "}
-            {isSignUp ? "Sign-in!" : "Sign-up!"}
-          </span>
-        </p>
-      </div>
+      <CredentialInput
+        name="username"
+        label="Username"
+        value={username}
+        setValue={setUsername}
+        isInputInvalid={isUsernameInvalid}
+      />
+      <CredentialInput
+        name="password"
+        label="Password"
+        value={password}
+        setValue={setPassword}
+        isInputInvalid={isPasswordInvalid}
+      />
+      {isSignInError && <SignInError />}
+      <SubmitBtn isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
     </form>
   );
 };

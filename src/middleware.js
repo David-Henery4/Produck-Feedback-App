@@ -44,8 +44,8 @@ export const config = {
   matcher: "/api/:path*",
 };
 
-export default withAuth(middleware, {
-  callbacks: {
-    authorized: ({ token }) => !!token,
-  },
-});
+// export default withAuth(middleware, {
+//   callbacks: {
+//     authorized: ({ token }) => !!token,
+//   },
+// });

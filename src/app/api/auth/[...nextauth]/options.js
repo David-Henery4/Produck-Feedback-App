@@ -65,30 +65,28 @@ export const options = {
             .lean()
             .exec();
 
-            console.log({...foundUser, msg:"test"}, "user details");
-            if (foundUser) {
-              // if user exists // if user isn't found, that is handled by the null
-              console.log("user exists");
-              const match = await bcrypt.compare(
-                credentials.password,
-                foundUser.password
-              );
-              console.log("match",match)
+          // console.log({...foundUser, msg:"test"}, "user details");
+          if (foundUser) {
+            // if user exists // if user isn't found, that is handled by the null
+            // console.log("user exists");
+            const match = await bcrypt.compare(
+              credentials.password,
+              foundUser.password
+            );
+            // console.log("match",match)
 
-              if (match) {
-                console.log("Good Pass");
-                delete foundUser.password;
-                foundUser["role"] = "Unverified Email User";
-                return foundUser;
-              }
+            if (match) {
+              // console.log("Good Pass");
+              delete foundUser.password;
+              foundUser["role"] = "Unverified Email User";
+              foundUser["message"] = "Work please";
+              return { ...foundUser, msg: "hello" };
             }
+          }
         } catch (error) {
           console.log(error);
         }
-        return {
-          res: null,
-          msg: "no credentials",
-        };
+        return null;
       },
     }),
     //
@@ -97,17 +95,37 @@ export const options = {
   callbacks: {
     // This adds our role, on to the token,
     // so we can utilize it on the server side
-    async jwt({ token, user }) {
-      if (user) token.role = user.role;
+    async jwt({ token, user, session }) {
+      console.log("jwt callback: ", token, user, session);
+      if (user) {
+        // token.role = user.role
+        // token.username = user.username
+        // user = { ...user, username: user.username };
+        console.log("jwt user: ", user);
+        console.log("jwt token: ", token);
+        return {
+          ...token,
+          id: user._id,
+          username: user.username,
+          role: user.role,
+        };
+      }
       return token;
     },
     // This here will allow us to do the same on the
     // client side as well
-    async session({ session, token }) {
-      if (session?.user) session.user.role = token.role;
-      return session;
+    async session({ session, token, user }) {
+      // if (session?.user) session.user.role = token.role;
+      return {
+        ...session.user,
+        id: token.id,
+        username: token.username,
+        role: token.role
+      }
+      // return session;
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/auth/signin",
   },
