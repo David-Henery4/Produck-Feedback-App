@@ -8,6 +8,7 @@ import {
   SignInError,
   SubmitBtn,
   CredentialInput,
+  DuplicateUser,
 } from "./credentials-signin-components";
 
 // const data = await signInWithCredentials({
@@ -17,7 +18,7 @@ import {
 // });
 
 const CredentialsSignIn = ({ csrfToken }) => {
-  const router = useRouter()
+  const router = useRouter();
   // const {status} = useSession({required: true})
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
@@ -25,6 +26,10 @@ const CredentialsSignIn = ({ csrfToken }) => {
   const [isUsernameInvalid, setIsUsernameInvalid] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const [isSignInError, setIsSignInError] = useState(false);
+  const [isDuplicateSignUpOrError, setIsDuplicateSignUpOrError] = useState({
+    msg: "",
+    isError: false,
+  });
   //
   const handleValidation = () => {
     username.trim() === ""
@@ -41,26 +46,48 @@ const CredentialsSignIn = ({ csrfToken }) => {
     setIsPasswordInvalid(false);
     setIsUsernameInvalid(false);
     if (!isSignUp) {
-      const data = await signIn("credentials", {
-        redirect: false,
-        username,
-        password,
-      });
-      console.log(data);
-      if (data.error) {
-        setIsSignInError(true);
-        return
-      }
-      setIsSignInError(false)
-      router.refresh()
+      handleSignIn();
     }
     if (isSignUp) {
-      const res = await createUser({ username, password });
-      console.log("response", res);
+      handleSignUp();
     }
   };
+  ///
+  const handleSignIn = async () => {
+    const data = await signIn("credentials", {
+      redirect: false,
+      username,
+      password,
+    });
+    console.log(data);
+    if (data.error) {
+      setIsSignInError(true);
+      return;
+    }
+    setIsSignInError(false);
+    router.refresh();
+  };
   //
-  const handleSignUp = () => {};
+  const handleSignUp = async () => {
+    setIsDuplicateSignUpOrError({ msg: "", isError: false });
+    const res = await createUser({ username, password });
+    console.log("response", res);
+    if (res.message === "Duplicate Username") {
+      setIsDuplicateSignUpOrError({
+        msg: "Username already exists",
+        isError: true,
+      });
+      return;
+    }
+    if (res.message === "Error creating account"){
+      setIsDuplicateSignUpOrError({
+        msg: res?.message,
+        isError: true,
+      });
+      return
+    }
+    handleSignIn()
+  };
   //
   return (
     <form
@@ -89,7 +116,17 @@ const CredentialsSignIn = ({ csrfToken }) => {
         isInputInvalid={isPasswordInvalid}
       />
       {isSignInError && <SignInError />}
-      <SubmitBtn isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
+      {isDuplicateSignUpOrError?.isError && (
+        <DuplicateUser msg={isDuplicateSignUpOrError?.msg} />
+      )}
+      <SubmitBtn
+        isSignUp={isSignUp}
+        setIsSignUp={setIsSignUp}
+        setPassword={setPassword}
+        setUsername={setUsername}
+        setIsSignInError={setIsSignInError}
+        setIsDuplicateSignUpOrError={setIsDuplicateSignUpOrError}
+      />
     </form>
   );
 };

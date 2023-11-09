@@ -1,6 +1,13 @@
 
 
-const SubmitBtn = ({ isSignUp, setIsSignUp }) => {
+const SubmitBtn = ({
+  isSignUp,
+  setIsSignUp,
+  setUsername,
+  setPassword,
+  setIsSignInError,
+  setIsDuplicateSignUpOrError,
+}) => {
   return (
     <div className="w-full mt-9">
       <button
@@ -13,7 +20,13 @@ const SubmitBtn = ({ isSignUp, setIsSignUp }) => {
         {isSignUp ? "Already have an account?" : "Don't have an account?"}
         <span
           className="text-blue cursor-pointer"
-          onClick={() => setIsSignUp(!isSignUp)}
+          onClick={() => {
+            setIsSignUp(!isSignUp);
+            setPassword("");
+            setUsername("");
+            setIsSignInError(false)
+            setIsDuplicateSignUpOrError({ msg: "", isError: false });
+          }}
         >
           {" "}
           {isSignUp ? "Sign-in!" : "Sign-up!"}

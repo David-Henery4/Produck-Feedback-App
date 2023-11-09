@@ -10,6 +10,7 @@ const TitleBox = () => {
         src={backgroundHeaderMobile.src}
         alt="header background gradient"
       />
+      {/* <button className="relative mt-4 text-sm">Sign Out</button> */}
     </div>
   );
 }

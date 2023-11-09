@@ -11,11 +11,14 @@ const createUser = async (userData) => {
         formData: { ...userData },
       }),
     });
+    if (!res.ok){
+      throw new Error(res.error)
+    }
     return res.json()
   } catch (error) {
     console.log(error)
     console.error(error)
-    return error
+    return { message: "Error creating account"}
   }
 }
 
