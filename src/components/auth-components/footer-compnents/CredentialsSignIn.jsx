@@ -25,6 +25,7 @@ const CredentialsSignIn = ({ csrfToken }) => {
   const [password, setPassword] = useState("");
   const [isUsernameInvalid, setIsUsernameInvalid] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isSignInError, setIsSignInError] = useState(false);
   const [isDuplicateSignUpOrError, setIsDuplicateSignUpOrError] = useState({
     msg: "",
@@ -79,14 +80,17 @@ const CredentialsSignIn = ({ csrfToken }) => {
       });
       return;
     }
-    if (res.message === "Error creating account"){
+    if (res.message === "Error creating account") {
       setIsDuplicateSignUpOrError({
         msg: res?.message,
         isError: true,
       });
+      return;
+    }
+    if (res.message === "User Created"){
+      handleSignIn();
       return
     }
-    handleSignIn()
   };
   //
   return (
@@ -114,6 +118,8 @@ const CredentialsSignIn = ({ csrfToken }) => {
         value={password}
         setValue={setPassword}
         isInputInvalid={isPasswordInvalid}
+        isPasswordVisible={isPasswordVisible}
+        setIsPasswordVisible={setIsPasswordVisible}
       />
       {isSignInError && <SignInError />}
       {isDuplicateSignUpOrError?.isError && (
