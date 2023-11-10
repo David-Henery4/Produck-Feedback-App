@@ -31,11 +31,13 @@ const Comment = ({
       {isReply && (
         <div className="w-[1px] h-[130%] bg-gray/10 absolute top-0 left-0 hidden group-first:block group-first:lgTab:hidden"></div>
       )}
-      <img
-        className="w-10 h-10 rounded-full object-cover object-center"
-        src={`/assets/user-images/${image}`}
-        alt="Avatar of the user"
-      />
+      {image && (
+        <img
+          className="w-10 h-10 rounded-full object-cover object-center"
+          src={`/assets/user-images/${image}`}
+          alt="Avatar of the user"
+        />
+      )}
 
       <div className="flex justify-between items-center lgTab:col-start-3 lgTab:col-end-4">
         <div>

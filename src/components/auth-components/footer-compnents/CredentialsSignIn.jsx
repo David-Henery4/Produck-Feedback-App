@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import signInWithCredentials from "@/lib/signInWithCredentials";
+// import signInWithCredentials from "@/lib/signInWithCredentials";
 import createUser from "@/lib/createUser";
 import {
   SignInError,
@@ -11,11 +11,6 @@ import {
   DuplicateUser,
 } from "./credentials-signin-components";
 
-// const data = await signInWithCredentials({
-//   csrfToken,
-//   username,
-//   password
-// });
 
 const CredentialsSignIn = ({ csrfToken }) => {
   const router = useRouter();
@@ -100,8 +95,6 @@ const CredentialsSignIn = ({ csrfToken }) => {
         handleValidation();
         handleSubmit();
       }}
-      // method="post"
-      // action="/api/auth/callback/credentials"
       className="w-full"
     >
       <input name="csrfToken" type="hidden" defaultValue={csrfToken} />

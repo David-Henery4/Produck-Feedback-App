@@ -10,11 +10,6 @@ const CardFooter = async () => {
   const csrfToken = await getCsrfToken();
   // console.log(providers, csrfToken);
   console.log("component session: ",session);
-  // if (session?.user){
-  //   const isUserActive = Object?.entries(session?.user).filter(item => item[0] !== "image").every(item => item[1] === undefined)
-  //   console.log(isUserActive)
-  // }
-  // onClick={() => signIn(provider.id)
   //   // If the user is already logged in, redirect.
   //   // Note: Make sure not to redirect to the same page_
   //   // To avoid an infinite loop!

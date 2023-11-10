@@ -7,7 +7,10 @@ const SignOut = () => {
   }
   //
   return (
-    <button className="relative text-sm font-semibold text-blue" onClick={handleSignOut}>
+    <button
+      className="relative text-sm font-semibold text-blue hover:text-blue/75"
+      onClick={handleSignOut}
+    >
       Sign Out
     </button>
   );

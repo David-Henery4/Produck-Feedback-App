@@ -14,7 +14,7 @@ export default async function Home() {
   //
   return (
     <>
-      <SignOutAndThemeToggle/>
+      <SignOutAndThemeToggle user={session}/>
       <main className="grid grid-cols-mob auto-rows-min min-h-[100svh] overflow-x-hidden overflow-y-clip pb-14 max-w-[1110px] mx-auto smTab:grid-cols-smTab lgTab:pb-28 lap:grid-cols-lap">
         <NavSection />
         <FeedbackBarSection />
