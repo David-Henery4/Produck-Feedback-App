@@ -8,7 +8,7 @@ const SignOut = () => {
   //
   return (
     <button
-      className="relative text-sm font-semibold text-blue hover:text-blue/75"
+      className="relative text-sm font-semibold text-blue dark:text-purple hover:text-blue/75"
       onClick={handleSignOut}
     >
       Sign Out

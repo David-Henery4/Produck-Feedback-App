@@ -48,8 +48,8 @@ const Upvotes = ({
           : "rounded-lg py-[6px] lgTab:col-start-1 lgTab:col-end-2 lgTab:flex-col lgTab:px-2 lgTab:py-3"
       } ${
         upvotedBy?.includes(session?.username || session?.name)
-          ? "bg-blue"
-          : "bg-iceWhite"
+          ? "bg-blue dark:bg-purple"
+          : "bg-iceWhite dark:bg-navy"
       }`}
       onClick={() => {
         handleUpvote();
@@ -59,14 +59,14 @@ const Upvotes = ({
         className={`${
           upvotedBy?.includes(session?.username || session?.name)
             ? "stroke-white"
-            : "stroke-blue"
+            : "stroke-blue dark:stroke-pink"
         }`}
       />
       <p
         className={`text-[13px] font-bold -tracking-[0.18px]  ${
           upvotedBy?.includes(session?.username || session?.name)
             ? "text-white"
-            : "text-lightNavy"
+            : "text-lightNavy dark:text-white"
         }`}
       >
         {upvotes}

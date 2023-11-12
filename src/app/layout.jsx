@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${jost.variable} font-jost bg-offWhite`}>
+      <body className={`${jost.variable} font-jost bg-offWhite dark:bg-navy`}>
         <AuthProvider>
           <ReduxProvider>{children}</ReduxProvider>
         </AuthProvider>
