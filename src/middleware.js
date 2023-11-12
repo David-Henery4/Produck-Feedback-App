@@ -9,7 +9,7 @@ const allowedOrigins =
 
 export function middleware(req) {
   const origin = req.headers.get("origin");
-  console.log(origin);
+  // console.log(origin);
   //
   // Conditional to see if the origin is on the allowed origin list or not
   // if NOT, this conditional gets applied and returns this "400: Bad Request" response
@@ -25,9 +25,9 @@ export function middleware(req) {
     });
   }
   //
-  console.log("middleware");
-  console.log(req.method);
-  console.log(req.url);
+  // console.log("middleware");
+  // console.log(req.method);
+  // console.log(req.url);
   // console.log(NextResponse.next());
   //
   // AUTH LOGIC

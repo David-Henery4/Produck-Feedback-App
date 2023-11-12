@@ -4,6 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 // import signInWithCredentials from "@/lib/signInWithCredentials";
 import createUser from "@/lib/createUser";
+import generateUserColour from "@/redux/features/helpers/generateUserColour";
 import {
   SignInError,
   SubmitBtn,
@@ -55,7 +56,6 @@ const CredentialsSignIn = ({ csrfToken }) => {
       username,
       password,
     });
-    console.log(data);
     if (data.error) {
       setIsSignInError(true);
       return;
@@ -66,8 +66,11 @@ const CredentialsSignIn = ({ csrfToken }) => {
   //
   const handleSignUp = async () => {
     setIsDuplicateSignUpOrError({ msg: "", isError: false });
-    const res = await createUser({ username, password });
-    console.log("response", res);
+    const res = await createUser({
+      username,
+      password,
+      userColour: generateUserColour(),
+    });
     if (res.message === "Duplicate Username") {
       setIsDuplicateSignUpOrError({
         msg: "Username already exists",

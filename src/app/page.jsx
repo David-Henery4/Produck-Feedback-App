@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 export default async function Home() {
   const {data} = await getFeedbackList()
   const session = await getServerSession(options);
-  console.log("response session", session);
+  // console.log("response session", session);
   if (!session){
     redirect("/auth/signin")
   }

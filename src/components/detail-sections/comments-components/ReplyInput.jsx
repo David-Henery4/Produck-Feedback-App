@@ -4,7 +4,7 @@ import { ReplyToComment } from ".";
 import { useSelector } from "react-redux";
 
 const ReplyInput = ({
-  replyInfo: { id, username, ogCommentId },
+  replyInfo: { id, username, ogCommentId, name },
   setIsReplyActive,
   comments
 }) => {
@@ -13,7 +13,7 @@ const ReplyInput = ({
   const [replyData, setReplyData] = useState({
     id: +new Date(),
     content: "",
-    replyingTo: username,
+    replyingTo: username || name,
     user: { ...currentUser },
   });
   //

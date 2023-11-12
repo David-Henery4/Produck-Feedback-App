@@ -2,8 +2,6 @@ import getFeedbackList from "@/lib/getFeedbackList";
 
 const RoadmapList = async () => {
   const { data: feedbackList } = await getFeedbackList();
-  // console.log(feedbackList)
-  console.log("Roadmaplist: Server")
   //
   const handleSettingStatusQuantities = () => {
     return [
@@ -52,50 +50,3 @@ const RoadmapList = async () => {
 };
 
 export default RoadmapList;
-
-
-// OLD LOGIC
-
-// "use client";
-// import { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-
-// const RoadmapList = () => {
-//   const { placeholderRequests } = useSelector(
-//     (store) => store.productRequestsReducer
-//   );
-//   const [roadmap, setRoadmap] = useState([]);
-//   //
-//   const handleSettingStatusQuantities = () => {
-//     setRoadmap([
-//       {
-//         id: 1,
-//         label: "Planned",
-//         quantity:
-//           placeholderRequests?.filter((req) => req.status === "planned")
-//             .length || 0,
-//         colour: "bg-orange",
-//       },
-//       {
-//         id: 2,
-//         label: "In-Progress",
-//         quantity:
-//           placeholderRequests?.filter((req) => req.status === "in-progress")
-//             .length || 0,
-//         colour: "bg-purple",
-//       },
-//       {
-//         id: 3,
-//         label: "Live",
-//         quantity:
-//           placeholderRequests?.filter((req) => req.status === "live").length ||
-//           0,
-//         colour: "bg-lightBlue",
-//       },
-//     ]);
-//   };
-//   //
-//   useEffect(() => {
-//     handleSettingStatusQuantities();
-//   }, [placeholderRequests]);
-//   //

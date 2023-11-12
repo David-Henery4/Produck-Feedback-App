@@ -1,10 +1,14 @@
 "use client"
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import updateFeedback from "@/lib/updateFeedback";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { setUserData } from "@/redux/features/userSlice";
 
 const AddComments = ({ currentFeedback }) => {
+  const dispatch = useDispatch()
+  const { data: session } = useSession();
   const router = useRouter()
   const [checkInputActive, setCheckInputActive] = useState(false);
   const [isContentInvalid, setIsContentInvalid] = useState(false);
@@ -25,6 +29,16 @@ const AddComments = ({ currentFeedback }) => {
     await updateFeedback(currentFeedback.id, updatedFeedbackWithComment)
     router.refresh()
   };
+  //
+  useEffect(() => {
+    dispatch(setUserData(session))
+  }, [session])
+  //
+  useEffect(() => {
+    setCommentData((oldValues) => {
+      return {...oldValues, user: {...currentUser}}
+    })
+  }, [currentUser])
   //
   useEffect(() => {
     setCharacterLimit(250 - commentData.content.length);
@@ -91,30 +105,3 @@ const AddComments = ({ currentFeedback }) => {
 };
 
 export default AddComments;
-
-// OLD Components logic & imports
-
-// "use client"
-// import { useState, useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { addComment } from "@/redux/features/prodReqsSlice";
-
-//   const [checkInputActive,setCheckInputActive] = useState(false)
-//   const [isContentInvalid, setIsContentInvalid] = useState(false);
-//   const [characterLimit, setCharacterLimit] = useState(250);
-//   const dispatch = useDispatch();
-//   const { currentUser } = useSelector((store) => store.userReducer);
-//   //
-//   const [commentData, setCommentData] = useState({
-//     id: +new Date(),
-//     content: "",
-//     user: { ...currentUser },
-//   });
-//   //
-//   const handleCommentSubmit =() => {
-    
-//   }
-//   //
-//   useEffect(() => {
-//     setCharacterLimit(250 - commentData.content.length);
-//   }, [commentData?.content]);

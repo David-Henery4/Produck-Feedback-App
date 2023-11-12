@@ -60,7 +60,7 @@ export async function PUT (req, {params: {id}}){
   try {
     // Parse the request body as JSON to extract the updated feedback data.
     const body = await req.json();
-    // console.log(body)
+
     const updatedFeedbackData = body.formData;
 
     // Update the feedback item with the specified ID using the provided data.
@@ -70,14 +70,13 @@ export async function PUT (req, {params: {id}}){
         new: true
       }
     );
-    // console.log(newData)
     //
     return NextResponse.json(
       { message: "Feedback updated successfully" },
       { status: 201 }
     );
   } catch (error) {
-    // console.log(error)
+    console.log(error)
     return NextResponse.json({message: "Failed to update", error}, {status: 500})
   }
 }

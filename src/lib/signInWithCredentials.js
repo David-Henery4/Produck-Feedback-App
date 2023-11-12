@@ -2,7 +2,6 @@
 
 const signInWithCredentials = async (userData) => {
   try {
-    console.log(userData)
     const res = await fetch("/api/auth/callback/credentials", {
       method: "POST",
       headers: {
@@ -12,7 +11,6 @@ const signInWithCredentials = async (userData) => {
         formData: { ...userData }
       }),
     });
-    console.log(res)
     return res
   } catch (error) {
     console.log(error)

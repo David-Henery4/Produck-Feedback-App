@@ -3,11 +3,13 @@ import generateUserColour from "./helpers/generateUserColour";
 
 const initialState = {
   currentUser: {
-    image: "image-zena.jpg",
-    name: "Zena Kelley",
-    username: "velvetround",
+    id: "",
+    image: null, // og
+    name: "", // og
+    username: "", // og
     userColour: generateUserColour(),
-    userInitial: ""
+    userInitial: "",
+    role: ""
   },
 };
 
@@ -16,7 +18,12 @@ const user = createSlice({
   initialState,
   reducers: {
     setUserData: (state, {payload}) => {
-      console.log()
+      const userInitial = payload?.name || payload?.username
+      state.currentUser = {
+        ...state.currentUser,
+        ...payload,
+        userInitial: userInitial?.slice(0, 1),
+      };
     }
   }
 })

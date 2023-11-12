@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import { useState } from "react";
-import {  ReplyInput } from ".";
+import { ReplyInput } from ".";
 import { useSelector } from "react-redux";
 
 const Comment = ({
   id,
   content,
   comments,
-  user: { name, username, image },
+  user: { name, username, image, userColour = null, userInitial = null },
   replies,
   isReply,
   replyingTo = null,
@@ -30,27 +30,34 @@ const Comment = ({
       {isReply && (
         <div className="w-[1px] h-[130%] bg-gray/10 absolute top-0 left-0 hidden group-first:block group-first:lgTab:hidden"></div>
       )}
-      {image && (
+      {image ? (
         <img
           className="w-10 h-10 rounded-full object-cover object-center"
           src={`/assets/user-images/${image}`}
           alt="Avatar of the user"
         />
+      ) : (
+        <div
+          className="w-10 h-10 rounded-full text-center grid place-items-center text-2xl text-white"
+          style={{ backgroundColor: userColour && userColour }}
+        >
+          <p className="capitalize">{userInitial}</p>
+        </div>
       )}
 
       <div className="flex justify-between items-center lgTab:col-start-3 lgTab:col-end-4">
         <div>
-          <h3 className="font-bold text-lightNavy">{name}</h3>
-          <h4>{username}</h4>
+          <h3 className="font-bold text-lightNavy">{name || username}</h3>
+          <h4>{username || name}</h4>
         </div>
-        {username !== currentUser?.username && (
+        {username !== currentUser?.username || name !== currentUser?.name ? (
           <button
             className="font-semibold text-blue hover:underline"
             onClick={() => setIsReplyActive(!isReplyActive)}
           >
             Reply
           </button>
-        )}
+        ) : null}
       </div>
 
       {/* Bottom */}
@@ -69,7 +76,7 @@ const Comment = ({
       {isReplyActive && (
         <ReplyInput
           comments={comments}
-          replyInfo={{ id, username, ogCommentId }}
+          replyInfo={{ id, username , ogCommentId, name }}
           setIsReplyActive={setIsReplyActive}
         />
       )}

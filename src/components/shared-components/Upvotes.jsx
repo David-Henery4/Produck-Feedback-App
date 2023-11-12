@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import { ArrowUpIcon } from "public/assets/shared";
-import { useSelector } from "react-redux";
 import updateFeedback from "@/lib/updateFeedback";
 import { useRouter } from "next/navigation";
-
+import { useSession } from "next-auth/react";
 
 const Upvotes = ({
   upvotes,
@@ -11,26 +10,35 @@ const Upvotes = ({
   feedbackId,
   upvotedBy,
 }) => {
-  const router = useRouter()
-  const { currentUser } = useSelector((store) => store.userReducer);
+  const { data: session } = useSession();
+  const router = useRouter();
   //
   const handleUpvote = async () => {
-    let newUpvotes
-    let newList
+    let newUpvotes;
+    let newList;
     //
-    if (upvotedBy?.includes(currentUser?.username)) {
+    if (upvotedBy?.includes(session?.username || session?.name)) {
       newUpvotes = upvotes -= 1;
-      newList = upvotedBy.filter(
-        (item) => item !== currentUser?.username
-      );
+      if (session?.username){
+        newList = upvotedBy.filter((item) => item !== session?.username);
+      }
+      if (session?.name){
+        newList = upvotedBy.filter((item) => item !== session?.name);
+      }
     } else {
       newUpvotes = upvotes += 1;
-      newList = [...(upvotedBy || []), currentUser?.username];
+      newList = [
+        ...(upvotedBy || []),
+        session?.username || session?.name,
+      ];
     }
     //
-    await updateFeedback(feedbackId, { upvotes : newUpvotes, upvotedBy: newList});
-    router.refresh()
-  }
+    await updateFeedback(feedbackId, {
+      upvotes: newUpvotes,
+      upvotedBy: newList,
+    });
+    router.refresh();
+  };
   //
   return (
     <div
@@ -39,20 +47,24 @@ const Upvotes = ({
           ? "py-3 rounded-[10px]"
           : "rounded-lg py-[6px] lgTab:col-start-1 lgTab:col-end-2 lgTab:flex-col lgTab:px-2 lgTab:py-3"
       } ${
-        upvotedBy?.includes(currentUser?.username) ? "bg-blue" : "bg-iceWhite"
+        upvotedBy?.includes(session?.username || session?.name)
+          ? "bg-blue"
+          : "bg-iceWhite"
       }`}
       onClick={() => {
-        handleUpvote()
+        handleUpvote();
       }}
     >
       <ArrowUpIcon
         className={`${
-          upvotedBy?.includes(currentUser?.username) ? "stroke-white" : "stroke-blue"
+          upvotedBy?.includes(session?.username || session?.name)
+            ? "stroke-white"
+            : "stroke-blue"
         }`}
       />
       <p
         className={`text-[13px] font-bold -tracking-[0.18px]  ${
-          upvotedBy?.includes(currentUser?.username)
+          upvotedBy?.includes(session?.username || session?.name)
             ? "text-white"
             : "text-lightNavy"
         }`}
@@ -65,23 +77,3 @@ const Upvotes = ({
 
 export default Upvotes;
 
-// QUICK LOGIC
-
-// if (activeFeedback.upvotedBy?.includes(username)) {
-//   activeFeedback.upvotes -= 1;
-//   activeFeedback.upvotedBy = activeFeedback.upvotedBy.filter(
-//     (item) => item !== username
-//   );
-// } else {
-//   activeFeedback.upvotes += 1;
-//   activeFeedback.upvotedBy = [...(activeFeedback.upvotedBy || []), username];
-// }
-
-// Was using:
-
-// import { useDispatch, useSelector } from "react-redux";
-// import { addAndRemoveUpvote } from "@/redux/features/prodReqsSlice";
-// const dispatch = useDispatch();
-// dispatch(
-//   addAndRemoveUpvote({ feedbackId, username: currentUser?.username })
-// );

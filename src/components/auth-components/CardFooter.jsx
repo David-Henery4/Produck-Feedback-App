@@ -8,8 +8,6 @@ const CardFooter = async () => {
   const session = await getServerSession(options);
   const providers = await getProviders();
   const csrfToken = await getCsrfToken();
-  // console.log(providers, csrfToken);
-  console.log("component session: ",session);
   //   // If the user is already logged in, redirect.
   //   // Note: Make sure not to redirect to the same page_
   //   // To avoid an infinite loop!
