@@ -22,9 +22,15 @@ const CredentialInput = ({
       <div className="relative">
         <input
           id={name}
-          className={`bg-offWhite w-full outline-none pl-3 py-4 pr-12 rounded-[10px] ${
-            isInputInvalid ? "border border-red" : "border border-offWhite"
-          } ${name === "password" && !isPasswordVisible && "font-[math] tracking-[2px]"}`}
+          className={`bg-offWhite dark:bg-navy w-full outline-none pl-3 py-4 pr-12 rounded-[10px] ${
+            isInputInvalid
+              ? "border border-red"
+              : "border border-offWhite dark:border-navy"
+          } ${
+            name === "password" &&
+            !isPasswordVisible &&
+            "font-[math] tracking-[2px]"
+          }`}
           name={name}
           type={
             name === "password" && isPasswordVisible
@@ -38,14 +44,14 @@ const CredentialInput = ({
         />
         {name === "password" && isPasswordVisible ? (
           <Visible
-            className="absolute top-1/2 right-[14px] -translate-y-1/2  hover:cursor-pointer"
+            className="absolute top-1/2 right-[14px] -translate-y-1/2 fill-black dark:fill-white hover:cursor-pointer"
             onClick={() => setIsPasswordVisible(!isPasswordVisible)}
           />
         ) : (
           name === "password" &&
           !isPasswordVisible && (
             <NotVisible
-              className="absolute top-1/2 right-[14px] -translate-y-1/2  hover:cursor-pointer"
+              className="absolute top-1/2 right-[14px] -translate-y-1/2 fill-black dark:fill-white hover:cursor-pointer"
               onClick={() => setIsPasswordVisible(!isPasswordVisible)}
             />
           )

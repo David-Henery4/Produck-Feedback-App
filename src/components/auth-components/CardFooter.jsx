@@ -15,7 +15,7 @@ const CardFooter = async () => {
     redirect("/")
   }
   return (
-    <section className="px-6 pt-10 pb-14 w-full bg-white smTab:px-14 tab:px-20">
+    <section className="px-6 pt-10 pb-14 w-full bg-white dark:bg-lightNavy smTab:px-14 tab:px-20">
       {/* Providers Sign-in */}
       <ProvidersSignIn providers={providers} />
 

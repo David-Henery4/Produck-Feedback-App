@@ -13,8 +13,8 @@ const ProvidersSignIn = ({ providers }) => {
             <div key={provider.name} className="w-full">
               <button
                 onClick={() => signIn(provider.id)}
-                className={`px-6 py-7 w-full rounded-[10px] inline-flex items-center justify-center font-medium ${
-                  isGoogle && "bg-offWhite text-black/75"
+                className={`px-6 py-7 w-full rounded-[10px] inline-flex items-center justify-center font-medium hover:scale-105 ${
+                  isGoogle && "bg-offWhite dark:bg-navy text-black/75 dark:text-white/75"
                 } ${isGitHub && "bg-black text-white/75"}`}
               >
                 <span className="mr-auto">

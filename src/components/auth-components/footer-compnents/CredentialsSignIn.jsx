@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-// import signInWithCredentials from "@/lib/signInWithCredentials";
 import useTheme from "@/hooks/useTheme";
 import createUser from "@/lib/createUser";
 import generateUserColour from "@/redux/features/helpers/generateUserColour";
