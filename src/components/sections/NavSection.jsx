@@ -2,7 +2,7 @@ import { Titles, TitleBox, CategoryBox, RoadmapBox, BurgerAndSidebar } from "../
 import { backgroundHeaderMobile } from "public/assets/suggestions";
 
 
-const NavSection = () => {
+const NavSection = ({user}) => {
   //
   return (
     <nav className="relative w-full col-start-1 col-end-13 px-6 py-4 flex justify-between items-center text-white smTab:px-10 lgTab:col-start-2 lgTab:col-end-12 lgTab:p-0 lgTab:mb-10 lap:col-start-2 lap:col-end-3 lap:row-start-1 lap:row-end-3 lap:m-0 lap:max-w-[225px]">
@@ -21,7 +21,7 @@ const NavSection = () => {
       </div>
 
       {/* SIDEBAR & BURGER MENU */}
-      <BurgerAndSidebar>
+      <BurgerAndSidebar user={user}>
         <RoadmapBox />
       </BurgerAndSidebar>
     </nav>

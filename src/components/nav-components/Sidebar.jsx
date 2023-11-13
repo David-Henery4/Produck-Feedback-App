@@ -1,6 +1,7 @@
 import { CategoryBox, RoadmapBox } from "."
+import { SignOut, ThemeToggle } from "../shared-components";
 
-const Sidebar = ({ isSidebarOpen, children }) => {
+const Sidebar = ({ isSidebarOpen, children, user }) => {
   //
   return (
     <aside
@@ -12,6 +13,16 @@ const Sidebar = ({ isSidebarOpen, children }) => {
       {/**/}
       {children} {/*{children} = <RoadmapBox /> */}
       {/**/}
+      <div className="w-full max-w-[350px] flex flex-col justify-between items-center gap-8 p-6 rounded-[10px] bg-white dark:bg-lightNavy smTab:flex-row">
+        <div className="flex justify-start items-center gap-2">
+          <SignOut />
+          <p className="text-xs font-semibold text-gray dark:text-white/75">
+            ({user.name || user.username})
+          </p>
+        </div>
+
+        <ThemeToggle />
+      </div>
     </aside>
   );
 };

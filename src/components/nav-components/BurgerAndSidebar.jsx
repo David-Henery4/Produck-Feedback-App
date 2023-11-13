@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { HamburgerIcon, CloseIcon } from "public/assets/shared";
 import { Sidebar, Overlay } from ".";
 
-const BurgerAndSidebar = ({children}) => {
+const BurgerAndSidebar = ({children,user}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   //
   const toggleSidebarClick = () => {
@@ -45,7 +45,9 @@ const BurgerAndSidebar = ({children}) => {
           />
         )}
       </div>
-      <Sidebar isSidebarOpen={isSidebarOpen}>{children}</Sidebar>
+      <Sidebar isSidebarOpen={isSidebarOpen} user={user}>
+        {children}
+      </Sidebar>
       <Overlay
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
