@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useTheme from "@/hooks/useTheme";
 import checkPreferedScheme from "@/hooks/theme-helpers/checkPreferedScheme";
 

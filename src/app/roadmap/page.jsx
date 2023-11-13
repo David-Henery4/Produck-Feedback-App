@@ -1,5 +1,6 @@
 import { RoadmapHeader,  RoadmapContentContainer, StatusToggles} from "@/components/roadmap-sections"
 import getFeedbackList from "@/lib/getFeedbackList";
+import { ThemeInit } from "@/components";
 
 
 const RoadMap = async () => {
@@ -38,6 +39,7 @@ const RoadMap = async () => {
   //
   return (
     <div className="grid grid-cols-mob pb-24 lgTab:pt-14 smTab:grid-cols-smTab">
+      <ThemeInit/>
       <RoadmapHeader roadmapColumnData={handleSetRoadmapColumns()} />
       <RoadmapContentContainer roadmapColumnData={handleSetRoadmapColumns()} />
     </div>

@@ -1,11 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import useTheme from "@/hooks/useTheme";
 import createUser from "@/lib/createUser";
 import generateUserColour from "@/redux/features/helpers/generateUserColour";
-import checkPreferedScheme from "@/hooks/theme-helpers/checkPreferedScheme";
 import {
   SignInError,
   SubmitBtn,
@@ -16,7 +14,6 @@ import {
 
 const CredentialsSignIn = ({ csrfToken }) => {
   const router = useRouter();
-  const { toggleTheme, changeTheme, setInitialTheme } = useTheme();
   // const {status} = useSession({required: true})
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
@@ -92,14 +89,7 @@ const CredentialsSignIn = ({ csrfToken }) => {
       return
     }
   };
-  //
-  useEffect(() => {
-    setInitialTheme();
-  }, [])
-  //
-  useEffect(() => {
-    checkPreferedScheme(changeTheme)
-  }, [])
+  
   //
   return (
     <form

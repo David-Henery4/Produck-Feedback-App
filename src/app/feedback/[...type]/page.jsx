@@ -1,6 +1,7 @@
 import { GoBackBtn } from "@/components/shared-components";
 import { LogoSection, Form, FormTitle } from "@/components/form-page-sections";
 import getSingleFeedback from "@/lib/getSingleFeedback";
+import { ThemeInit } from "@/components";
 
 const page = async ({ params: { type } }) => {
   const getEditValues = async () => {
@@ -15,6 +16,7 @@ const page = async ({ params: { type } }) => {
   //
   return (
     <main className="w-full pt-[34px] pb-[77px] grid grid-cols-mob smTab:grid-cols-smTab">
+      <ThemeInit/>
       <div className="w-full col-start-2 col-end-12 max-w-[540px] mx-auto">
         <GoBackBtn />
       </div>
