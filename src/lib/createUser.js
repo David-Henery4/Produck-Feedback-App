@@ -11,9 +11,9 @@ const createUser = async (userData) => {
         formData: { ...userData },
       }),
     });
-    if (!res.ok){
-      throw new Error(res.error)
-    }
+    // if (!res.ok){
+    //   throw new Error(res.error)
+    // }
     return res.json()
   } catch (error) {
     console.log(error)

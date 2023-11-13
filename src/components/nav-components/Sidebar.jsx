@@ -5,7 +5,7 @@ const Sidebar = ({ isSidebarOpen, children, user }) => {
   //
   return (
     <aside
-      className={`absolute bg-offWhite dark:bg-navy top-full right-0 w-3/4 h-[100svh] transition-all p-6 flex flex-col justify-start items-center gap-6 z-50 overflow-y-auto lap:hidden ${
+      className={`absolute bg-offWhite dark:bg-navy top-full right-0 w-3/4 h-[100svh] transition-all p-6 flex flex-col justify-start items-center gap-6 z-50 overflow-y-auto lgTab:hidden ${
         isSidebarOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >

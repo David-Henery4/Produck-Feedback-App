@@ -2,7 +2,7 @@ import { getProviders, getCsrfToken } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import {redirect} from "next/navigation"
 import { options } from "../../app/api/auth/[...nextauth]/options";
-import { ProvidersSignIn, OrSeperator, CredentialsSignIn } from "./footer-compnents";
+import { ProvidersSignIn, OrSeperator, CredentialsSignIn, DemoSignIn } from "./footer-compnents";
 
 const CardFooter = async () => {
   const session = await getServerSession(options);
@@ -23,6 +23,8 @@ const CardFooter = async () => {
 
       {/* Credentials Sign-in */}
       <CredentialsSignIn csrfToken={csrfToken} />
+
+      <DemoSignIn/>
     </section>
   );
 };

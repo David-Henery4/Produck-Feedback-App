@@ -60,24 +60,3 @@ const FeedbackListSection = ({feedBackList}) => {
 export default FeedbackListSection;
 
 
-
-
-// OLD LOGIC FOR THIS COMPONENT
-
-// currentlyDisplayed replaced by: feedBackList
-
-// import { useDispatch, useSelector } from "react-redux";
-// import { sortProductRequests } from "@/redux/features/prodReqsSlice";
-// import { useEffect } from "react";
-
-// (Inside component)
-//   const dispatch = useDispatch();
-//   const { currentlyDisplayed } = useSelector(
-//     (store) => store.productRequestsReducer
-//   );
-//   //
-//   const { currentSortData } = useSelector((store) => store.sortReducer);
-//   //
-//   useEffect(() => {
-//     dispatch(sortProductRequests(currentSortData));
-//   }, [currentSortData, currentlyDisplayed]);

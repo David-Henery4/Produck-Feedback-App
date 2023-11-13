@@ -1,4 +1,3 @@
-// name = password
 import { Visible, NotVisible } from "public/assets/providers";
 
 const CredentialInput = ({
@@ -15,7 +14,7 @@ const CredentialInput = ({
     <div className="mt-4 grid gap-1">
       <label
         htmlFor={name}
-        className="text-lightNavy font-bold -tracking-[0.19px]"
+        className="text-lightNavy dark:text-white font-bold -tracking-[0.19px]"
       >
         {label}
       </label>
