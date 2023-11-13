@@ -45,10 +45,10 @@ const AddComments = ({ currentFeedback }) => {
   }, [commentData?.content]);
   //
   return (
-    <div className="w-full p-6 text-[13px] font-medium bg-white rounded-xl tab:px-8 lgTab:text-[15px]">
+    <div className="w-full p-6 text-[13px] font-medium bg-white dark:bg-lightNavy rounded-xl tab:px-8 lgTab:text-[15px]">
       <label
         htmlFor="comment-input"
-        className="text-lg font-bold text-lightNavy"
+        className="text-lg font-bold text-lightNavy dark:text-white"
       >
         Add comment
       </label>
@@ -58,9 +58,9 @@ const AddComments = ({ currentFeedback }) => {
         id="comment-input"
         onFocus={() => setCheckInputActive(!checkInputActive)}
         onBlur={() => setCheckInputActive(!checkInputActive)}
-        className={`resize-none outline-none rounded-md w-full h-20 p-4 bg-offWhite mt-6 ${
+        className={`resize-none outline-none rounded-md w-full h-20 p-4 bg-offWhite dark:bg-navy dark:text-white mt-6 ${
           isContentInvalid && "border border-red"
-        } ${checkInputActive && !isContentInvalid && "border border-blue"}`}
+        } ${checkInputActive && !isContentInvalid && "border border-blue dark:border-pink"}`}
         onChange={(e) =>
           setCommentData((oldValues) => {
             return e.target.value.length > 250
@@ -76,11 +76,11 @@ const AddComments = ({ currentFeedback }) => {
         </p>
       )}
       <div className="w-full flex justify-center items-center flex-wrap gap-4 mt-4 smMob:justify-between">
-        <p className="text-gray">
+        <p className="text-gray dark:text-offWhite">
           {characterLimit <= 0 ? 0 : characterLimit} Characters left
         </p>
         <button
-          className="rounded-xl bg-purple font-bold text-iceWhite px-4 py-3 hover:bg-pink active:bg-purple lgTab:text-[14px]"
+          className="rounded-xl bg-purple dark:bg-blue font-bold text-iceWhite px-4 py-3 hover:bg-pink active:bg-purple lgTab:text-[14px]"
           onClick={() => {
             if (commentData.content.trim() !== "") {
               setIsContentInvalid(false);

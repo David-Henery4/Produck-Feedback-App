@@ -35,7 +35,7 @@ const SubmitFeedbackBtns = ({
             e.preventDefault();
             checkValues();
           }}
-          className="w-full py-3 px-7 rounded-xl bg-purple hover:bg-pink active:bg-purple text-white lgTab:w-36 lgTab:px-6"
+          className="w-full py-3 px-7 rounded-xl bg-purple dark:bg-blue hover:bg-pink dark:hover:bg-blueShade active:bg-purple dark:active:bg-blue text-white lgTab:w-36 lgTab:px-6"
         >
           {type[0] === "edit" ? "Save Changes" : "Add Feedback"}
         </button>
@@ -45,11 +45,11 @@ const SubmitFeedbackBtns = ({
             e.preventDefault();
             if (type[0] === "edit") {
               resetFormToEditValues();
-              return
+              return;
             }
-            resetFormToDefault()
+            resetFormToDefault();
           }}
-          className="w-full py-3 px-7 mt-4 rounded-xl bg-lightNavy text-white hover:bg-lighterNavy active:bg-lightNavy lgTab:w-24 lgTab:px-6 lgTab:mt-0"
+          className="w-full py-3 px-7 mt-4 rounded-xl bg-lightNavy dark:bg-gray text-white hover:bg-lighterNavy dark:hover:bg-lightGray active:bg-lightNavy dark:active:bg-gray lgTab:w-24 lgTab:px-6 lgTab:mt-0"
         >
           Cancel
         </button>

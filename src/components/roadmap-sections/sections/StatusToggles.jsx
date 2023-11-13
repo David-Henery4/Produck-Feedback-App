@@ -12,14 +12,16 @@ const StatusToggles = ({
   );
   //
   return (
-    <div className="w-full col-start-1 col-end-13 border-b border-b-lightGray/25 lgTab:hidden">
-      <div className="px-3 w-full flex justify-between items-center text-[11px] smMob:text-sm text-lightNavy/40 font-bold max-w-[500px] mx-auto">
+    <div className="w-full col-start-1 col-end-13 border-b border-b-lightGray/25 dark:border-b-pink/25 lgTab:hidden">
+      <div className="px-3 w-full flex justify-between items-center text-[11px] smMob:text-sm text-lightNavy/40 dark:text-offWhite/40 font-bold max-w-[500px] mx-auto">
         {roadmapColumns.map((tabs, i) => {
           return (
             <button
               key={tabs.id}
               className={`relative px-3 py-5 ${
-                currentRoadmapColumnIndex === i ? "text-lightNavy" : ""
+                currentRoadmapColumnIndex === i
+                  ? "text-lightNavy dark:text-offWhite"
+                  : ""
               }`}
               onClick={() => dispatch(changeRoadmapColumn(i))}
             >

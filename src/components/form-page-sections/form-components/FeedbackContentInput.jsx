@@ -6,16 +6,16 @@ const feedbackContentInput = ({ formInfo, errorsList }) => {
     <div>
       <div>
         <label htmlFor="feedback-content">Feedback Detail</label>
-        <p className="text-gray font-medium mt-1">
+        <p className="text-gray dark:text-offWhite font-medium mt-1">
           Include any specific comments on what should be improved, added, etc.
         </p>
       </div>
 
       <textarea
-        className={`resize-none w-full p-4 mt-4 rounded-md outline-none bg-offWhite border min-h-[120px] tab:text-[15px] ${
+        className={`resize-none w-full p-4 mt-4 rounded-md outline-none bg-offWhite dark:bg-navy border min-h-[120px] tab:text-[15px] ${
           errorsList?.description?.isError
             ? "border-red"
-            : "border-offWhite hover:border-blue"
+            : "border-offWhite dark:border-navy hover:border-blue dark:hover:border-pink"
         }`}
         name="feedback-content"
         id="feedback-content"

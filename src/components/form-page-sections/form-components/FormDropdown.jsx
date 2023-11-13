@@ -6,7 +6,7 @@ const FormDropdown = ({ isDropdownOpen, inputName, inputOptions }) => {
   const dispatch = useDispatch()
   return (
     <div
-      className={`absolute top-14 left-0 bg-white shadow-sortDropdown w-full z-20 rounded-[10px] ${
+      className={`absolute top-14 left-0 bg-white dark:bg-navy shadow-sortDropdown dark:shadow-sortDropdownDark w-full z-20 rounded-[10px] ${
         isDropdownOpen ? "block" : "hidden"
       }`}
     >
@@ -15,7 +15,7 @@ const FormDropdown = ({ isDropdownOpen, inputName, inputOptions }) => {
           return (
             <li
               key={category.id}
-              className="relative py-3 px-6 text-sm group flex justify-between items-center border-b group border-lightNavy/20 last:border-none"
+              className="relative py-3 px-6 text-sm group flex justify-between items-center border-b group border-lightNavy/20 dark:border-pink/20 last:border-none"
             >
               <label htmlFor={category.dataType}>
                 <input
@@ -35,7 +35,7 @@ const FormDropdown = ({ isDropdownOpen, inputName, inputOptions }) => {
                     );
                   }}
                 />
-                <span className="group-hover:text-purple">
+                <span className="group-hover:text-purple dark:group-hover:text-blue">
                   <p>{category.label}</p>
                 </span>
               </label>

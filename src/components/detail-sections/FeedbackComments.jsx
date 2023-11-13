@@ -2,8 +2,8 @@ import { Comment } from "./comments-components";
 
 const FeedbackComments = ({ comments }) => {
   return (
-    <div className="w-full p-6 bg-white rounded-xl tab:px-8 tab:pb-8">
-      <h1 className="font-bold text-lg text-lightNavy">
+    <div className="w-full p-6 bg-white dark:bg-lightNavy rounded-xl tab:px-8 tab:pb-8">
+      <h1 className="font-bold text-lg text-lightNavy dark:text-white">
         {comments ? comments?.length : 0} Comments
       </h1>
 

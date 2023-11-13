@@ -52,6 +52,7 @@ module.exports = {
     },
     boxShadow: {
       sortDropdown: "0px 10px 40px -7px rgba(55, 63, 104, 0.35)",
+      sortDropdownDark: "0px 10px 40px -7px rgba(100, -80, 115, .75)",
     },
     extend: {},
   },

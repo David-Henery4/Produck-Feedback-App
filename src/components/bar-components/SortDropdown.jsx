@@ -12,7 +12,7 @@ const SortDropdown = ({ dropdownInfo }) => {
   //
   return (
     <div
-      className={`absolute top-14 left-0 bg-white shadow-sortDropdown w-64 z-20 rounded-[10px] ${
+      className={`absolute top-14 left-0 bg-white dark:bg-lightNavy shadow-sortDropdown dark:shadow-sortDropdownDark w-64 z-20 rounded-[10px] ${
         isSortOpen ? "block" : "hidden"
       }`}
     >
@@ -20,7 +20,7 @@ const SortDropdown = ({ dropdownInfo }) => {
         {sortData?.map((s) => {
           return (
             <li
-              className="relative py-3 px-6 text-sm group flex justify-between items-center border-b border-lightNavy/20 last:border-none"
+              className="relative py-3 px-6 text-sm group flex justify-between items-center border-b border-lightNavy/20 dark:border-pink/20 last:border-none"
               key={s?.id}
               onClick={() => setIsSortOpen(!isSortOpen)}
             >
@@ -37,12 +37,12 @@ const SortDropdown = ({ dropdownInfo }) => {
                   }}
                 />
                 <span>
-                  <p className="text-gray group-hover:text-purple">
+                  <p className="text-gray dark:text-offWhite group-hover:text-purple dark:group-hover:text-blue">
                     {s?.label}
                   </p>
                 </span>
               </label>
-              {s?.isActive && <CheckIcon />}
+              {s?.isActive && <CheckIcon className="stroke-purple dark:stroke-blue" />}
             </li>
           );
         })}

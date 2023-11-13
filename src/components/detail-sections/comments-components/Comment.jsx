@@ -18,7 +18,7 @@ const Comment = ({
   //
   return (
     <div
-      className={`relative group text-[13px] text-gray font-medium grid grid-cols-commentMob lgTab:grid-cols-commentTab lgTab:gap-x-0 ${
+      className={`relative group text-[13px] text-gray dark:text-offWhite font-medium grid grid-cols-commentMob lgTab:grid-cols-commentTab lgTab:gap-x-0 ${
         isReply
           ? "pl-6 pb-6 gap-4 lgTab:gap-[10px] lgTab:pl-11 lgTab:py-0"
           : "py-6 gap-4 lgTab:py-8"
@@ -47,12 +47,12 @@ const Comment = ({
 
       <div className="flex justify-between items-center lgTab:col-start-3 lgTab:col-end-4">
         <div>
-          <h3 className="font-bold text-lightNavy">{name || username}</h3>
+          <h3 className="font-bold text-lightNavy dark:text-white">{name || username}</h3>
           <h4>{username || name}</h4>
         </div>
         {username !== currentUser?.username || name !== currentUser?.name ? (
           <button
-            className="font-semibold text-blue hover:underline"
+            className="font-semibold text-blue dark:text-pink hover:underline"
             onClick={() => setIsReplyActive(!isReplyActive)}
           >
             Reply
@@ -65,7 +65,7 @@ const Comment = ({
       <div className="col-start-1 col-end-3 lgTab:col-start-3 lgTab:col-end-4">
         {isReply ? (
           <p className="break-words">
-            <span className="text-purple font-bold">@{replyingTo}</span>{" "}
+            <span className="text-purple font-bold dark:text-blue">@{replyingTo}</span>{" "}
             {content}
           </p>
         ) : (

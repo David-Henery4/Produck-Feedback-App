@@ -8,7 +8,7 @@ const FeedbackTitleInput = ({ formInfo, errorsList }) => {
     <div>
       <div>
         <label htmlFor="feedback-title">Feedback Title</label>
-        <p className="text-gray font-medium mt-1">
+        <p className="text-gray dark:text-offWhite font-medium mt-1">
           Add a short, descriptive headline
         </p>
       </div>
@@ -16,10 +16,10 @@ const FeedbackTitleInput = ({ formInfo, errorsList }) => {
         type="text"
         id="feedback-title"
         name="feedback-title"
-        className={`w-full p-4 mt-4 rounded-md bg-offWhite outline-none border tab:text-[15px] ${
+        className={`w-full p-4 mt-4 rounded-md bg-offWhite dark:bg-navy outline-none border tab:text-[15px] ${
           errorsList?.title?.isError
             ? "border-red"
-            : "border-offWhite hover:border-blue"
+            : "border-offWhite dark:border-navy hover:border-blue dark:hover:border-pink"
         }`}
         value={formInputs?.title}
         onChange={(e) =>

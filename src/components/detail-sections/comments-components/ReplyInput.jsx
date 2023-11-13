@@ -23,8 +23,8 @@ const ReplyInput = ({
         <textarea
           name="reply-input"
           id="reply-input"
-          className={`w-full min-h-[80px] px-4 py-2 resize-none outline-none rounded-md bg-offWhite border lgTab:flex-[4] ${
-            isContentInvalid ? "border-red" : "border-blue"
+          className={`w-full min-h-[80px] px-4 py-2 resize-none outline-none rounded-md bg-offWhite dark:bg-navy border lgTab:flex-[4] ${
+            isContentInvalid ? "border-red" : "border-blue dark:border-pink"
           }`}
           onChange={(e) => {
             setReplyData((oldValues) => {

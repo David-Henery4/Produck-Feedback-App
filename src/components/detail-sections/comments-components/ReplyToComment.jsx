@@ -42,7 +42,7 @@ const ReplyToComment = ({
   //
   return (
     <button
-      className="w-full px-6 py-3 rounded-xl text-white bg-purple hover:bg-pink active:bg-purple lgTab:flex-1 lgTab:self-start"
+      className="w-full px-6 py-3 rounded-xl text-white bg-purple dark:bg-blue hover:bg-pink dark:hover:bg-blueShade active:bg-purple lgTab:flex-1 lgTab:self-start"
       onClick={() => {
         if (replyData?.content.trim() !== "") {
           setIsContentInvalid(false)

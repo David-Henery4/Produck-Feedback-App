@@ -39,9 +39,13 @@ const RoadmapList = async () => {
           <li key={road?.id} className="flex justify-between items-center">
             <div className="flex justify-start items-center gap-4">
               <div className={`rounded-full h-2 w-2 ${road?.colour}`}></div>
-              <h3 className="text-base text-gray font-normal">{road?.label}</h3>
+              <h3 className="text-base text-gray dark:text-offWhite font-normal">
+                {road?.label}
+              </h3>
             </div>
-            <p className="font-bold text-base text-gray">{road?.quantity}</p>
+            <p className="font-bold text-base text-gray dark:text-offWhite">
+              {road?.quantity}
+            </p>
           </li>
         );
       })}

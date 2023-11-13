@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import Overlay from "./Overlay";
 import BurgerAndSidebar from "./BurgerAndSidebar";
 import RoadmapList from "./RoadmapList";
+import RoadmapLink from "./RoadmapLink";
 
 export {
   Titles,
@@ -15,5 +16,6 @@ export {
   Sidebar,
   Overlay,
   BurgerAndSidebar,
-  RoadmapList
+  RoadmapList,
+  RoadmapLink,
 }

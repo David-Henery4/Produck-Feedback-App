@@ -7,7 +7,7 @@ const DetailsNav = ({id}) => {
       <GoBackBtn />
       <Link
         href={`/feedback/edit/${id}`}
-        className="bg-blue text-white px-4 py-[10px] rounded-xl hover:bg-blueShade active:bg-blue"
+        className="bg-blue dark:bg-purple text-white px-4 py-[10px] rounded-xl hover:bg-blueShade dark:hover:bg-purple/75 active:bg-blue active:dark:bg-purple"
       >
         Edit Feedback
       </Link>

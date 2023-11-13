@@ -19,7 +19,7 @@ const RoadmapFeedbackBox = ({
 }) => {
   return (
     <div
-      className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white text-gray ${
+      className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white dark:bg-lightNavy text-gray dark:text-offWhite ${
         (status === "in-progress" && "border-t-purple") ||
         (status === "planned" && "border-t-orange") ||
         (status === "live" && "border-t-lightBlue")
@@ -40,7 +40,7 @@ const RoadmapFeedbackBox = ({
       {/* Title & Feedback */}
       <div className="mt-2">
         <Link
-          className="font-bold capitalize text-lightNavy -tracking-[0.25px] hover:text-blue lap:text-lg"
+          className="font-bold capitalize text-lightNavy dark:text-white -tracking-[0.25px] hover:text-blue lap:text-lg"
           href={`/feedback-detail/${id}`}
         >
           {title}
@@ -49,8 +49,10 @@ const RoadmapFeedbackBox = ({
       </div>
 
       {/* Feedback type */}
-      <div className="px-4 py-[6px] rounded-lg bg-iceWhite inline-flex mt-4">
-        <p className="text-blue font-semibold capitalize">{category}</p>
+      <div className="px-4 py-[6px] rounded-lg bg-iceWhite dark:bg-navy inline-flex mt-4">
+        <p className="text-blue dark:text-pink font-semibold capitalize">
+          {category}
+        </p>
       </div>
 
       {/* Upvotes & Comments Amounts */}
@@ -63,7 +65,7 @@ const RoadmapFeedbackBox = ({
         />
 
         <div className="grid">
-          <p className="inline-flex justify-center items-center gap-2 font-bold">
+          <p className="inline-flex justify-center items-center gap-2 font-bold text-lightNavy dark:text-white">
             <span>
               <CommentsIcon />
             </span>{" "}
