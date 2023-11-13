@@ -1,11 +1,19 @@
 import { RoadmapHeader,  RoadmapContentContainer, StatusToggles} from "@/components/roadmap-sections"
 import getFeedbackList from "@/lib/getFeedbackList";
 import { ThemeInit } from "@/components";
+import { options } from "../api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 
 const RoadMap = async () => {
+  const session = await getServerSession(options);
   const {data: feedbackList} = await getFeedbackList()
-  // 
+  //
+  if (!session) {
+    redirect("/auth/signin");
+  }
+  //
   const handleSetRoadmapColumns = () => {
     return [
       {

@@ -2,8 +2,12 @@ import { GoBackBtn } from "@/components/shared-components";
 import { LogoSection, Form, FormTitle } from "@/components/form-page-sections";
 import getSingleFeedback from "@/lib/getSingleFeedback";
 import { ThemeInit } from "@/components";
+import { getServerSession } from "next-auth";
+import { options } from "../../api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
 const page = async ({ params: { type } }) => {
+    const session = await getServerSession(options);
   const getEditValues = async () => {
     const mode = type[0];
     const feedbackId = type[1];
@@ -13,6 +17,10 @@ const page = async ({ params: { type } }) => {
     }
   };
   const feedbackValuesForEdit = await getEditValues();
+  //
+  if (!session) {
+    redirect("/auth/signin");
+  }
   //
   return (
     <main className="w-full pt-[34px] pb-[77px] grid grid-cols-mob smTab:grid-cols-smTab">
