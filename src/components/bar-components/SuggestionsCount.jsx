@@ -1,24 +1,18 @@
-"use client"
 import { SuggestionsIcon } from "public/assets/suggestions";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import getFeedbackList from "@/lib/getFeedbackList";
 
-const SuggestionsCount = () => {
-  const [suggestionsCount,setSuggestionsCount] = useState(0)
-  const { placeholderRequests } = useSelector(
-    (store) => store.productRequestsReducer
-  );
+const SuggestionsCount = async () => {
   //
-  useEffect(() => {
-  setSuggestionsCount(placeholderRequests.filter(item => item.status === "suggestion").length)
-  },[placeholderRequests])
+  const res = await getFeedbackList();
+  const suggestionsList = res?.data?.filter(
+    (item) => item.status === "suggestion"
+  ).length;
   //
   return (
     <div className="hidden justify-start items-center gap-4 font-bold text-lg lgTab:flex">
       <SuggestionsIcon />
       <p>
-        <span>{suggestionsCount}</span>
-        {" "}Suggestions
+        <span>{suggestionsList}</span> Suggestions
       </p>
     </div>
   );

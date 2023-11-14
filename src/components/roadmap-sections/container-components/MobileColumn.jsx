@@ -1,15 +1,11 @@
-"use client"
+"use client";
 import { ColumnHeader, ColumnContainer } from ".";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSelector } from "react-redux";
 
-const MobileColumn = ({ roadmapColumns }) => {
-  const { currentRoadmapColumnIndex } = useSelector(
-    (store) => store.productRequestsReducer
-  );
+const MobileColumn = ({ roadmapColumns, currentColumn }) => {
   //
   return (
-    <div className="w-full lgTab:hidden">
+    <div className="w-full col-start-2 col-end-12 max-w-md mx-auto mt-6 lgTab:hidden">
       {
         roadmapColumns.map((col, i) => {
           return (
@@ -26,10 +22,10 @@ const MobileColumn = ({ roadmapColumns }) => {
               </motion.div>
             </AnimatePresence>
           );
-        })[currentRoadmapColumnIndex]
+        })[currentColumn]
       }
     </div>
   );
 };
 
-export default MobileColumn
+export default MobileColumn;

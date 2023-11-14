@@ -1,34 +1,10 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { upDateFilterUi } from "@/redux/features/filtersSlice";
-import {
-  filterFeedbackList,
-  sortProductRequests,
-} from "@/redux/features/prodReqsSlice";
-import { useEffect } from "react";
 
 const CategoryBox = () => {
   const dispatch = useDispatch();
   const { filterOptions } = useSelector((store) => store.filterReducer);
-  const { currentSortData } = useSelector((store) => store.sortReducer);
-  const { placeholderRequests } = useSelector(
-    (store) => store.productRequestsReducer
-  );
-  //
-  const handleRefreshFilterAfterChanges = () => {
-    const currentFilterType = filterOptions.find(
-      (item) => item.isActive
-    ).dataType;
-    dispatch(filterFeedbackList(currentFilterType));
-  };
-  //
-  useEffect(() => {
-    dispatch(sortProductRequests(currentSortData));
-  }, [filterOptions]);
-  //
-  useEffect(() => {
-    handleRefreshFilterAfterChanges()
-  }, [placeholderRequests]);
   //
   return (
     <div className="w-full bg-white dark:bg-lightNavy p-6 flex flex-wrap justify-start items-center content-evenly gap-2 rounded-[10px] max-w-[350px] lgTab:max-w-none lgTab:h-full">
@@ -43,7 +19,6 @@ const CategoryBox = () => {
             }`}
             onClick={() => {
               dispatch(upDateFilterUi(prod?.id));
-              dispatch(filterFeedbackList(prod?.dataType));
             }}
           >
             <p>{prod?.label}</p>
