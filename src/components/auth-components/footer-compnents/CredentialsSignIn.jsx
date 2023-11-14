@@ -9,12 +9,15 @@ import {
   SubmitBtn,
   CredentialInput,
   DuplicateUser,
+  LoadingSpinner,
 } from "./credentials-signin-components";
+
 
 
 const CredentialsSignIn = ({ csrfToken }) => {
   const router = useRouter();
-  // const {status} = useSession({required: true})
+  const {status} = useSession()
+  const [isloading, setIsLoading] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -50,20 +53,31 @@ const CredentialsSignIn = ({ csrfToken }) => {
   };
   ///
   const handleSignIn = async () => {
-    const data = await signIn("credentials", {
-      redirect: false,
-      username,
-      password,
-    });
-    if (data.error) {
+    try {
+      setIsLoading(true)
+      setIsSignInError(false);
+      const data = await signIn("credentials", {
+        redirect: false,
+        username,
+        password,
+      });
+      if (data.ok){
+        setIsLoading(false);
+        setIsSignInError(false);
+        router.refresh();
+        return
+      }
+      setIsLoading(false);
       setIsSignInError(true);
-      return;
+    } catch (error) {
+      setIsSignInError(true);
+      setIsLoading(false)
+      console.error(error)
     }
-    setIsSignInError(false);
-    router.refresh();
   };
   //
   const handleSignUp = async () => {
+    setIsLoading(true);
     setIsDuplicateSignUpOrError({ msg: "", isError: false });
     const res = await createUser({
       username,
@@ -75,6 +89,7 @@ const CredentialsSignIn = ({ csrfToken }) => {
         msg: "Username already exists",
         isError: true,
       });
+      setIsLoading(false);
       return;
     }
     if (res.message === "Error creating account") {
@@ -82,6 +97,7 @@ const CredentialsSignIn = ({ csrfToken }) => {
         msg: res?.message,
         isError: true,
       });
+      setIsLoading(false);
       return;
     }
     if (res.message === "User Created"){
@@ -101,6 +117,8 @@ const CredentialsSignIn = ({ csrfToken }) => {
       className="w-full"
     >
       <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+      {isloading ? <LoadingSpinner/> : (
+      <>
       <CredentialInput
         name="username"
         label="Username"
@@ -117,6 +135,7 @@ const CredentialsSignIn = ({ csrfToken }) => {
         isPasswordVisible={isPasswordVisible}
         setIsPasswordVisible={setIsPasswordVisible}
       />
+      </>)}
       {isSignInError && <SignInError />}
       {isDuplicateSignUpOrError?.isError && (
         <DuplicateUser msg={isDuplicateSignUpOrError?.msg} />
