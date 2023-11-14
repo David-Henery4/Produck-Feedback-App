@@ -15,13 +15,18 @@ const FeedbackComments = ({ comments }) => {
               className="w-full border-t-lightGray/25 border-t first:border-none"
               key={comment?.id}
             >
-              <Comment comments={ comments } {...comment} />
+              <Comment
+                comments={comments}
+                {...comment}
+                repliesLength={comment?.replies?.length}
+              />
               {comment?.replies && (
-                <div className="w-full grid gap-6 pb-6 lgTab:pb-8 lgTab:gap-4">
-                  {comment?.replies?.map((reply, i) => {
+                <div className="w-full grid gap-8 pb-6 lgTab:pb-8">
+                  {comment?.replies?.map((reply, i, array) => {
                     return (
                       <Comment
                         key={i}
+                        arrayLength={array?.length}
                         comments={comments}
                         {...reply}
                         isReply={true}

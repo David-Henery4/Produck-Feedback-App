@@ -12,6 +12,8 @@ const Comment = ({
   isReply,
   replyingTo = null,
   ogCommentId = null,
+  arrayLength,
+  repliesLength
 }) => {
   const { currentUser } = useSelector((store) => store.userReducer);
   const [isReplyActive, setIsReplyActive] = useState(false);
@@ -25,10 +27,18 @@ const Comment = ({
       }`}
     >
       {replies && (
-        <div className="w-[1px] h-[130%] bg-gray/10 absolute top-[94px] left-5 hidden lgTab:block"></div>
+        <div
+          className={`w-[1px] bg-gray/10 absolute top-[94px] left-5 hidden lgTab:block ${
+            repliesLength > 1 ? "h-[150%]" : "h-[50%]"
+          }`}
+        ></div>
       )}
       {isReply && (
-        <div className="w-[1px] h-[130%] bg-gray/10 absolute top-0 left-0 hidden group-first:block group-first:lgTab:hidden"></div>
+        <div
+          className={`w-[1px] bg-gray/10 absolute top-0 left-0 hidden group-first:block group-first:lgTab:hidden ${
+            arrayLength > 1 ? "h-[150%]" : "h-[80%]"
+          }`}
+        ></div>
       )}
       {image ? (
         <img
@@ -47,7 +57,9 @@ const Comment = ({
 
       <div className="flex justify-between items-center lgTab:col-start-3 lgTab:col-end-4">
         <div>
-          <h3 className="font-bold text-lightNavy dark:text-white">{name || username}</h3>
+          <h3 className="font-bold text-lightNavy dark:text-white">
+            {name || username}
+          </h3>
           <h4>{username || name}</h4>
         </div>
         {username !== currentUser?.username || name !== currentUser?.name ? (
@@ -65,7 +77,9 @@ const Comment = ({
       <div className="col-start-1 col-end-3 lgTab:col-start-3 lgTab:col-end-4">
         {isReply ? (
           <p className="break-words">
-            <span className="text-purple font-bold dark:text-blue">@{replyingTo}</span>{" "}
+            <span className="text-purple font-bold dark:text-blue">
+              @{replyingTo}
+            </span>{" "}
             {content}
           </p>
         ) : (
@@ -76,7 +90,7 @@ const Comment = ({
       {isReplyActive && (
         <ReplyInput
           comments={comments}
-          replyInfo={{ id, username , ogCommentId, name }}
+          replyInfo={{ id, username, ogCommentId, name }}
           setIsReplyActive={setIsReplyActive}
         />
       )}

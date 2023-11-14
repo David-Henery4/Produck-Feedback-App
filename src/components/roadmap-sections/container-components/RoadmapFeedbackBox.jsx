@@ -19,7 +19,7 @@ const RoadmapFeedbackBox = ({
 }) => {
   return (
     <div
-      className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white dark:bg-lightNavy text-gray dark:text-offWhite ${
+      className={`w-full p-8 rounded-md border-t-[6px] text-[13px] bg-white dark:bg-lightNavy text-gray dark:text-offWhite lap:min-h-[320px] ${
         (status === "in-progress" && "border-t-purple") ||
         (status === "planned" && "border-t-orange") ||
         (status === "live" && "border-t-lightBlue")

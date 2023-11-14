@@ -1,12 +1,15 @@
-import { IllustrationIcon } from "public/assets/suggestions";
+import {
+  IllustrationIcon,
+  IllustrationEmptyDuckIcon,
+} from "public/assets/suggestions";
 import { AddFeedbackLink } from "../shared-components";
 
 const EmptyFeedbackSection = () => {
-  // dark:bg-lightNavy = #3A4374
+  //
   return (
     <div className="w-full h-full bg-white dark:bg-lightNavy rounded-[10px] py-[76px] px-6 text-center grid place-items-center gap-10 smTab:gap-14 lgTab:py-[110px] lgTab:px-[140px] lap:px-[206px]">
-      <div className="bg-offWhite p-6 rounded-full">
-        <IllustrationIcon />
+      <div className="w-40 h-40">
+        <IllustrationEmptyDuckIcon className="w-full h-full" />
       </div>
       <div className="w-full h-full">
         <div className="mb-6 smTab:mb-12">

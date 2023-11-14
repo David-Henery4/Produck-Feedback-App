@@ -13,7 +13,7 @@ module.exports = {
       smTab: "32.5em", // 520px
       tab: "40em", // 640px
       lgTab: "45em", // 720px
-      lap: "63.75em", // 1070px
+      lap: "63.75em", // 1020px
     },
     colors: {
       purple: "#AD1FEA",
