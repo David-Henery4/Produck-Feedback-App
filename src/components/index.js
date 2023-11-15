@@ -3,6 +3,7 @@ import FeedbackBarSection from "./sections/FeedbackBarSection";
 import FeedbackListSection from "./sections/FeedbackListSection";
 import SignOutAndThemeToggle from "./sections/SignOutAndThemeToggle";
 import ThemeInit from "./theme-init/ThemeInit";
+import Dashboard from "./sections/Dashboard";
 
 export {
   NavSection,
@@ -10,4 +11,5 @@ export {
   FeedbackListSection,
   SignOutAndThemeToggle,
   ThemeInit,
+  Dashboard,
 }
