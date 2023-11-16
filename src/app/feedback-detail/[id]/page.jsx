@@ -1,3 +1,4 @@
+// export const dynamic = "force-dynamic";
 import { FeedbackBox } from "@/components/list-components";
 import {
   AddComments,
@@ -6,9 +7,20 @@ import {
 } from "@/components/detail-sections";
 import { ThemeInit } from "@/components";
 import getSingleFeedback from "@/lib/getSingleFeedback";
+// import getFeedbackList from "@/lib/getFeedbackList";
 import { getServerSession } from "next-auth";
 import { options } from "../../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
+import productRequests from "@/app/models/FeedbackSchema";
+import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  // Couldn't call internal api here, instead had to call db directly
+  const allFeedback = await productRequests.find({});
+  return allFeedback.map((item) => ({
+    id: item.id.toString(),
+  }));
+}
 
 const Page = async ({ params: { id } }) => {
   const session = await getServerSession(options);
@@ -16,6 +28,10 @@ const Page = async ({ params: { id } }) => {
   //
   if (!session) {
     redirect("/auth/signin");
+  }
+  //
+  if (!currentFeedback){
+    return notFound()
   }
   //
   return (
@@ -32,4 +48,3 @@ const Page = async ({ params: { id } }) => {
 };
 
 export default Page;
-
