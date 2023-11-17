@@ -5,6 +5,7 @@ async function updateFeedback(id, dataToUpdate) {
       body: JSON.stringify({
         formData: { ...dataToUpdate },
       }),
+      next: { revalidate: 3600 },
     });
     return await res.json();
   } catch (error) {

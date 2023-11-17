@@ -7,6 +7,7 @@ async function getFeedbackList() {
       headers: {
         "Content-Type": "application/json",
       },
+      next: {revalidate: 3600}
     });
     //
     return res.json()

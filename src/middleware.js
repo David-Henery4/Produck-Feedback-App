@@ -4,7 +4,11 @@ import { withAuth } from "next-auth/middleware";
 // Allowed Origin List
 const allowedOrigins =
   process.env.NODE_ENV === "production"
-    ? ["https://www.yoursite.com", "https://yoursite.com"]
+    ? [
+        "https://www.yoursite.com",
+        "https://yoursite.com",
+        "http://localhost:3000",
+      ]
     : ["http://localhost:3000"];
 
 export function middleware(req) {
