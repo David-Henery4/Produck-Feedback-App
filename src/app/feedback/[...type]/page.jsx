@@ -5,14 +5,30 @@ import { ThemeInit } from "@/components";
 import { getServerSession } from "next-auth";
 import { options } from "../../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
+import productRequests from "@/app/models/FeedbackSchema";
+import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  // Couldn't call internal api here, instead had to call db directly
+  const allFeedback = await productRequests.find({});
+  return allFeedback.map((item) => ({
+    id: item.id.toString(),
+  }));
+}
 
 const page = async ({ params: { type } }) => {
-    const session = await getServerSession(options);
+  const mode = type[0];
+  const feedbackId = type[1];
+  //
+  if (mode !== "edit" && mode !== "create") {return notFound()}
+  //
+  const session = await getServerSession(options);
   const getEditValues = async () => {
-    const mode = type[0];
-    const feedbackId = type[1];
     if (mode === "edit") {
       const { data: feedbackValues } = await getSingleFeedback(feedbackId);
+      if (!feedbackValues){
+        return notFound()
+      }
       return await feedbackValues;
     }
   };

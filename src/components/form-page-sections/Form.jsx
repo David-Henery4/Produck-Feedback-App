@@ -48,13 +48,13 @@ const Form = ({ type, feedbackValuesForEdit }) => {
     dispatch(
       updateDropdownData({
         inputName: "status-input",
-        dataType: feedbackValuesForEdit.status,
+        dataType: feedbackValuesForEdit?.status,
       })
     );
     dispatch(
       updateDropdownData({
         inputName: "category-input",
-        dataType: feedbackValuesForEdit.category,
+        dataType: feedbackValuesForEdit?.category,
       })
     );
   };
@@ -130,7 +130,7 @@ const Form = ({ type, feedbackValuesForEdit }) => {
         errorsList={errorsList}
       />
       <FeedbackDropdownInput
-        value={formInputs.category}
+        value={formInputs?.category}
         inputTitle="Category"
         inputDescription="Choose a category for your feedback"
         inputName="category-input"
@@ -139,7 +139,7 @@ const Form = ({ type, feedbackValuesForEdit }) => {
       {/* For edit only */}
       {type[0] === "edit" && (
         <FeedbackDropdownInput
-          value={formInputs.status}
+          value={formInputs?.status}
           inputTitle="Update Status"
           inputDescription="Change feature state"
           inputName="status-input"

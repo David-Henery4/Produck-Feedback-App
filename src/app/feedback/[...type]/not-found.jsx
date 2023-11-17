@@ -1,7 +1,9 @@
 import NotFoundLayout from "@/components/not-found-component/NotFoundLayout";
 
 const NotFound = () => {
-  return <NotFoundLayout />;
+  return (
+    <NotFoundLayout/>
+  );
 };
 
 export default NotFound;
