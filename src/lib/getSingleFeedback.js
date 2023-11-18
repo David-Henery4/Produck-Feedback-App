@@ -1,7 +1,7 @@
 
 const getSingleFeedback = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/feedback/${id}`);
+    const res = await fetch(`${process.env.BASE_URL}/api/feedback/${id}`);
     return res.json()
   } catch (error) {
     console.error(error);

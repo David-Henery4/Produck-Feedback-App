@@ -2,7 +2,7 @@
 
 async function getFeedbackList() {
   try {
-    const res = await fetch("http://localhost:3000/api/feedback", {
+    const res = await fetch(`${process.env.BASE_URL}/api/feedback`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
