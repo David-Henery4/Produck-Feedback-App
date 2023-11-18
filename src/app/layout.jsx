@@ -4,7 +4,7 @@ import { ReduxProvider } from "@/redux/provider";
 import AuthProvider from "@/components/AuthProvider";
 
 export const metadata = {
-  title: "Product feedback",
+  title: "Produck feedback",
   description: "Product feedback app",
 };
 
