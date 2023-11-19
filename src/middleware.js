@@ -8,7 +8,7 @@ const allowedOrigins =
         "https://www.yoursite.com",
         "https://yoursite.com",
         "http://localhost:3000",
-        "https://produck-feedback-o6v52uw9k-david-henery4.vercel.app",
+        "https://produck-feedback-app.vercel.app",
       ]
     : ["http://localhost:3000"];
 
