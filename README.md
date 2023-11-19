@@ -38,14 +38,13 @@ Users are be able to:
 ![Sign-In page](./public/assets/screenshots/localhost_3000_auth_signin.png)
 
 ### Screenshot of the home dashboard
-![Sign-In page](./public/assets/screenshots/home-dashboard-screnshot-2.png)
+![Dashboard](./public/assets/screenshots/home-dashboard-screnshot-2.png)
 
 
 ### Links
 
-# Links to be added!!!
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Frontend mentor solution page](https://www.frontendmentor.io/solutions/productfeedbackappnextjs-nextauth-mongodb-tailwindcss-framerm-YogrL-fVRE)
+- Live Site URL: [https://produck-feedback-app.vercel.app](https://produck-feedback-app.vercel.app)
 
 ## My process
 
